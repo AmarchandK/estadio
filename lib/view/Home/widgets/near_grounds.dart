@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_cards/flutter_custom_cards.dart';
 
+import '../../../constants/colors.dart';
 import '../../../constants/sizes.dart';
 import 'current_location.dart';
 

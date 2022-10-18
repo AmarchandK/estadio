@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import '../constants/global_refactoring.dart';
 import '../constants/url.dart';
-import '../controller/login_controller.dart';
+import '../controller/Authentication/login_controller.dart';
 import '../model/log_in/login_request.dart';
 import '../model/log_in/login_response.dart';
 import '../model/otp/otp_request.dart';

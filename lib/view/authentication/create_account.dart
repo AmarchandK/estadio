@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../constants/colors.dart';
 import '../../constants/global_refactoring.dart';
 import '../../constants/sizes.dart';
-import '../../controller/login_controller.dart';
+import '../../controller/Authentication/login_controller.dart';
 import 'widgets/button.dart';
 import 'widgets/text_span.dart';
 import 'widgets/textfield.dart';

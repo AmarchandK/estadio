@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../../constants/sizes.dart';
-import '../../../controller/home_controller.dart';
+import '../../../constants/colors.dart';
+import '../../../controller/Home/home_controller.dart';
 
 class DotSlider extends StatelessWidget {
   const DotSlider({

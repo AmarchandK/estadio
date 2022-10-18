@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../constants/colors.dart';
 import '../../constants/sizes.dart';
-import '../../controller/login_controller.dart';
+import '../../controller/Authentication/login_controller.dart';
 import 'create_account.dart';
 import 'widgets/button.dart';
 import 'widgets/text_span.dart';

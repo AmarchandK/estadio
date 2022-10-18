@@ -47,6 +47,9 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   flutter_custom_cards: ^0.2.1
   google_nav_bar: ^5.0.6
+  blurrycontainer: ^1.0.2
+  geolocator: ^8.2.0
+  geocoding: ^2.0.4
 
 dev_dependencies:
   flutter_test:

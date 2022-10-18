@@ -3,10 +3,10 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
-import '../model/log_in/login_request.dart';
-import '../model/otp/otp_request.dart';
-import '../model/sign_in/create_request.dart';
-import '../services/auth_services.dart';
+import '../../model/log_in/login_request.dart';
+import '../../model/otp/otp_request.dart';
+import '../../model/sign_in/create_request.dart';
+import '../../services/auth_services.dart';
 
 class Authentication extends GetxController {
   ////////////////////////TEXT EDITING CONTROLLERS////////////////////////

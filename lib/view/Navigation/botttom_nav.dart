@@ -1,9 +1,12 @@
+import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:estadio/constants/sizes.dart';
-import 'package:estadio/controller/bottomnav_controller.dart';
+import 'package:estadio/controller/BottomNav/bottomnav_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+
+import '../../constants/colors.dart';
 
 class BottomNav extends GetView<BottomNavController> {
   const BottomNav({super.key});
@@ -16,19 +19,19 @@ class BottomNav extends GetView<BottomNavController> {
       body: Obx(
         () => controller.screens[controller.pageIndex.value],
       ),
-      bottomNavigationBar: Container(
+      bottomNavigationBar: BlurryContainer(
+        height: 70,
+        color: const Color.fromARGB(59, 0, 0, 0),
         width: widthSize(context),
-        decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.5),
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: grassColor)),
+        borderRadius: BorderRadius.circular(10),
+        padding: const EdgeInsets.all(3),
         child: GNav(
             onTabChange: (value) => controller.pageIndex.value = value,
             selectedIndex: 0,
             tabBorderRadius: 10,
             rippleColor: Colors.white,
-            tabBackgroundColor: grassColor,
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            tabBackgroundColor: bColor,
+            padding: const EdgeInsets.all(10),
             hoverColor: Colors.grey,
             style: GnavStyle.google,
             curve: Curves.easeOutExpo,

@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import '../../../constants/sizes.dart';
-import '../../../controller/home_controller.dart';
+import '../../../constants/colors.dart';
+import '../../../controller/Home/home_controller.dart';
 
 class ImageSlider extends StatelessWidget {
   const ImageSlider({

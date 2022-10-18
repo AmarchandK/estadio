@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 
-import '../../../constants/sizes.dart';
-import '../../../controller/login_controller.dart';
+import '../../../constants/colors.dart';
+import '../../../controller/Authentication/login_controller.dart';
 
 class Fields extends GetView<Authentication> {
   const Fields({
@@ -13,7 +13,6 @@ class Fields extends GetView<Authentication> {
     required this.validator,
     this.length,
     required this.icon,
-
     this.obscure,
     this.suffix,
   }) : super(key: key);
@@ -27,7 +26,6 @@ class Fields extends GetView<Authentication> {
   final bool? obscure;
   final Widget? suffix;
 
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -39,15 +37,13 @@ class Fields extends GetView<Authentication> {
             if (value == null || value.isEmpty) {
               return validator;
             }
-        
-            
+
             return null;
           },
           controller: cntrlr,
           obscuringCharacter: '*',
           keyboardType: keybord,
           cursorColor: greenColor,
-     
           autovalidateMode: AutovalidateMode.onUserInteraction,
           obscureText: (hint == "Password" || hint == 'Confirm Password')
               ? controller.isObscure.value

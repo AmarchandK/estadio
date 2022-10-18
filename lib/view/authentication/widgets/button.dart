@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 
-import '../../../constants/sizes.dart';
-import '../../../controller/login_controller.dart';
+import '../../../constants/colors.dart';
+import '../../../controller/Authentication/login_controller.dart';
 
 class OnTapButton extends StatelessWidget {
   final void Function() onTap;
