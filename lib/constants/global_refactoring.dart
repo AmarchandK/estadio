@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'sizes.dart';
-
+    Widget headingText(text) => Text(
+                text,
+                style: const TextStyle(fontSize: 25),
+              );
 SnackbarController showDialogue(tittle) {
   return Get.showSnackbar(
     GetSnackBar(

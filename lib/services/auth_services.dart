@@ -1,15 +1,15 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
+import 'package:estadio/model/Authentication/sign_in/create_response.dart';
 import 'package:get/get.dart';
 import '../constants/global_refactoring.dart';
 import '../constants/url.dart';
 import '../controller/Authentication/login_controller.dart';
-import '../model/log_in/login_request.dart';
-import '../model/log_in/login_response.dart';
-import '../model/otp/otp_request.dart';
-import '../model/otp/otp_response.dart';
-import '../model/sign_in/create_request.dart';
-import '../model/sign_in/create_response.dart';
+import '../model/Authentication/log_in/login_request.dart';
+import '../model/Authentication/log_in/login_response.dart';
+import '../model/Authentication/otp/otp_request.dart';
+import '../model/Authentication/otp/otp_response.dart';
+import '../model/Authentication/sign_in/create_request.dart';
 import '../view/Home/home_screen.dart';
 import '../view/authentication/otp_veryfy.dart';
 

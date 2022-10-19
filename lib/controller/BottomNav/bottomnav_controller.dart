@@ -1,4 +1,3 @@
-import 'package:estadio/view/Navigation/botttom_nav.dart';
 import 'package:estadio/view/Account/my_account.dart';
 import 'package:estadio/view/Favorites/favourites.dart';
 import 'package:estadio/view/Home/home_screen.dart';

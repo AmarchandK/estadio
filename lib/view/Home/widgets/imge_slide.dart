@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:estadio/view/Grounds/list_of_grounds.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../constants/colors.dart';
 import '../../../controller/Home/home_controller.dart';
 
@@ -26,24 +28,27 @@ class ImageSlider extends StatelessWidget {
       itemBuilder: (context, index, realIndex) {
         final urlImg = controller.imgUrls[index];
         final urlTitle = controller.carosleTittle[index];
-        return Container(
-          width: 400,
-          height: 200,
-          margin: const EdgeInsets.symmetric(horizontal: 7),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            image: DecorationImage(
-              fit: BoxFit.fill,
-              image: AssetImage(urlImg),
+        return GestureDetector(
+          onTap: () => Get.to(() => Grounds(img: urlImg, tittle: urlTitle)),
+          child: Container(
+            width: 400,
+            height: 200,
+            margin: const EdgeInsets.symmetric(horizontal: 7),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              image: DecorationImage(
+                fit: BoxFit.fill,
+                image: AssetImage(urlImg),
+              ),
             ),
-          ),
-          child: Align(
-            alignment: Alignment.bottomRight,
-            child: Padding(
-              padding: const EdgeInsets.only(right: 10, bottom: 20),
-              child: Text(
-                urlTitle,
-                style: const TextStyle(color: wColor, fontSize: 40),
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 10, bottom: 20),
+                child: Text(
+                  urlTitle,
+                  style: const TextStyle(color: wColor, fontSize: 40),
+                ),
               ),
             ),
           ),

@@ -1,6 +1,8 @@
+import 'package:estadio/view/Discription/discriptiom.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_cards/flutter_custom_cards.dart';
+import 'package:get/get.dart';
 
 import '../../../constants/colors.dart';
 import '../../../constants/sizes.dart';
@@ -79,7 +81,7 @@ class GroundCards extends StatelessWidget {
                   ],
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () => Get.to(() => const DescriptionPage()),
                   style: ElevatedButton.styleFrom(
                     elevation: 10,
                     backgroundColor: greenColor,
