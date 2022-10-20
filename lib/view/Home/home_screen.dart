@@ -40,13 +40,24 @@ class HomePage extends StatelessWidget {
                   style: TextStyle(fontSize: 20),
                 ),
               ),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: 10,
-                itemBuilder: (BuildContext context, int index) =>
-                    const GroundCards(),
-              )
+              Consumer<HomeController>(builder: (context, controller, _) {
+                return ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: controller.nearGrounds.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final turfsList = controller.nearGrounds[index];
+
+                    return GroundCards(
+                      img: turfsList.turfLogo!,
+                      turfName: turfsList.turfName!,
+                      rating: turfsList.turfInfo!.turfRating!,
+                      place: turfsList.turfPlace!,
+                      toFucn: () {},
+                    );
+                  },
+                );
+              })
             ],
           ),
         ),

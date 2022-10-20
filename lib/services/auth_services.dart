@@ -37,8 +37,8 @@ class ApiService {
       final response =
           await dio.post(Config.emailOtpVerify, data: model.toJson());
       final OtpResponse otoResponse = OtpResponse.fromJson(response.data);
-      // await UserSecureStorage.setTokens(
-      //     otoResponse.token, otoResponse.refreshToken);
+      await UserSecureStorage.setTokens(
+          otoResponse.token, otoResponse.refreshToken);
       showToast(otoResponse.message);
       if (response.statusCode! >= 200 && response.statusCode! <= 299) {
         log("OTP SuccessFull${response.data}");
@@ -55,8 +55,8 @@ class ApiService {
       final response = await dio.post(Config.loginEmail, data: model.toJson());
       log('message');
       final LoginResponse loginResponse = LoginResponse.fromJson(response.data);
-      // await UserSecureStorage.setTokens(
-      //     loginResponse.token, loginResponse.refreshToken);
+      await UserSecureStorage.setTokens(
+          loginResponse.token, loginResponse.refreshToken);
       showToast(loginResponse.message);
       if (response.statusCode! >= 200 && response.statusCode! <= 299) {
         log("Login Success${response.data}");
@@ -67,5 +67,3 @@ class ApiService {
     }
   }
 }
-
-

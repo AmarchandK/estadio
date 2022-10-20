@@ -1,6 +1,6 @@
 import 'package:estadio/constants/colors.dart';
 import 'package:estadio/constants/sizes.dart';
-import 'package:estadio/view/Home/widgets/near_grounds.dart';
+import 'package:estadio/view/Home/widgets/current_location.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +8,7 @@ class Grounds extends StatelessWidget {
   const Grounds({super.key, required this.img, required this.tittle});
   final String img;
   final String tittle;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +48,7 @@ class Grounds extends StatelessWidget {
                       indent: 15,
                     ),
                 itemBuilder: (BuildContext context, int index) =>
-                    const GroundCards()),
+                 const   CurrentLocation()),
           )
         ],
       ),

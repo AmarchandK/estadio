@@ -1,14 +1,14 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:estadio/constants/colors.dart';
 import 'package:estadio/constants/global_refactoring.dart';
 import 'package:estadio/constants/sizes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'widgets/turf_pic.dart';
 
 class DescriptionPage extends StatelessWidget {
-  const DescriptionPage({super.key});
-
+  const DescriptionPage({super.key, required this.turfDetails});
+  final List turfDetails;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,35 +24,58 @@ class DescriptionPage extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [headingText('Ground Name'), const Text('Location Name')],
+            children: [
+              headingText('Ground Name'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [subTittle('5s'), w20, subTittle('6s')],
+              )
+            ],
           ),
           h20,
-          CarouselSlider.builder(
-            itemCount: 3,
-            itemBuilder: (context, index, realIndex) => Container(
-              width: 400,
-              height: 200,
-              margin: const EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: wColor,
-                image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: AssetImage(''),
-                ),
-              ),
-            ),
-            options: CarouselOptions(
-              height: 180,
-              enableInfiniteScroll: true,
-            ),
+          const TurfPics(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              headingText('Facilities'),
+              subTittle('Location'),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 50, top: 15),
-            child: headingText('Facilities'),
-          )
+          GridView.count(
+              crossAxisCount: 3,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              children: List.generate(5, (index) {
+                return const _Facility();
+              }))
         ]),
       ),
+    );
+  }
+
+  Text subTittle(String text) {
+    return Text(
+      text,
+      style: const TextStyle(fontSize: 20),
+    );
+  }
+}
+
+class _Facility extends StatelessWidget {
+  const _Facility({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: const [
+        Icon(
+          Icons.done_outline_sharp,
+          color: grassColor,
+        ),
+        Text('First Aid')
+      ],
     );
   }
 }

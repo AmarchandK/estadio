@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:estadio/constants/colors.dart';
@@ -6,10 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-    Widget headingText(text) => Text(
-                text,
-                style: const TextStyle(fontSize: 25),
-              );
+
+Widget headingText(text) => Text(
+      text,
+      style: const TextStyle(fontSize: 25),
+    );
 SnackbarController showDialogue(tittle) {
   return Get.showSnackbar(
     GetSnackBar(
@@ -78,8 +80,10 @@ class UserSecureStorage {
   static Future setTokens(String token, String refreshToken) async {
     await storage.write(key: tokenKey, value: token);
     await storage.write(key: refreshKey, value: refreshToken);
+    final tokens = await storage.readAll();
+    log(' token saved $tokens');
   }
 
   static Future getToken() async => await storage.readAll();
-  static Future getrefreshToken() async => await storage.read(key: refreshKey);
+  static Future getrefreshToken() async => await storage.read(key: tokenKey);
 }
