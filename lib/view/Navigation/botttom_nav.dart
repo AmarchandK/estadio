@@ -35,7 +35,7 @@ class BottomNav extends GetView<BottomNavController> {
             hoverColor: Colors.grey,
             style: GnavStyle.google,
             curve: Curves.easeOutExpo,
-            activeColor: greenColor,
+            activeColor: lightGreen,
             tabs: const [
               GButton(icon: CupertinoIcons.home, text: ' Home'),
               GButton(icon: CupertinoIcons.bookmark_fill, text: ' Saved'),

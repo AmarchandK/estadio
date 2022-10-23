@@ -1,62 +1,102 @@
 import 'package:estadio/constants/colors.dart';
 import 'package:estadio/constants/global_refactoring.dart';
 import 'package:estadio/constants/sizes.dart';
+import 'package:estadio/model/Home/home_response.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'widgets/turf_pic.dart';
 
 class DescriptionPage extends StatelessWidget {
-  const DescriptionPage({super.key, required this.turfDetails});
-  final List turfDetails;
+  const DescriptionPage({
+    super.key,
+    required this.datum,
+  });
+  final Datum datum;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: const Icon(
-              CupertinoIcons.back,
-            ),
+        child: Column(children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                onPressed: () {
+                  Get.back();
+                },
+                icon: const Icon(
+                  CupertinoIcons.back,
+                ),
+              ),
+              subTittle(datum.turfPlace!),
+            ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              headingText('Ground Name'),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [subTittle('5s'), w20, subTittle('6s')],
-              )
+              headingText(datum.turfName),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                subTittle(datum.turfType!.turfFives == true ? "5s" : ""),
+                w20,
+                subTittle(datum.turfType!.turfSevens == true ? "7s" : "")
+              ])
             ],
           ),
           h20,
-          const TurfPics(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              headingText('Facilities'),
-              subTittle('Location'),
+          TurfPics(
+            img: [
+              datum.turfImages!.turfImages1!,
+              datum.turfImages!.turfImages2!,
+              datum.turfImages!.turfImages3!
             ],
           ),
-          GridView.count(
-              crossAxisCount: 3,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              children: List.generate(5, (index) {
-                return const _Facility();
-              }))
+          headingText('Rates'),
+          rates('Morning', datum.turfPrice!.morningPrice),
+          rates('Afternoon', datum.turfPrice!.afternoonPrice),
+          rates('Evening', datum.turfPrice!.eveningPrice),
+          headingText('Facilities'),
+          Center(
+            child: GridView.count(
+                crossAxisCount: 3,
+                padding: const EdgeInsets.only(left: 40),
+                childAspectRatio: 3,
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                children: List.generate(6, (index) {
+                  return _Facility(
+                    datum: datum,
+                  );
+                })),
+          ),
         ]),
       ),
     );
   }
 
-  Text subTittle(String text) {
-    return Text(
-      text,
-      style: const TextStyle(fontSize: 20),
+  Widget rates(text, rate) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          subTittle(text),
+          const SizedBox(width: 70),
+          subTittle(rate.toString())
+        ],
+      ),
+    );
+  }
+
+  Padding subTittle(String text) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Text(
+        text,
+        style: const TextStyle(fontSize: 20),
+      ),
     );
   }
 }
@@ -64,7 +104,9 @@ class DescriptionPage extends StatelessWidget {
 class _Facility extends StatelessWidget {
   const _Facility({
     Key? key,
+    required this.datum,
   }) : super(key: key);
+  final Datum datum;
 
   @override
   Widget build(BuildContext context) {
@@ -72,8 +114,9 @@ class _Facility extends StatelessWidget {
       children: const [
         Icon(
           Icons.done_outline_sharp,
-          color: grassColor,
+          color: darkGreen,
         ),
+        w20,
         Text('First Aid')
       ],
     );

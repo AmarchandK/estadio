@@ -43,7 +43,7 @@ class Fields extends GetView<Authentication> {
           controller: cntrlr,
           obscuringCharacter: '*',
           keyboardType: keybord,
-          cursorColor: greenColor,
+          cursorColor: lightGreen,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           obscureText: (hint == "Password" || hint == 'Confirm Password')
               ? controller.isObscure.value
@@ -60,7 +60,7 @@ class Fields extends GetView<Authentication> {
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: const BorderSide(
-                color: greenColor,
+                color: lightGreen,
               ),
             ),
             hintText: hint,

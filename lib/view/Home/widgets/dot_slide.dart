@@ -19,7 +19,7 @@ class DotSlider extends StatelessWidget {
         effect: const JumpingDotEffect(
             radius: 9,
             dotColor: greyColor,
-            activeDotColor: greenColor,
+            activeDotColor: lightGreen,
             dotHeight: 10,
             dotWidth: 10),
       ),

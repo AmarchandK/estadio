@@ -29,7 +29,7 @@ class Textspan extends GetView<Authentication> {
             text: secondText,
             style: GoogleFonts.akayaKanadaka(
               fontSize: 20,
-              color: greenColor,
+              color: lightGreen,
             ),
             recognizer: TapGestureRecognizer()..onTap = onTap,
           ),

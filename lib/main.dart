@@ -1,6 +1,6 @@
 import 'package:estadio/constants/controller_int.dart';
 import 'package:estadio/controller/Home/home_controller.dart';
-import 'package:estadio/view/Splashscreen/splash_screen.dart';
+import 'package:estadio/view/authentication/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          textTheme: GoogleFonts.concertOneTextTheme(
+          textTheme: GoogleFonts.firaSansTextTheme(
               Theme.of(context).textTheme.apply(bodyColor: wColor)),
           iconTheme: const IconThemeData(color: wColor),
           primarySwatch: Colors.green,
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           bottomNavigationBarTheme: const BottomNavigationBarThemeData(
               backgroundColor: Colors.transparent),
         ),
-        home: const SplashScreen(),
+        home: const LoginPage(),
       ),
     );
   }

@@ -25,14 +25,14 @@ class GroundCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
-        color: grassColor,
-        childPadding: 8,
+        color: darkGreen,
+        childPadding: 5,
         borderRadius: 10,
         child: Row(
           children: [
             Container(
-              height: 110,
-              width: 110,
+              height: 100,
+              width: 100,
               decoration: BoxDecoration(
                 image: DecorationImage(
                     image: NetworkImage(
@@ -47,67 +47,45 @@ class GroundCards extends StatelessWidget {
             w10,
             Expanded(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          top: 10,
-                        ),
-                        child: FittedBox(
-                          child: Text(
-                            turfName,
-                            style: const TextStyle(fontSize: 20),
-                          ),
-                        ),
-                      ),
-                      IconButton(
-                          onPressed: () => onFav,
-                          icon: const Icon(
-                            CupertinoIcons.bookmark_fill,
-                            color: greenColor,
-                            size: 20,
-                          ))
-                    ],
+                  FittedBox(
+                    child: Text(
+                      turfName,
+                      style: const TextStyle(fontSize: 20),
+                    ),
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(place),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          const Icon(
-                            CupertinoIcons.star,
-                            size: 20,
-                            color: Color.fromARGB(255, 255, 129, 0),
-                          ),
-                          Text(
-                            rating.toString(),
-                          )
-                        ],
+                      const Text('Rating'),
+                      w10,
+                      const Icon(
+                        CupertinoIcons.star,
+                        size: 15,
+                        color: Color.fromARGB(255, 255, 129, 0),
+                      ),
+                      w10,
+                      Text(
+                        rating.toString(),
                       )
                     ],
                   ),
-                  ElevatedButton(
-                    onPressed: toFucn,
-                    style: ElevatedButton.styleFrom(
-                      elevation: 10,
-                      backgroundColor: greenColor,
-                      minimumSize: const Size(300, 30),
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.only(bottom: 8.0),
-                      child: Text('BOOK'),
-                    ),
-                  )
+                  Row(
+                    children: [
+                      Text(place),
+                      const Spacer(),
+                    ],
+                  ),
                 ],
               ),
-            )
+            ),
+            IconButton(
+                onPressed: () => onFav,
+                icon: const Icon(
+                  CupertinoIcons.bookmark_fill,
+                  color: lightGreen,
+                  size: 20,
+                ))
           ],
         ));
   }

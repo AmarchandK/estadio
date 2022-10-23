@@ -24,7 +24,7 @@ class Search extends GetView<SearchController> {
                 left: controller.isSearchClicked.value ? 0 : 290,
                 child: AnimatedOpacity(
                   duration: const Duration(seconds: 1),
-                  opacity: controller.isSearchClicked.value ? 0.4 : 1,
+                  opacity: controller.isSearchClicked.value ? 0.3 : 1,
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 50),
                     height: 50,
@@ -32,8 +32,8 @@ class Search extends GetView<SearchController> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: controller.isSearchClicked.value
-                          ? grassColor
-                          : greenColor,
+                          ? darkGreen
+                          : lightGreen,
                     ),
                   ),
                 ),

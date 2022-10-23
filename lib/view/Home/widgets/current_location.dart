@@ -9,17 +9,20 @@ class CurrentLocation extends GetView<LocationController> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const Icon(CupertinoIcons.location_solid),
-        Obx(
-          () => Text(
-            controller.currentAddress.value,
-            overflow: TextOverflow.fade,
-            softWrap: true,
-          ),
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(top: 10, left: 20),
+      child: Row(
+        children: [
+          const Icon(CupertinoIcons.location_solid),
+          Obx(
+            () => Text(
+              controller.currentAddress.value,
+              overflow: TextOverflow.fade,
+              softWrap: true,
+            ),
+          )
+        ],
+      ),
     );
   }
 }

@@ -8,9 +8,6 @@ class NearByService {
   static final Dio dio = Dio(BaseOptions(baseUrl: Config.baseUrl));
   static Future<HomeResponse?> nearByFetch(
       {required String place, required String token}) async {
-    log('Function Called');
-    log(Config.baseUrl + Config.nearbyGrounds + place);
-    log(token.toString());
     try {
       final Response response = await dio.get(Config.nearbyGrounds + place,
           options: Options(headers: {"Authorization": "Bearer $token"}));

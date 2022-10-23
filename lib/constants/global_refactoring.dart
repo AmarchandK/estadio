@@ -8,9 +8,12 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
-Widget headingText(text) => Text(
-      text,
-      style: const TextStyle(fontSize: 25),
+Widget headingText(text) => Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(
+        text,
+        style: const TextStyle(fontSize: 25),
+      ),
     );
 SnackbarController showDialogue(tittle) {
   return Get.showSnackbar(
@@ -40,7 +43,7 @@ showToast(message) {
   Fluttertoast.showToast(
       msg: message,
       fontSize: 20,
-      textColor: greenColor,
+      textColor: lightGreen,
       toastLength: Toast.LENGTH_LONG,
       timeInSecForIosWeb: 3,
       gravity: ToastGravity.TOP,

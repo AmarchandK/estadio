@@ -86,7 +86,7 @@ class OTPscreen extends GetView<Authentication> {
                         ),
                       )
                     : const CupertinoActivityIndicator(
-                        color: greenColor,
+                        color: lightGreen,
                         radius: 20,
                       ),
               ),
@@ -132,10 +132,10 @@ class OTPscreen extends GetView<Authentication> {
       height: 56,
       textStyle: const TextStyle(
         fontSize: 22,
-        color: greenColor,
+        color: lightGreen,
       ),
       decoration: BoxDecoration(
-        border: Border.all(color: greenColor),
+        border: Border.all(color: lightGreen),
         borderRadius: BorderRadius.circular(8),
       ));
   final PinTheme _submittedPinTheme = PinTheme(

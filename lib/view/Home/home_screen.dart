@@ -1,7 +1,9 @@
-import 'package:estadio/constants/sizes.dart';
+  import 'package:estadio/constants/sizes.dart';
+import 'package:estadio/view/Discription/discriptiom.dart';
 import 'package:estadio/view/Home/widgets/current_location.dart';
 import 'package:estadio/view/Home/widgets/dot_slide.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import '../../constants/colors.dart';
 import '../../controller/Home/home_controller.dart';
@@ -15,7 +17,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final HomeController controller =
-        Provider.of<HomeController>(context, listen: true);
+        Provider.of<HomeController>(context, listen: false);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      controller.homeFetch();
+    });
     return Scaffold(
       backgroundColor: bColor,
       body: Padding(
@@ -29,7 +34,7 @@ class HomePage extends StatelessWidget {
               h10,
               const Search(),
               h10,
-              ImageSlider(controller: controller),
+              ImageSlider(controller: controller,datum: controller.nearGrounds),
               h10,
               const DotSlider(),
               h10,
@@ -53,7 +58,9 @@ class HomePage extends StatelessWidget {
                       turfName: turfsList.turfName!,
                       rating: turfsList.turfInfo!.turfRating!,
                       place: turfsList.turfPlace!,
-                      toFucn: () {},
+                      toFucn: () => Get.to(() => DescriptionPage(
+                            datum: turfsList,
+                          )),
                     );
                   },
                 );
