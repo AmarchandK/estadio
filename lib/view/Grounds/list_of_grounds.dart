@@ -1,6 +1,5 @@
 import 'package:estadio/constants/colors.dart';
 import 'package:estadio/constants/sizes.dart';
-import 'package:estadio/view/Home/widgets/current_location.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -37,19 +36,18 @@ class Grounds extends StatelessWidget {
             expandedHeight: heightSize(context) / 3,
           ),
           SliverToBoxAdapter(
-            child: ListView.separated(
-                shrinkWrap: true,
-                primary: false,
-                itemCount: 10,
-                separatorBuilder: (BuildContext context, int index) =>
-                    const Divider(
-                      color: wColor,
-                      endIndent: 15,
-                      indent: 15,
-                    ),
-                itemBuilder: (BuildContext context, int index) =>
-                 const   CurrentLocation()),
-          )
+              child: ListView.separated(
+                  shrinkWrap: true,
+                  primary: false,
+                  itemCount: 10,
+                  separatorBuilder: (BuildContext context, int index) =>
+                      const Divider(
+                        color: wColor,
+                        endIndent: 15,
+                        indent: 15,
+                      ),
+                  itemBuilder: (BuildContext context, int index) =>
+                      const Text('')))
         ],
       ),
     );

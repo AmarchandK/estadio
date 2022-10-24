@@ -1,4 +1,6 @@
-  import 'package:estadio/constants/sizes.dart';
+import 'package:estadio/constants/global_refactoring.dart';
+import 'package:estadio/constants/sizes.dart';
+import 'package:estadio/controller/Home/location_fetch_controller.dart';
 import 'package:estadio/view/Discription/discriptiom.dart';
 import 'package:estadio/view/Home/widgets/current_location.dart';
 import 'package:estadio/view/Home/widgets/dot_slide.dart';
@@ -12,8 +14,8 @@ import 'widgets/near_grounds.dart';
 import 'widgets/search.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
+  HomePage({super.key});
+  final LocationController _locationController = Get.put(LocationController());
   @override
   Widget build(BuildContext context) {
     final HomeController controller =
@@ -30,41 +32,46 @@ class HomePage extends StatelessWidget {
           child: Column(
             children: [
               h20,
-              const CurrentLocation(),
-              h10,
+              CurrentLocation(
+                place: _locationController.currentAddress.value,
+                size: 25,
+              ),
               const Search(),
               h10,
-              ImageSlider(controller: controller,datum: controller.nearGrounds),
+              ImageSlider(
+                  controller: controller, datum: controller.nearGrounds),
               h10,
               const DotSlider(),
               h10,
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Near by Grounds',
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-              Consumer<HomeController>(builder: (context, controller, _) {
-                return ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: controller.nearGrounds.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final turfsList = controller.nearGrounds[index];
-
-                    return GroundCards(
-                      img: turfsList.turfLogo!,
-                      turfName: turfsList.turfName!,
-                      rating: turfsList.turfInfo!.turfRating!,
-                      place: turfsList.turfPlace!,
-                      toFucn: () => Get.to(() => DescriptionPage(
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: headingText('Near by Grounds')),
+              Consumer<HomeController>(
+                builder: (context, controller, _) {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: controller.nearGrounds.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final turfsList = controller.nearGrounds[index];
+                      return GroundCards(
+                        img: turfsList.turfLogo!,
+                        turfName: turfsList.turfName!,
+                        sevens: turfsList.turfType!.turfSevens!,
+                        fives: turfsList.turfType!.turfFives!,
+                        rating: turfsList.turfInfo!.turfRating!,
+                        place: turfsList.turfPlace!,
+                        isAvailable: turfsList.turfInfo!.turfIsAvailable!,
+                        toFucn: () => Get.to(
+                          () => DescriptionPage(
                             datum: turfsList,
-                          )),
-                    );
-                  },
-                );
-              })
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              )
             ],
           ),
         ),

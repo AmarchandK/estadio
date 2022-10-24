@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../constants/colors.dart';
@@ -14,90 +16,95 @@ class CreateAccount extends GetView<Authentication> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: const EdgeInsets.only(left: 25, right: 25),
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/baground.jpg'),
+            fit: BoxFit.fill,
+          ),
+        ),
         alignment: Alignment.center,
         child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/img1.png',
-                width: 150,
-                height: 150,
-              ),
-              h10,
-              const Text(
-                "Create an Account",
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              ),
-              h10,
-              const Text(
-                "We need to register your details without getting started!",
-                style: TextStyle(
-                  fontSize: 16,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(25),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+              child: Container(
+                height: heightSize(context) / 1.3,
+                width: widthSize(context) / 1.05,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [Colors.black12, Colors.black12],
+                  ),
                 ),
-                textAlign: TextAlign.center,
-              ),
-              h10,
-              Form(
-                key: controller.createKey,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Fields(
-                        cntrlr: controller.emailController,
-                        keybord: TextInputType.emailAddress,
-                        hint: 'Email',
-                        validator: 'Enter an Email',
-                        icon: Icons.mail_outline),
-                    Obx(
-                      () => Fields(
-                          cntrlr: controller.passwordController,
-                          keybord: TextInputType.number,
-                          length: 6,
-                          hint: 'Password',
-                          validator: 'Enter your Password',
-                          suffix: IconButton(
-                              onPressed: () {
-                                controller.isObscure.value =
-                                    !controller.isObscure.value;
-                              },
-                              icon: Icon(
-                                controller.isObscure.value
-                                    ? Icons.visibility_off_rounded
-                                    : Icons.visibility,
-                                color: bColor,
-                              )),
-                          icon: Icons.security),
+                    h10,
+                    Form(
+                      key: controller.createKey,
+                      child: Column(
+                        children: [
+                          headingText('Create Account'),
+                          Fields(
+                              cntrlr: controller.emailController,
+                              keybord: TextInputType.emailAddress,
+                              hint: 'Email',
+                              validator: 'Enter an Email',
+                              icon: Icons.mail_outline),
+                          Obx(
+                            () => Fields(
+                                cntrlr: controller.passwordController,
+                                keybord: TextInputType.number,
+                                length: 6,
+                                hint: 'Password',
+                                validator: 'Enter your Password',
+                                suffix: IconButton(
+                                    onPressed: () {
+                                      controller.isObscure.value =
+                                          !controller.isObscure.value;
+                                    },
+                                    icon: Icon(
+                                      controller.isObscure.value
+                                          ? Icons.visibility_off_rounded
+                                          : Icons.visibility,
+                                      color: bColor,
+                                    )),
+                                icon: Icons.security),
+                          ),
+                          Fields(
+                            cntrlr: controller.confirmController,
+                            keybord: TextInputType.number,
+                            obscure: true,
+                            hint: 'Confirm Password',
+                            validator: 'Confirm',
+                            icon: Icons.content_paste_off,
+                            length: 6,
+                          ),
+                        ],
+                      ),
                     ),
-                    Fields(
-                      cntrlr: controller.confirmController,
-                      keybord: TextInputType.number,
-                      obscure: true,
-                      hint: 'Confirm Password',
-                      validator: 'Confirm',
-                      icon: Icons.content_paste_off,
-                      length: 6,
-                    ),
+                    h20,
+                    OnTapButton(
+                        onTap: () async {
+                          controller.passwordController.text !=
+                                  controller.confirmController.text
+                              ? showDialogue('Password Missmatch')
+                              : await controller.onCreatebtnTap();
+                        },
+                        text: 'Validate'),
+                    h10,
+                    Textspan(() {
+                      controller.confirmController.clear();
+                      controller.passwordController.clear();
+                      controller.emailController.clear();
+                      Get.back();
+                    }, firstText: 'Have an account? ', secondText: 'LogIn'),
                   ],
                 ),
               ),
-              h20,
-              OnTapButton(
-                  onTap: () async {
-                    controller.passwordController.text !=
-                            controller.confirmController.text
-                        ? showDialogue('Password Missmatch')
-                        : await controller.onCreatebtnTap();
-                  },
-                  text: 'Validate'),
-              h10,
-              Textspan(() {
-                controller.confirmController.clear();
-                controller.passwordController.clear();
-                controller.emailController.clear();
-                Get.back();
-              }, firstText: 'Have an account? ', secondText: 'LogIn'),
-            ],
+            ),
           ),
         ),
       ),

@@ -22,7 +22,7 @@ class Textspan extends GetView<Authentication> {
         text: firstText,
         style: GoogleFonts.akayaKanadaka(
           fontSize: 20,
-          color: Colors.black,
+          color: wColor,
         ),
         children: [
           TextSpan(

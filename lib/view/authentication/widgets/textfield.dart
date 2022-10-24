@@ -50,13 +50,11 @@ class Fields extends GetView<Authentication> {
               : false,
           maxLength: length,
           decoration: InputDecoration(
-            suffix: suffix,
-            icon: Icon(icon),
+            suffixIcon: suffix,
+            prefixIcon: Icon(icon),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide:
-                  const BorderSide(color: Color.fromARGB(255, 26, 26, 26)),
-            ),
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(color: greyColor)),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: const BorderSide(

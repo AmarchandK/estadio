@@ -22,7 +22,7 @@ class OnTapButton extends StatelessWidget {
           () => ElevatedButton(
               style: ElevatedButton.styleFrom(
                 elevation: 15,
-                backgroundColor: Colors.green,
+                backgroundColor: lightGreen,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -30,9 +30,12 @@ class OnTapButton extends StatelessWidget {
               onPressed: !Authentication.onTapLoading.value ? () {} : onTap,
               child: !Authentication.onTapLoading.value
                   ? const CupertinoActivityIndicator(
-                      color: wColor,
+                      color: darkGreen,
                     )
-                  : Text(text)),
+                  : Text(
+                      text,
+                      style: const TextStyle(color: darkGreen),
+                    )),
         ),
       ),
     );

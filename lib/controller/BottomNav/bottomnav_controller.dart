@@ -7,10 +7,6 @@ import 'package:get/state_manager.dart';
 
 class BottomNavController extends GetxController {
   RxInt pageIndex = 0.obs;
-  final RxList<Widget> screens = [
-    const HomePage(),
-    const Favourites(),
-    const MyOrders(),
-    const MyAccount()
-  ].obs;
+  final RxList<Widget> screens =
+      [HomePage(), const Favourites(), const MyOrders(), const MyAccount()].obs;
 }

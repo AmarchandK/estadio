@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,86 +31,80 @@ class OTPscreen extends GetView<Authentication> {
         margin: const EdgeInsets.only(left: 25, right: 25),
         alignment: Alignment.center,
         child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Image(
-                image: AssetImage(
-                  'assets/img1.png',
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(25),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+              child: Container(
+                height: heightSize(context) / 1.5,
+                width: widthSize(context) / 1.05,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [Colors.white10, Colors.white12],
+                  ),
                 ),
-                width: 150,
-                height: 150,
-              ),
-              h20,
-              const Text(
-                "Email Verification",
-                style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text(
-                "We need to register your email without getting started!",
-                style: TextStyle(fontSize: 16, color: Colors.black),
-                textAlign: TextAlign.center,
-              ),
-              h20,
-              Obx(
-                () => Authentication.onTapLoading.value
-                    ? Form(
-                        key: controller.pinKey,
-                        child: Pinput(
-                          cursor: const Text('#'),
-                          androidSmsAutofillMethod:
-                              AndroidSmsAutofillMethod.smsUserConsentApi,
-                          pinAnimationType: PinAnimationType.rotation,
-                          hapticFeedbackType: HapticFeedbackType.heavyImpact,
-                          listenForMultipleSmsOnAndroid: true,
-                          autofocus: true,
-                          animationCurve: Curves.elasticInOut,
-                          animationDuration: const Duration(seconds: 1),
-                          focusNode: FocusNode(),
-                          // validator: (value) {
-                          //   return '';
-                          // },
-                          errorPinTheme: _defaultPinTheme.copyBorderWith(
-                            border: Border.all(color: Colors.redAccent),
-                          ),
-                          onCompleted: (pin) => controller.onOtpEnter(pin),
-                          defaultPinTheme: _defaultPinTheme,
-                          focusedPinTheme: _focusedPinTheme,
-                          submittedPinTheme: _submittedPinTheme,
-                          length: 4,
-                          showCursor: true,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Enter You OTP'),
+                    h20,
+                    Obx(
+                      () => Authentication.onTapLoading.value
+                          ? Form(
+                              key: controller.pinKey,
+                              child: Pinput(
+                                cursor: const Text('#'),
+                                androidSmsAutofillMethod:
+                                    AndroidSmsAutofillMethod.smsUserConsentApi,
+                                pinAnimationType: PinAnimationType.rotation,
+                                hapticFeedbackType:
+                                    HapticFeedbackType.heavyImpact,
+                                listenForMultipleSmsOnAndroid: true,
+                                autofocus: true,
+                                animationCurve: Curves.elasticInOut,
+                                animationDuration: const Duration(seconds: 1),
+                                focusNode: FocusNode(),
+                                // validator: (value) {
+                                //   return '';
+                                // },
+                                errorPinTheme: _defaultPinTheme.copyBorderWith(
+                                  border: Border.all(color: Colors.redAccent),
+                                ),
+                                onCompleted: (pin) =>
+                                    controller.onOtpEnter(pin),
+                                defaultPinTheme: _defaultPinTheme,
+                                focusedPinTheme: _focusedPinTheme,
+                                submittedPinTheme: _submittedPinTheme,
+                                length: 4,
+                                showCursor: true,
+                              ),
+                            )
+                          : const CupertinoActivityIndicator(
+                              color: lightGreen,
+                              radius: 20,
+                            ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: TextButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        child: const Text(
+                          "Resend",
+                          style: TextStyle(color: Colors.black),
                         ),
-                      )
-                    : const CupertinoActivityIndicator(
-                        color: lightGreen,
-                        radius: 20,
                       ),
+                    )
+                  ],
+                ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              // OnTapButton(
-              //   text: "Verify Phone Number",
-              //   onTap: () {},
-              // ),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: TextButton(
-                    onPressed: () {
-                      Get.back();
-                    },
-                    child: const Text(
-                      "Resend",
-                      style: TextStyle(color: Colors.black),
-                    )),
-              )
-            ],
+            ),
           ),
         ),
       ),

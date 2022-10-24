@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:estadio/constants/colors.dart';
+import 'package:estadio/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
 class TurfPics extends StatelessWidget {
@@ -15,8 +16,8 @@ class TurfPics extends StatelessWidget {
       itemCount: 3,
       itemBuilder: (context, index, realIndex) {
         return Container(
-          width: 400,
-          height: 200,
+          width: widthSize(context) - 50,
+          height: 180,
           margin: const EdgeInsets.all(5),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),

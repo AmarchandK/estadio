@@ -1,26 +1,28 @@
-import 'package:estadio/controller/Home/location_fetch_controller.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:get/state_manager.dart';
 
-class CurrentLocation extends GetView<LocationController> {
+class CurrentLocation extends StatelessWidget {
   const CurrentLocation({
+    required this.place,
     Key? key,
+    required this.size,
   }) : super(key: key);
-
+  final String place;
+  final double size;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 10, left: 20),
+      padding: const EdgeInsets.all(5),
       child: Row(
         children: [
-          const Icon(CupertinoIcons.location_solid),
-          Obx(
-            () => Text(
-              controller.currentAddress.value,
-              overflow: TextOverflow.fade,
-              softWrap: true,
-            ),
-          )
+          Icon(
+            CupertinoIcons.location_solid,
+            size: size,
+          ),
+          Text(
+            place,
+            overflow: TextOverflow.fade,
+            softWrap: true,
+          ),
         ],
       ),
     );

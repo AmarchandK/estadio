@@ -1,7 +1,7 @@
+import 'package:estadio/view/Home/widgets/current_location.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_cards/flutter_custom_cards.dart';
-
 import '../../../constants/colors.dart';
 import '../../../constants/sizes.dart';
 
@@ -14,6 +14,9 @@ class GroundCards extends StatelessWidget {
     required this.rating,
     required this.place,
     required this.toFucn,
+    required this.isAvailable,
+    required this.sevens,
+    required this.fives,
   }) : super(key: key);
   final String img;
   final String turfName;
@@ -21,72 +24,99 @@ class GroundCards extends StatelessWidget {
   final double rating;
   final String place;
   final void Function() toFucn;
+  final bool isAvailable;
+  final bool sevens;
+  final bool fives;
 
   @override
   Widget build(BuildContext context) {
-    return CustomCard(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: CustomCard(
         color: darkGreen,
+        onTap: toFucn,
         childPadding: 5,
         borderRadius: 10,
         child: Row(
           children: [
-            Container(
-              height: 100,
-              width: 100,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage(
-                      img,
-                    ),
-                    fit: BoxFit.fill),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(5),
+            Hero(
+              tag: 'FromHome',
+              child: Container(
+                height: 100,
+                width: 100,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage(
+                        img,
+                      ),
+                      fit: BoxFit.fill),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(5),
+                  ),
                 ),
               ),
             ),
             w10,
             Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  FittedBox(
-                    child: Text(
-                      turfName,
-                      style: const TextStyle(fontSize: 20),
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      const Text('Rating'),
-                      w10,
-                      const Icon(
-                        CupertinoIcons.star,
-                        size: 15,
-                        color: Color.fromARGB(255, 255, 129, 0),
+              child: SizedBox(
+                height: 100,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    FittedBox(
+                      child: Text(
+                        turfName,
+                        style: const TextStyle(fontSize: 20),
                       ),
-                      w10,
-                      Text(
-                        rating.toString(),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text(place),
-                      const Spacer(),
-                    ],
-                  ),
-                ],
+                    ),
+                    CurrentLocation(
+                      place: place,
+                      size: 15,
+                    ),
+                    isAvailable
+                        ? const Text('Available',
+                            style: TextStyle(color: Colors.green))
+                        : const Text('Not Available',
+                            style: TextStyle(color: Colors.red)),
+                    Row(
+                      children: [
+                        Text(fives ? "5s" : ""),
+                        w20,
+                        Text(sevens ? "7s" : "")
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-            IconButton(
-                onPressed: () => onFav,
-                icon: const Icon(
-                  CupertinoIcons.bookmark_fill,
-                  color: lightGreen,
-                  size: 20,
-                ))
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    const Icon(
+                      CupertinoIcons.star,
+                      size: 15,
+                      color: Color.fromARGB(255, 255, 129, 0),
+                    ),
+                    Text(
+                      ' $rating',
+                    ),
+                  ],
+                ),
+                IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.bookmark_border,
+                      color: lightGreen,
+                    )),
+                w20
+              ],
+            )
           ],
-        ));
+        ),
+      ),
+    );
   }
 }

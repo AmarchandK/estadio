@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 class SplashController extends GetxController {
   @override
   void onInit() {
-    // checkUserLoggedIn();
+    checkUserLoggedIn();
 
     super.onInit();
   }
@@ -18,7 +18,7 @@ class SplashController extends GetxController {
       const Duration(seconds: 1),
     );
     if (token == null || token.isEmpty) {
-      Get.off(() => const LoginPage());
+      Get.off(() => LoginPage());
     } else {
       Get.off(() => const BottomNav());
     }

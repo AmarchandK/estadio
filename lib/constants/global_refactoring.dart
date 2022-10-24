@@ -12,7 +12,8 @@ Widget headingText(text) => Padding(
       padding: const EdgeInsets.all(8.0),
       child: Text(
         text,
-        style: const TextStyle(fontSize: 25),
+        style: const TextStyle(
+            fontSize: 25, fontWeight: FontWeight.bold, color: lightGreen),
       ),
     );
 SnackbarController showDialogue(tittle) {
