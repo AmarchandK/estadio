@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:estadio/constants/global_refactoring.dart';
 import 'package:estadio/model/Home/home_response.dart';

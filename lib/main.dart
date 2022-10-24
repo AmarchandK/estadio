@@ -1,7 +1,6 @@
 import 'package:estadio/constants/controller_int.dart';
 import 'package:estadio/controller/Home/home_controller.dart';
 import 'package:estadio/view/Splashscreen/splash_screen.dart';
-import 'package:estadio/view/authentication/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';

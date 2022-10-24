@@ -48,7 +48,7 @@ class OTPscreen extends GetView<Authentication> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Enter You OTP'),
+                    const Text('Enter You OTP'),
                     h20,
                     Obx(
                       () => Authentication.onTapLoading.value

@@ -18,7 +18,7 @@ class SplashController extends GetxController {
       const Duration(seconds: 1),
     );
     if (token == null || token.isEmpty) {
-      Get.off(() => LoginPage());
+      Get.off(() => const LoginPage());
     } else {
       Get.off(() => const BottomNav());
     }
