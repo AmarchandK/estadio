@@ -1,14 +1,14 @@
-import 'dart:developer';
-
 import 'package:estadio/constants/colors.dart';
 import 'package:estadio/constants/global_refactoring.dart';
 import 'package:estadio/constants/sizes.dart';
 import 'package:estadio/model/Home/home_response.dart';
+import 'package:estadio/view/Discription/widgets/discription_chip.dart';
 import 'package:estadio/view/Home/widgets/current_location.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/link.dart';
+import 'widgets/amout_category.dart';
 import 'widgets/turf_pic.dart';
 
 class DescriptionPage extends StatelessWidget {
@@ -22,7 +22,6 @@ class DescriptionPage extends StatelessWidget {
     datum.turfPrice!.afternoonPrice!,
     datum.turfPrice!.eveningPrice!,
   ];
-  late final List<String> facilites = [];
 
   @override
   Widget build(BuildContext context) {
@@ -82,27 +81,27 @@ class DescriptionPage extends StatelessWidget {
             subTittle('Facilities'),
             Wrap(
               children: [
-                AmentiesWidget(
+                DiscriptionChipWidget(
                     value: datum.turfAmenities!.turfCafeteria!,
                     icon: Icons.local_cafe_outlined,
                     item: 'Cafteria'),
-                AmentiesWidget(
+                DiscriptionChipWidget(
                     value: datum.turfAmenities!.turfDressing!,
                     icon: Icons.spa,
                     item: 'Dressing'),
-                AmentiesWidget(
+                DiscriptionChipWidget(
                     value: datum.turfAmenities!.turfGallery!,
                     icon: Icons.stadium_outlined,
                     item: 'Gallery'),
-                AmentiesWidget(
+                DiscriptionChipWidget(
                     value: datum.turfAmenities!.turfParking!,
                     icon: Icons.local_parking_rounded,
                     item: 'Parking'),
-                AmentiesWidget(
+                DiscriptionChipWidget(
                     value: datum.turfAmenities!.turfWashroom!,
                     icon: Icons.wash,
                     item: '   Wash  '),
-                AmentiesWidget(
+                DiscriptionChipWidget(
                     value: datum.turfAmenities!.turfWater!,
                     icon: Icons.water,
                     item: '  Water '),
@@ -112,19 +111,19 @@ class DescriptionPage extends StatelessWidget {
             Wrap(
               alignment: WrapAlignment.center,
               children: [
-                AmentiesWidget(
+                DiscriptionChipWidget(
                     value: datum.turfCategory!.turfBadminton!,
                     item: 'Badminton',
                     icon: Icons.sports_football_rounded),
-                AmentiesWidget(
+                DiscriptionChipWidget(
                     value: datum.turfCategory!.turfCricket!,
                     item: 'Cricket',
                     icon: Icons.sports_football_rounded),
-                AmentiesWidget(
+                DiscriptionChipWidget(
                     value: datum.turfCategory!.turfFootball!,
                     item: 'Football',
                     icon: Icons.sports_football_rounded),
-                AmentiesWidget(
+                DiscriptionChipWidget(
                     value: datum.turfCategory!.turfYoga!,
                     item: 'Yoga',
                     icon: Icons.sports_football_rounded),
@@ -137,7 +136,7 @@ class DescriptionPage extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) => _times(
+                  itemBuilder: (context, index) => timings(
                       amount: price[index],
                       time: '10 am-12 pm',
                       timetype: 'Morning'),
@@ -150,90 +149,9 @@ class DescriptionPage extends StatelessWidget {
     );
   }
 
-  Container _times({amount, time, timetype}) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 4),
-      decoration: BoxDecoration(
-          border: Border.all(color: darkGreen, width: 2),
-          borderRadius: const BorderRadius.all(Radius.circular(10))),
-      width: 110,
-      child: Column(
-        children: [
-          Text(timetype),
-          const Divider(
-            color: greyColor,
-            endIndent: 1,
-            indent: 1,
-          ),
-          Text(time),
-          Text('₹ $amount'),
-        ],
-      ),
-    );
-  }
 
-  Widget subTittle(String text) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Padding(
-        padding: const EdgeInsets.all(7),
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontSize: 22,
-          ),
-        ),
-      ),
-    );
-  }
+
 }
 
-class AmentiesWidget extends StatelessWidget {
-  const AmentiesWidget({
-    Key? key,
-    required this.value,
-    required this.item,
-    required this.icon,
-  }) : super(key: key);
-  final bool value;
-  final String item;
-  final IconData icon;
 
-  @override
-  Widget build(BuildContext context) {
-    return value
-        ? Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ChoiceChip(
-                clipBehavior: Clip.hardEdge,
-                selectedColor: darkGreen,
-                padding: const EdgeInsets.all(2),
-                label: Text(item),
-                avatar: Icon(icon),
-                selected: true),
-          )
-        : const SizedBox();
-  }
-}
 
-class _Facility extends StatelessWidget {
-  const _Facility({
-    Key? key,
-    required this.datum,
-  }) : super(key: key);
-  final Datum datum;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: const [
-        Icon(
-          Icons.done_outline_sharp,
-          color: darkGreen,
-        ),
-        w20,
-        Text('First Aid')
-      ],
-    );
-  }
-}

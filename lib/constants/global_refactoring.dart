@@ -16,6 +16,18 @@ Widget headingText(text) => Padding(
             fontSize: 25, fontWeight: FontWeight.bold, color: lightGreen),
       ),
     );
+      Widget subTittle(String text) => Align(
+      alignment: Alignment.centerLeft,
+      child: Padding(
+        padding: const EdgeInsets.all(7),
+        child: Text(
+          text,
+          style: const TextStyle(
+            fontSize: 22,
+          ),
+        ),
+      ),
+    );
 SnackbarController showDialogue(tittle) {
   return Get.showSnackbar(
     GetSnackBar(
