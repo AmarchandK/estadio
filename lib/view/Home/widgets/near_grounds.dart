@@ -39,20 +39,17 @@ class GroundCards extends StatelessWidget {
         borderRadius: 10,
         child: Row(
           children: [
-            Hero(
-              tag: 'FromHome',
-              child: Container(
-                height: 100,
-                width: 100,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: NetworkImage(
-                        img,
-                      ),
-                      fit: BoxFit.fill),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(5),
-                  ),
+            Container(
+              height: 100,
+              width: 100,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: NetworkImage(
+                      img,
+                    ),
+                    fit: BoxFit.fill),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(5),
                 ),
               ),
             ),

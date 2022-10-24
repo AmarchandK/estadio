@@ -18,7 +18,6 @@ class LocationController extends GetxController {
   Future<bool> _handlePermision() async {
     LocationPermission _permission;
     bool _seviceEnabled;
-
     _seviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!_seviceEnabled) {
       showDialogue('Location sevices are disabled');
@@ -38,7 +37,6 @@ class LocationController extends GetxController {
     }
     return true;
   }
-
   Future<void> getCurrentPosition() async {
     final _hasPermission = await _handlePermision();
     if (!_hasPermission) return;
@@ -47,10 +45,8 @@ class LocationController extends GetxController {
       currentPosition = position;
       getAddress(currentPosition!);
     }).catchError((e) => print('exeption   $e'));
-
     update();
   }
-
   Future<void> getAddress(Position position) async {
     await placemarkFromCoordinates(
             currentPosition!.latitude, currentPosition!.longitude)

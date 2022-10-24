@@ -32,9 +32,11 @@ class HomePage extends StatelessWidget {
           child: Column(
             children: [
               h20,
-              CurrentLocation(
-                place: _locationController.currentAddress.value,
-                size: 25,
+              Obx(
+                () => CurrentLocation(
+                  place: _locationController.currentAddress.value,
+                  size: 25,
+                ),
               ),
               const Search(),
               h10,

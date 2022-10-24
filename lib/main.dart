@@ -1,5 +1,6 @@
 import 'package:estadio/constants/controller_int.dart';
 import 'package:estadio/controller/Home/home_controller.dart';
+import 'package:estadio/view/Splashscreen/splash_screen.dart';
 import 'package:estadio/view/authentication/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,6 +13,7 @@ void main() async {
   await onInit();
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
@@ -33,7 +35,7 @@ class MyApp extends StatelessWidget {
           bottomNavigationBarTheme: const BottomNavigationBarThemeData(
               backgroundColor: Colors.transparent),
         ),
-        home: const LoginPage(),
+        home: const SplashScreen(),
       ),
     );
   }

@@ -6,17 +6,15 @@ import '../constants/url.dart';
 
 class NearByService {
   static final Dio dio = Dio(BaseOptions(baseUrl: Config.baseUrl));
-  static Future<HomeResponse?> nearByFetch(
+  static Future<AllResponse?> nearByFetch(
       {required String place, required String token}) async {
     try {
       final Response response = await dio.get(Config.nearbyGrounds + place,
           options: Options(headers: {"Authorization": "Bearer $token"}));
-      log("before if ${response.statusCode}");
-      return HomeResponse.fromJson(response.data);
+      return AllResponse.fromJson(response.data);
     } catch (e) {
-      log("exeption");
       errorHandler(e);
-      return HomeResponse(status: false);
+      return AllResponse(status: false);
     }
   }
 }

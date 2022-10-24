@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:estadio/constants/colors.dart';
 import 'package:estadio/constants/global_refactoring.dart';
 import 'package:estadio/constants/sizes.dart';
@@ -54,28 +56,79 @@ class DescriptionPage extends StatelessWidget {
               ],
             ),
             h20,
+            TurfPics(
+              img: [
+                datum.turfImages!.turfImages1!,
+                datum.turfImages!.turfImages2!,
+                datum.turfImages!.turfImages3!
+              ],
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                CurrentLocation(place: datum.turfPlace!, size: 20),
+                CurrentLocation(
+                    place: '${datum.turfPlace} , ${datum.turfDistrict}',
+                    size: 20),
                 Link(
                   uri: Uri.parse(datum.turfInfo!.turfMap!),
-                  builder: (context, followLink) => ElevatedButton.icon(
-                      onPressed: () => followLink,
-                      icon: const Icon(Icons.open_in_new),
-                      label: const Text('Get Direction')),
+                  builder: (context, followLink) => IconButton(
+                    color: darkGreen,
+                    onPressed: () => followLink,
+                    icon: const Icon(Icons.map_rounded),
+                  ),
                 )
               ],
             ),
-            Hero(
-              tag: 'FromHome',
-              child: TurfPics(
-                img: [
-                  datum.turfImages!.turfImages1!,
-                  datum.turfImages!.turfImages2!,
-                  datum.turfImages!.turfImages3!
-                ],
-              ),
+            subTittle('Facilities'),
+            Wrap(
+              children: [
+                AmentiesWidget(
+                    value: datum.turfAmenities!.turfCafeteria!,
+                    icon: Icons.local_cafe_outlined,
+                    item: 'Cafteria'),
+                AmentiesWidget(
+                    value: datum.turfAmenities!.turfDressing!,
+                    icon: Icons.spa,
+                    item: 'Dressing'),
+                AmentiesWidget(
+                    value: datum.turfAmenities!.turfGallery!,
+                    icon: Icons.stadium_outlined,
+                    item: 'Gallery'),
+                AmentiesWidget(
+                    value: datum.turfAmenities!.turfParking!,
+                    icon: Icons.local_parking_rounded,
+                    item: 'Parking'),
+                AmentiesWidget(
+                    value: datum.turfAmenities!.turfWashroom!,
+                    icon: Icons.wash,
+                    item: '   Wash  '),
+                AmentiesWidget(
+                    value: datum.turfAmenities!.turfWater!,
+                    icon: Icons.water,
+                    item: '  Water '),
+              ],
+            ),
+            subTittle('Available For'),
+            Wrap(
+              alignment: WrapAlignment.center,
+              children: [
+                AmentiesWidget(
+                    value: datum.turfCategory!.turfBadminton!,
+                    item: 'Badminton',
+                    icon: Icons.sports_football_rounded),
+                AmentiesWidget(
+                    value: datum.turfCategory!.turfCricket!,
+                    item: 'Cricket',
+                    icon: Icons.sports_football_rounded),
+                AmentiesWidget(
+                    value: datum.turfCategory!.turfFootball!,
+                    item: 'Football',
+                    icon: Icons.sports_football_rounded),
+                AmentiesWidget(
+                    value: datum.turfCategory!.turfYoga!,
+                    item: 'Yoga',
+                    icon: Icons.sports_football_rounded),
+              ],
             ),
             subTittle('Rates'),
             SizedBox(
@@ -91,7 +144,6 @@ class DescriptionPage extends StatelessWidget {
                   separatorBuilder: (context, index) => w10,
                   itemCount: 3),
             ),
-            subTittle('Facilities'),
           ]),
         ),
       ),
@@ -133,6 +185,34 @@ class DescriptionPage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class AmentiesWidget extends StatelessWidget {
+  const AmentiesWidget({
+    Key? key,
+    required this.value,
+    required this.item,
+    required this.icon,
+  }) : super(key: key);
+  final bool value;
+  final String item;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return value
+        ? Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ChoiceChip(
+                clipBehavior: Clip.hardEdge,
+                selectedColor: darkGreen,
+                padding: const EdgeInsets.all(2),
+                label: Text(item),
+                avatar: Icon(icon),
+                selected: true),
+          )
+        : const SizedBox();
   }
 }
 

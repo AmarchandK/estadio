@@ -33,7 +33,7 @@ class HomeController extends ChangeNotifier {
   Future homeFetch() async {
     const storage = FlutterSecureStorage();
     final String? token = await storage.read(key: 'tokenKey');
-    final HomeResponse? homeResponse =
+    final AllResponse? homeResponse =
         await NearByService.nearByFetch(place: "Malappuram", token: token!);
     if (homeResponse != null && homeResponse.status == true) {
       nearGrounds.clear();
