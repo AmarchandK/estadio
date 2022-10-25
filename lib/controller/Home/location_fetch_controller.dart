@@ -6,13 +6,15 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/state_manager.dart';
 
 class LocationController extends GetxController {
-  @override
-  void onInit() async {
-    await getCurrentPosition();
-    super.onInit();
+  static final LocationController instance = LocationController._insantce();
+
+  factory LocationController() {
+    return instance;
   }
 
-  RxString currentAddress = 'Unknown Location'.obs;
+  LocationController._insantce();
+
+  RxString currentAddress = 'Malappuram'.obs;
   dynamic currentPosition = Geolocator.getCurrentPosition().obs;
 
   Future<bool> _handlePermision() async {
@@ -37,6 +39,7 @@ class LocationController extends GetxController {
     }
     return true;
   }
+
   Future<void> getCurrentPosition() async {
     final _hasPermission = await _handlePermision();
     if (!_hasPermission) return;
@@ -47,6 +50,7 @@ class LocationController extends GetxController {
     }).catchError((e) => print('exeption   $e'));
     update();
   }
+
   Future<void> getAddress(Position position) async {
     await placemarkFromCoordinates(
             currentPosition!.latitude, currentPosition!.longitude)

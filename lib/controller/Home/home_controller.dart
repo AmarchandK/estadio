@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:estadio/model/Home/home_response.dart';
 import 'package:estadio/services/all_turf_service.dart';
 import 'package:estadio/services/nearby_serevice.dart';
@@ -7,6 +5,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class HomeController extends ChangeNotifier {
+  static final HomeController _singleton = HomeController.instance();
+  factory HomeController() {
+    return _singleton;
+  }
+  HomeController.instance();
+
   onInit() async {
     await allTurfFetch();
     await listAdd();
@@ -44,36 +48,23 @@ class HomeController extends ChangeNotifier {
     'Yoga',
   ];
   int activeIndex = 0;
+  //////////////////////////
+
+  bool homeIsLoading = true;
+  onLoding() {
+    homeIsLoading = !homeIsLoading;
+    notifyListeners();
+  }
   ///////////////////////////////////////////////////
 
-  //////////////// carousle image change//////////////
+///////////////// carousle image change//////////////
   void carousleChange(index) {
     activeIndex = index;
     notifyListeners();
   }
-// / //////////////////////////////////////////////////
+/////////////////////////////////////////////////////
 
 /////////////////// turf cateogory add ///////////////
-  categoryAllAdd() {
-    categoryAllList.clear();
-    List<Datum> categories(int i) {
-      switch (i) {
-        case 1:
-          return footballList;
-        case 2:
-          return badmintonList;
-        case 3:
-          return cricketList;
-        default:
-          return yoga;
-      }
-    }
-
-    for (int i = 1; i <= 4; i++) {
-      categoryAllList.add(categories(i));
-    }
-  }
-
   listAdd() {
     cricketList.clear();
     footballList.clear();
@@ -94,26 +85,49 @@ class HomeController extends ChangeNotifier {
         yoga.add(element);
       }
     }
-    log(cricketList[0].turfName.toString());
   }
+
+  categoryAllAdd() {
+    categoryAllList.clear();
+    List<Datum> categories(int i) {
+      switch (i) {
+        case 1:
+          return footballList;
+        case 2:
+          return badmintonList;
+        case 3:
+          return cricketList;
+        default:
+          return yoga;
+      }
+    }
+
+    for (int i = 1; i <= 4; i++) {
+      categoryAllList.add(categories(i));
+    }
+  }
+
   ////////////////////////////////////////////////////////
 
 /////////////// Near bu turf fetch //////////////////////////
   Future nearTurfFech() async {
+    onLoding();
     const storage = FlutterSecureStorage();
     final String? token = await storage.read(key: 'tokenKey');
     final AllResponse? homeResponse =
-        await NearByService.nearByTurf(place: "Malappuram", token: token!);
+        await NearByService.nearByTurf(place: 'Malappuram', token: token!);
     if (homeResponse != null && homeResponse.status == true) {
       nearGrounds.clear();
       nearGrounds.addAll(homeResponse.data!);
     }
+    onLoding();
     notifyListeners();
   }
 //////////////////////////////////////////////////////////
 
 ///////////////All turf fetch //////////////////////////////
   Future allTurfFetch() async {
+    onLoding();
     const storage = FlutterSecureStorage();
     final String? token = await storage.read(key: 'tokenKey');
     final AllResponse? homeResponse =
@@ -122,7 +136,14 @@ class HomeController extends ChangeNotifier {
       allTurf.clear();
       allTurf.addAll(homeResponse.data!);
     }
+    onLoding();
+
     notifyListeners();
+  }
+
+  Future<List<Datum>> searchAsign() async {
+    await allTurfFetch();
+    return allTurf;
   }
 }
 /////////////////////////////////////////////////////////////////

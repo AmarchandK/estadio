@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:estadio/constants/shimmer/shimmer.dart';
 import 'package:estadio/view/Home/widgets/current_location.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +11,9 @@ import '../../../model/Home/home_response.dart';
 class GroundCards extends StatelessWidget {
   const GroundCards({
     Key? key,
-
-    this.onFav, required this.toFucn, required this.turfList,
-
+    this.onFav,
+    required this.toFucn,
+    required this.turfList,
   }) : super(key: key);
 
   final void Function()? onFav;
@@ -31,20 +33,30 @@ class GroundCards extends StatelessWidget {
         borderRadius: 10,
         child: Row(
           children: [
-            Container(
-              height: 100,
-              width: 100,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage(
-                      turfList.turfLogo!,
+            CachedNetworkImage(
+                imageUrl: turfList.turfLogo!,
+                imageBuilder: (context, imageProvider) => Container(
+                      height: 100,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: imageProvider,
+                            fit: BoxFit.fill,
+                            colorFilter: const ColorFilter.mode(
+                                Colors.transparent, BlendMode.colorBurn)),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(5),
+                        ),
+                      ),
                     ),
-                    fit: BoxFit.fill),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(5),
-                ),
-              ),
-            ),
+                placeholder: (context, url) =>
+                    const ShimmerWidget.borderRectangle(
+                        width: 100, height: 100),
+                errorWidget: (context, url, error) => const SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: Center(child: CupertinoActivityIndicator()),
+                    )),
             w10,
             Expanded(
               child: SizedBox(
@@ -63,9 +75,11 @@ class GroundCards extends StatelessWidget {
                       place: turfList.turfPlace!,
                       size: 15,
                     ),
-                     turfList.turfInfo!.turfIsAvailable!
-                        ? const Text('Available',
-                            style: TextStyle(color: Colors.green))
+                    turfList.turfInfo!.turfIsAvailable!
+                        ? const Text(
+                            'Available',
+                            style: TextStyle(color: Colors.green),
+                          )
                         : const Text('Not Available',
                             style: TextStyle(color: Colors.red)),
                     Row(

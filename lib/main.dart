@@ -6,10 +6,12 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'constants/colors.dart';
+import 'controller/Home/location_fetch_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await onInit();
+  await LocationController.instance.getCurrentPosition();
+
   runApp(const MyApp());
 }
 
@@ -24,6 +26,7 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: GetMaterialApp(
+        onInit: () => controllerInit(),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           textTheme: GoogleFonts.firaSansTextTheme(

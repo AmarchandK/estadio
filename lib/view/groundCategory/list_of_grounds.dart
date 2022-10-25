@@ -1,3 +1,4 @@
+import 'package:estadio/constants/colors.dart';
 import 'package:estadio/constants/sizes.dart';
 import 'package:estadio/view/Discription/discriptiom.dart';
 import 'package:estadio/view/Home/widgets/near_grounds.dart';
@@ -44,19 +45,22 @@ class GroundCategory extends StatelessWidget {
             expandedHeight: heightSize(context) / 3,
           ),
           SliverToBoxAdapter(
-              child: ListView.separated(
-                  shrinkWrap: true,
-                  primary: false,
-                  itemCount: turfList.length,
-                  separatorBuilder: (BuildContext context, int index) {
-                    return GroundCards(
-                      turfList: turfList[index],
-                      toFucn: () =>
-                          Get.to(() => DescriptionPage(datum: turfList[index])),
-                    );
-                  },
-                  itemBuilder: (BuildContext context, int index) =>
-                      const Text('')))
+            child: ListView.separated(
+              shrinkWrap: true,
+              primary: false,
+              itemCount: turfList.length,
+              separatorBuilder: (BuildContext context, int index) {
+                return const Divider(
+                  color: greyColor,
+                );
+              },
+              itemBuilder: (BuildContext context, int index) => GroundCards(
+                turfList: turfList[index],
+                toFucn: () =>
+                    Get.to(() => DescriptionPage(datum: turfList[index])),
+              ),
+            ),
+          )
         ],
       ),
     );

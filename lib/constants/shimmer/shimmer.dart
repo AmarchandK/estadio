@@ -4,20 +4,20 @@ import 'package:shimmer/shimmer.dart';
 
 loadingShimmer() {
   return const ListTile(
-    leading: SimmerWidget.circular(width: 100, height: 100),
-    title: SimmerWidget.rectangular(height: 70),
+    leading: ShimmerWidget.borderRectangle(width: 100, height: 100),
+    title: ShimmerWidget.rectangular(height: 70),
   );
 }
 
-class SimmerWidget extends StatelessWidget {
-  const SimmerWidget.rectangular(
+class ShimmerWidget extends StatelessWidget {
+  const ShimmerWidget.rectangular(
       {super.key,
-      this.width = double.infinity,
+      this.width = double.infinity - 70,
       required this.height,
       this.shapeBorder = const RoundedRectangleBorder()});
-  const SimmerWidget(
+  const ShimmerWidget(
       {super.key, required this.width, required this.height, this.shapeBorder});
-  const SimmerWidget.circular({
+  const ShimmerWidget.borderRectangle({
     super.key,
     required this.width,
     required this.height,
@@ -35,13 +35,16 @@ class SimmerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Shimmer.fromColors(
         baseColor: Colors.grey[400]!,
-        highlightColor: Colors.grey[300]!,
-        child: Container(
-          width: width,
-          height: height,
-          decoration: ShapeDecoration(
-            shape: shapeBorder!,
-            color: greyColor,
+        highlightColor: lightGreen,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            width: width,
+            height: height,
+            decoration: ShapeDecoration(
+              shape: shapeBorder!,
+              color: greyColor,
+            ),
           ),
         ),
       );

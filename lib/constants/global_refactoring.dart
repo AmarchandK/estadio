@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:estadio/constants/colors.dart';
@@ -96,8 +95,7 @@ class UserSecureStorage {
   static Future setTokens(String token, String refreshToken) async {
     await storage.write(key: tokenKey, value: token);
     await storage.write(key: refreshKey, value: refreshToken);
-    final tokens = await storage.readAll();
-    log(' token saved $tokens');
+   
   }
 
   static Future getToken() async => await storage.readAll();
