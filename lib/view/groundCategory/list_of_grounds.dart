@@ -1,12 +1,20 @@
-import 'package:estadio/constants/colors.dart';
 import 'package:estadio/constants/sizes.dart';
+import 'package:estadio/view/Discription/discriptiom.dart';
+import 'package:estadio/view/Home/widgets/near_grounds.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../../model/Home/home_response.dart';
 
-class Grounds extends StatelessWidget {
-  const Grounds({super.key, required this.img, required this.tittle});
+class GroundCategory extends StatelessWidget {
+  const GroundCategory(
+      {super.key,
+      required this.img,
+      required this.tittle,
+      required this.turfList});
   final String img;
   final String tittle;
+  final List<Datum> turfList;
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +47,14 @@ class Grounds extends StatelessWidget {
               child: ListView.separated(
                   shrinkWrap: true,
                   primary: false,
-                  itemCount: 10,
-                  separatorBuilder: (BuildContext context, int index) =>
-                      const Divider(
-                        color: wColor,
-                        endIndent: 15,
-                        indent: 15,
-                      ),
+                  itemCount: turfList.length,
+                  separatorBuilder: (BuildContext context, int index) {
+                    return GroundCards(
+                      turfList: turfList[index],
+                      toFucn: () =>
+                          Get.to(() => DescriptionPage(datum: turfList[index])),
+                    );
+                  },
                   itemBuilder: (BuildContext context, int index) =>
                       const Text('')))
         ],

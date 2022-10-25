@@ -4,29 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_custom_cards/flutter_custom_cards.dart';
 import '../../../constants/colors.dart';
 import '../../../constants/sizes.dart';
+import '../../../model/Home/home_response.dart';
 
 class GroundCards extends StatelessWidget {
   const GroundCards({
     Key? key,
-    required this.img,
-    required this.turfName,
-    this.onFav,
-    required this.rating,
-    required this.place,
-    required this.toFucn,
-    required this.isAvailable,
-    required this.sevens,
-    required this.fives,
+
+    this.onFav, required this.toFucn, required this.turfList,
+
   }) : super(key: key);
-  final String img;
-  final String turfName;
+
   final void Function()? onFav;
-  final double rating;
-  final String place;
+
   final void Function() toFucn;
-  final bool isAvailable;
-  final bool sevens;
-  final bool fives;
+
+  final Datum turfList;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +37,7 @@ class GroundCards extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                     image: NetworkImage(
-                      img,
+                      turfList.turfLogo!,
                     ),
                     fit: BoxFit.fill),
                 borderRadius: const BorderRadius.all(
@@ -63,24 +55,24 @@ class GroundCards extends StatelessWidget {
                   children: [
                     FittedBox(
                       child: Text(
-                        turfName,
+                        turfList.turfName!,
                         style: const TextStyle(fontSize: 20),
                       ),
                     ),
                     CurrentLocation(
-                      place: place,
+                      place: turfList.turfPlace!,
                       size: 15,
                     ),
-                    isAvailable
+                     turfList.turfInfo!.turfIsAvailable!
                         ? const Text('Available',
                             style: TextStyle(color: Colors.green))
                         : const Text('Not Available',
                             style: TextStyle(color: Colors.red)),
                     Row(
                       children: [
-                        Text(fives ? "5s" : ""),
+                        Text(turfList.turfType!.turfFives! ? "5s" : ""),
                         w20,
-                        Text(sevens ? "7s" : "")
+                        Text(turfList.turfType!.turfSevens! ? "7s" : "")
                       ],
                     ),
                   ],
@@ -98,7 +90,7 @@ class GroundCards extends StatelessWidget {
                       color: Color.fromARGB(255, 255, 129, 0),
                     ),
                     Text(
-                      ' $rating',
+                      ' ${turfList.turfInfo!.turfRating!}',
                     ),
                   ],
                 ),

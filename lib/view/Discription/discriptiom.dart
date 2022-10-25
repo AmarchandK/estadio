@@ -69,7 +69,7 @@ class DescriptionPage extends StatelessWidget {
                     place: '${datum.turfPlace} , ${datum.turfDistrict}',
                     size: 20),
                 Link(
-                  uri: Uri.parse(datum.turfInfo!.turfMap!),
+                 uri: Uri.parse(datum.turfInfo!.turfMap!),
                   builder: (context, followLink) => IconButton(
                     color: darkGreen,
                     onPressed: () => followLink,

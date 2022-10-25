@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
     final HomeController controller =
         Provider.of<HomeController>(context, listen: false);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      controller.homeFetch();
+      controller.onInit();
     });
     return Scaffold(
       backgroundColor: bColor,
@@ -40,8 +40,7 @@ class HomePage extends StatelessWidget {
               ),
               const Search(),
               h10,
-              ImageSlider(
-                  controller: controller, datum: controller.nearGrounds),
+              const ImageSlider(),
               h10,
               const DotSlider(),
               h10,
@@ -57,18 +56,12 @@ class HomePage extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       final turfsList = controller.nearGrounds[index];
                       return GroundCards(
-                        img: turfsList.turfLogo!,
-                        turfName: turfsList.turfName!,
-                        sevens: turfsList.turfType!.turfSevens!,
-                        fives: turfsList.turfType!.turfFives!,
-                        rating: turfsList.turfInfo!.turfRating!,
-                        place: turfsList.turfPlace!,
-                        isAvailable: turfsList.turfInfo!.turfIsAvailable!,
                         toFucn: () => Get.to(
                           () => DescriptionPage(
                             datum: turfsList,
                           ),
                         ),
+                        turfList: turfsList,
                       );
                     },
                   );

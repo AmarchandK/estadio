@@ -1,23 +1,20 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:estadio/model/Home/home_response.dart';
-import 'package:estadio/view/Grounds/list_of_grounds.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import '../../../constants/colors.dart';
 import '../../../controller/Home/home_controller.dart';
+import '../../groundCategory/list_of_grounds.dart';
 
 class ImageSlider extends StatelessWidget {
   const ImageSlider({
     Key? key,
-    required this.controller,
-    required this.datum,
   }) : super(key: key);
-
-  final HomeController controller;
-  final List<Datum> datum;
 
   @override
   Widget build(BuildContext context) {
+    final HomeController controller =
+        Provider.of<HomeController>(context, listen: false);
     return CarouselSlider.builder(
       itemCount: controller.imgUrls.length,
       options: CarouselOptions(
@@ -32,7 +29,11 @@ class ImageSlider extends StatelessWidget {
         final urlImg = controller.imgUrls[index];
         final urlTitle = controller.carosleTittle[index];
         return GestureDetector(
-          onTap: () => Get.to(() => Grounds(img: urlImg, tittle: urlTitle)),
+          onTap: () => Get.to(() => GroundCategory(
+                img: urlImg,
+                tittle: urlTitle,
+                turfList: controller.categoryAllList[index],
+              )),
           child: Container(
             width: 400,
             height: 200,
