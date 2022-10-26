@@ -7,7 +7,6 @@ class SplashController extends GetxController {
   @override
   void onInit() {
     checkUserLoggedIn();
-
     super.onInit();
   }
 

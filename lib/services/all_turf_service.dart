@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:estadio/constants/global_refactoring.dart';
-import 'package:estadio/constants/url.dart';
+import 'package:estadio/constants/core_refactering/global_refactoring.dart';
+import 'package:estadio/constants/url/url.dart';
 import 'package:estadio/model/Home/home_response.dart';
 
 class AllTurfService {

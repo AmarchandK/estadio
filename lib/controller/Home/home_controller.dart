@@ -12,10 +12,10 @@ class HomeController extends ChangeNotifier {
   HomeController.instance();
 
   onInit() async {
+    await nearTurfFech();
     await allTurfFetch();
     await listAdd();
     await categoryAllAdd();
-    await nearTurfFech();
   }
 
   static late String turfLocality;
@@ -121,7 +121,6 @@ class HomeController extends ChangeNotifier {
       nearGrounds.addAll(homeResponse.data!);
     }
     onLoding();
-    notifyListeners();
   }
 //////////////////////////////////////////////////////////
 
@@ -137,8 +136,6 @@ class HomeController extends ChangeNotifier {
       allTurf.addAll(homeResponse.data!);
     }
     onLoding();
-
-    notifyListeners();
   }
 
   Future<List<Datum>> searchAsign() async {

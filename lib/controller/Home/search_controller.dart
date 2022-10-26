@@ -1,6 +1,8 @@
+import 'dart:developer';
 import 'package:estadio/controller/Home/home_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import '../../constants/debounce/debounce.dart';
 import '../../model/Home/home_response.dart';
 
 class SearchController extends GetxController {
@@ -8,7 +10,7 @@ class SearchController extends GetxController {
   final searchController = TextEditingController();
   List<Datum> allSerach = [];
   late List<Datum> foundTurfs = [];
-  late List<Datum> searchResults = [];
+  final Debouncer debouncer = Debouncer(milliseconds: 1 * 1000);
 
   @override
   void onInit() async {
@@ -22,6 +24,8 @@ class SearchController extends GetxController {
   }
 
   void runFilter(String serachItem) {
+    late List<Datum> searchResults = [];
+    log('Item $serachItem');
     if (serachItem.isEmpty) {
       searchResults = allSerach;
     } else {
@@ -33,6 +37,15 @@ class SearchController extends GetxController {
           )
           .toList();
     }
+    foundTurfs = searchResults;
+    log(searchResults.toString());
     update();
+  }
+
+  @override
+  void onClose() {
+    foundTurfs.clear();
+    searchController.clear();
+    super.onClose();
   }
 }

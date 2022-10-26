@@ -1,4 +1,4 @@
-import 'package:estadio/constants/controller_int.dart';
+import 'package:estadio/constants/controler_initalize/controller_int.dart';
 import 'package:estadio/controller/Home/home_controller.dart';
 import 'package:estadio/view/Splashscreen/splash_screen.dart';
 import 'package:flutter/material.dart';

@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../constants/colors.dart';
-import '../../constants/global_refactoring.dart';
+import '../../constants/core_refactering/global_refactoring.dart';
 import '../../constants/sizes.dart';
 import '../../controller/Authentication/login_controller.dart';
 import 'widgets/button.dart';

@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:estadio/constants/global_refactoring.dart';
+import 'package:estadio/constants/core_refactering/global_refactoring.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../constants/colors.dart';

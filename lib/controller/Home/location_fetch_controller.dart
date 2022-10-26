@@ -1,5 +1,5 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers, invalid_return_type_for_catch_error, avoid_print
-import 'package:estadio/constants/global_refactoring.dart';
+import 'package:estadio/constants/core_refactering/global_refactoring.dart';
 import 'package:estadio/controller/Home/home_controller.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';

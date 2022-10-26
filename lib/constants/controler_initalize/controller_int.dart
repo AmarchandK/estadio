@@ -6,7 +6,7 @@ import 'package:estadio/controller/Home/location_fetch_controller.dart';
 import 'package:estadio/controller/Splash/splash_controller.dart';
 import 'package:get/get.dart';
 
-import '../controller/Authentication/login_controller.dart';
+import '../../controller/Authentication/login_controller.dart';
 
 Future controllerInit() async {
   Get.put(SplashController());
