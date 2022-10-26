@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
           bottomNavigationBarTheme: const BottomNavigationBarThemeData(
               backgroundColor: Colors.transparent),
         ),
-        home: const SplashScreen(),
+        home: SplashScreen(),
       ),
     );
   }

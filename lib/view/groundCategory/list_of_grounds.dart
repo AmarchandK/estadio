@@ -1,7 +1,7 @@
 import 'package:estadio/constants/colors.dart';
 import 'package:estadio/constants/sizes.dart';
 import 'package:estadio/view/Discription/discriptiom.dart';
-import 'package:estadio/view/Home/widgets/near_grounds.dart';
+import 'package:estadio/view/Home/widgets/ground_cards.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

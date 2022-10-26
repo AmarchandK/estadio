@@ -6,27 +6,49 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-Widget headingText(text) => Padding(
-      padding: const EdgeInsets.all(8.0),
+Widget mainHeadingText(
+  text,
+) =>
+    Padding(
+        padding: const EdgeInsets.only(left: 18, top: 8),
+        child: Row(
+          children: [
+            Text(
+              text,
+              style: GoogleFonts.baumans(
+                  color: lightGreen, fontSize: 30, fontWeight: FontWeight.bold),
+            ),
+            const Expanded(
+                child: Padding(
+              padding: EdgeInsets.only(top: 6),
+              child: Divider(
+                color: wColor,
+                thickness: 2,
+                indent: 10,
+              ),
+            ))
+          ],
+        ));
+Widget subTittle(String text) => Padding(
+      padding: const EdgeInsets.all(7),
       child: Text(
         text,
-        style: const TextStyle(
-            fontSize: 25, fontWeight: FontWeight.bold, color: lightGreen),
-      ),
-    );
-      Widget subTittle(String text) => Align(
-      alignment: Alignment.centerLeft,
-      child: Padding(
-        padding: const EdgeInsets.all(7),
-        child: Text(
-          text,
-          style: const TextStyle(
+        style: GoogleFonts.andika(
             fontSize: 22,
-          ),
-        ),
+            fontWeight: FontWeight.bold,
+            color: Colors.lightGreen[300]),
       ),
     );
+contentsText({required String text, double? size, Color? color}) => Text(
+      text,
+      style: GoogleFonts.andika(
+          fontSize: size ?? 15,
+          fontWeight: FontWeight.w600,
+          color: color ?? Colors.grey[100]),
+    );
+
 SnackbarController showDialogue(tittle) {
   return Get.showSnackbar(
     GetSnackBar(
@@ -92,12 +114,24 @@ class UserSecureStorage {
   static const storage = FlutterSecureStorage();
   static const String tokenKey = 'tokenKey';
   static const String refreshKey = 'refreshKey';
-  static Future setTokens(String token, String refreshToken) async {
+  static const String userId = 'userId';
+  static Future setTokens(String token, String refreshToken, String id) async {
     await storage.write(key: tokenKey, value: token);
     await storage.write(key: refreshKey, value: refreshToken);
-   
+    await storage.write(key: userId, value: id);
   }
 
-  static Future getToken() async => await storage.readAll();
-  static Future getrefreshToken() async => await storage.read(key: tokenKey);
+  static Future getToken() async => await storage.read(key: tokenKey);
+  static Future getrefreshToken() async => await storage.read(key: refreshKey);
+  static Future getid() async => await storage.read(key: userId);
+}
+String greeting() {
+  var hour = DateTime.now().hour;
+  if (hour < 12) {
+    return 'Good Morning';
+  }
+  if (hour < 17) {
+    return 'Good Afternoon';
+  }
+  return 'Good Evening';
 }

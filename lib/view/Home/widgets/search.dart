@@ -1,7 +1,8 @@
+import 'package:estadio/constants/core_refactering/global_refactoring.dart';
 import 'package:estadio/constants/sizes.dart';
 import 'package:estadio/controller/Home/search_controller.dart';
 import 'package:estadio/view/Discription/discriptiom.dart';
-import 'package:estadio/view/Home/widgets/near_grounds.dart';
+import 'package:estadio/view/Home/widgets/ground_cards.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
@@ -37,7 +38,7 @@ class AnimatedSearch extends StatelessWidget {
                             _searchController.isSearchClicked.value ? 0 : 1,
                         duration: const Duration(seconds: 1),
                         child: Text(
-                          'Good Morning',
+                          greeting(),
                           style: GoogleFonts.lato(
                               fontStyle: FontStyle.italic,
                               fontSize: 30,

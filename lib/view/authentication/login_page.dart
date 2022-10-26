@@ -47,7 +47,7 @@ class LoginPage extends GetView<Authentication> {
                       key: controller.logKey,
                       child: Column(
                         children: [
-                          headingText('Log-In'),
+                          mainHeadingText('Log-In'),
                           h10,
                           Fields(
                               cntrlr: controller.emailController,

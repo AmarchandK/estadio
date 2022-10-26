@@ -1,7 +1,5 @@
-
+import 'package:estadio/constants/core_refactering/global_refactoring.dart';
 import 'package:flutter/material.dart';
-
-import '../../../constants/colors.dart';
 
 class DiscriptionChipWidget extends StatelessWidget {
   const DiscriptionChipWidget({
@@ -21,9 +19,9 @@ class DiscriptionChipWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: ChoiceChip(
                 clipBehavior: Clip.hardEdge,
-                selectedColor: darkGreen,
+                selectedColor: Colors.lightGreen[800],
                 padding: const EdgeInsets.all(2),
-                label: Text(item),
+                label: contentsText(text: item, size: 16),
                 avatar: Icon(icon),
                 selected: true),
           )

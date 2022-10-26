@@ -6,6 +6,7 @@ import 'package:estadio/view/Discription/widgets/discription_chip.dart';
 import 'package:estadio/view/Home/widgets/current_location.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/link.dart';
 import 'widgets/amout_category.dart';
@@ -41,19 +42,7 @@ class DescriptionPage extends StatelessWidget {
                 ),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                headingText(datum.turfName),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(datum.turfType!.turfFives == true ? "5s" : ""),
-                      w10,
-                      Text(datum.turfType!.turfSevens == true ? "7s" : "")
-                    ])
-              ],
-            ),
+            mainHeadingText(datum.turfName),
             h20,
             TurfPics(
               img: [
@@ -65,11 +54,22 @@ class DescriptionPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                w20,
+                RatingBarIndicator(
+                  rating: datum.turfInfo!.turfRating!,
+                  itemBuilder: (context, index) => const Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                  ),
+                  itemSize: 15,
+                  unratedColor: greyColor,
+                ),
+                const Spacer(),
                 CurrentLocation(
                     place: '${datum.turfPlace} , ${datum.turfDistrict}',
                     size: 20),
                 Link(
-                 uri: Uri.parse(datum.turfInfo!.turfMap!),
+                  uri: Uri.parse(datum.turfInfo!.turfMap!),
                   builder: (context, followLink) => IconButton(
                     color: darkGreen,
                     onPressed: () => followLink,
@@ -131,7 +131,7 @@ class DescriptionPage extends StatelessWidget {
             ),
             subTittle('Rates'),
             SizedBox(
-              height: 80,
+              height: 100,
               child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
@@ -148,10 +148,4 @@ class DescriptionPage extends StatelessWidget {
       ),
     );
   }
-
-
-
 }
-
-
-

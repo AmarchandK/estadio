@@ -1,8 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import '../../../constants/colors.dart';
 import '../../../controller/Home/home_controller.dart';
 import '../../groundCategory/list_of_grounds.dart';
 
@@ -51,7 +51,8 @@ class ImageSlider extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 10, bottom: 20),
                 child: Text(
                   urlTitle,
-                  style: const TextStyle(color: wColor, fontSize: 40),
+                  style: GoogleFonts.arimo(
+                      fontSize: 40, fontWeight: FontWeight.w900),
                 ),
               ),
             ),

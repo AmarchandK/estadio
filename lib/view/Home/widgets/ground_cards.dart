@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:estadio/constants/core_refactering/global_refactoring.dart';
 import 'package:estadio/constants/shimmer/shimmer.dart';
 import 'package:estadio/view/Home/widgets/current_location.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_cards/flutter_custom_cards.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../../constants/colors.dart';
 import '../../../constants/sizes.dart';
 import '../../../model/Home/home_response.dart';
@@ -41,7 +43,7 @@ class GroundCards extends StatelessWidget {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                             image: imageProvider,
-                            fit: BoxFit.fill,
+                            fit: BoxFit.cover,
                             colorFilter: const ColorFilter.mode(
                                 Colors.transparent, BlendMode.colorBurn)),
                         borderRadius: const BorderRadius.all(
@@ -57,18 +59,19 @@ class GroundCards extends StatelessWidget {
                       height: 100,
                       child: Center(child: CupertinoActivityIndicator()),
                     )),
-            w10,
+            w20,
             Expanded(
               child: SizedBox(
                 height: 100,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     FittedBox(
                       child: Text(
                         turfList.turfName!,
-                        style: const TextStyle(fontSize: 20),
+                        style: GoogleFonts.baumans(
+                            fontSize: 21, fontWeight: FontWeight.bold),
                       ),
                     ),
                     CurrentLocation(
@@ -76,17 +79,27 @@ class GroundCards extends StatelessWidget {
                       size: 15,
                     ),
                     turfList.turfInfo!.turfIsAvailable!
-                        ? const Text(
-                            'Available',
-                            style: TextStyle(color: Colors.green),
-                          )
-                        : const Text('Not Available',
-                            style: TextStyle(color: Colors.red)),
+                        ? Text('Available',
+                            style: GoogleFonts.baumans(
+                                fontStyle: FontStyle.italic,
+                                color: Colors.green,
+                                fontSize: 18))
+                        : Text(
+                            'Not Available',
+                            style: GoogleFonts.baumans(
+                                fontStyle: FontStyle.italic,
+                                color: Colors.red,
+                                fontSize: 18),
+                          ),
                     Row(
                       children: [
-                        Text(turfList.turfType!.turfFives! ? "5s" : ""),
+                        contentsText(
+                            text: turfList.turfType!.turfFives! ? "5s" : "",
+                            size: 16),
                         w20,
-                        Text(turfList.turfType!.turfSevens! ? "7s" : "")
+                        contentsText(
+                            text: turfList.turfType!.turfSevens! ? "7s" : "",
+                            size: 16)
                       ],
                     ),
                   ],
@@ -96,15 +109,16 @@ class GroundCards extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                h30,
                 Row(
                   children: [
                     const Icon(
-                      CupertinoIcons.star,
-                      size: 15,
+                      CupertinoIcons.star_fill,
+                      size: 17,
                       color: Color.fromARGB(255, 255, 129, 0),
                     ),
-                    Text(
-                      ' ${turfList.turfInfo!.turfRating!}',
+                    contentsText(
+                      text: ' ${turfList.turfInfo!.turfRating!}',
                     ),
                   ],
                 ),
@@ -113,6 +127,7 @@ class GroundCards extends StatelessWidget {
                     icon: const Icon(
                       Icons.bookmark_border,
                       color: lightGreen,
+                      size: 30,
                     )),
                 w20
               ],

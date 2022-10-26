@@ -46,7 +46,7 @@ class CreateAccount extends GetView<Authentication> {
                       key: controller.createKey,
                       child: Column(
                         children: [
-                          headingText('Create Account'),
+                          mainHeadingText('Create Account'),
                           Fields(
                               cntrlr: controller.emailController,
                               keybord: TextInputType.emailAddress,

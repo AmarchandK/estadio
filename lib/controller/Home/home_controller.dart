@@ -1,8 +1,8 @@
+import 'package:estadio/constants/core_refactering/global_refactoring.dart';
 import 'package:estadio/model/Home/home_response.dart';
 import 'package:estadio/services/all_turf_service.dart';
 import 'package:estadio/services/nearby_serevice.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class HomeController extends ChangeNotifier {
   static final HomeController _singleton = HomeController.instance();
@@ -112,10 +112,10 @@ class HomeController extends ChangeNotifier {
 /////////////// Near bu turf fetch //////////////////////////
   Future nearTurfFech() async {
     onLoding();
-    const storage = FlutterSecureStorage();
-    final String? token = await storage.read(key: 'tokenKey');
+    final String? token = await UserSecureStorage.getToken();
+
     final AllResponse? homeResponse =
-        await NearByService.nearByTurf(place: 'Malappuram', token: token!);
+        await NearByService.nearByTurf(place: turfLocality, token: token!);
     if (homeResponse != null && homeResponse.status == true) {
       nearGrounds.clear();
       nearGrounds.addAll(homeResponse.data!);
@@ -127,8 +127,8 @@ class HomeController extends ChangeNotifier {
 ///////////////All turf fetch //////////////////////////////
   Future allTurfFetch() async {
     onLoding();
-    const storage = FlutterSecureStorage();
-    final String? token = await storage.read(key: 'tokenKey');
+
+    final String? token = await UserSecureStorage.getToken();
     final AllResponse? homeResponse =
         await AllTurfService.allTurf(token: token!);
     if (homeResponse != null && homeResponse.status == true) {

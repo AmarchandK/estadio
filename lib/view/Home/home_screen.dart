@@ -9,10 +9,9 @@ import 'package:estadio/view/shimmer/home_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import '../../constants/colors.dart';
 import '../../controller/Home/home_controller.dart';
 import 'widgets/imge_slide.dart';
-import 'widgets/near_grounds.dart';
+import 'widgets/ground_cards.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -26,7 +25,6 @@ class HomePage extends StatelessWidget {
       controller.onInit();
     });
     return Scaffold(
-      backgroundColor: bColor,
       body: Consumer<HomeController>(
         builder: (context, controller, _) {
           return controller.homeIsLoading
@@ -36,9 +34,12 @@ class HomePage extends StatelessWidget {
                     children: [
                       h20,
                       Obx(
-                        () => CurrentLocation(
-                          place: _locationController.currentAddress.value,
-                          size: 25,
+                        () => Padding(
+                          padding: const EdgeInsets.only(top: 12, left: 15),
+                          child: CurrentLocation(
+                            place: _locationController.currentAddress.value,
+                            size: 25,
+                          ),
                         ),
                       ),
                       AnimatedSearch(),
@@ -49,7 +50,7 @@ class HomePage extends StatelessWidget {
                       h10,
                       Align(
                           alignment: Alignment.centerLeft,
-                          child: headingText('Near by Grounds')),
+                          child: mainHeadingText('Near by Grounds')),
                       ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),

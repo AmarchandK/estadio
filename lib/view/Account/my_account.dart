@@ -14,7 +14,7 @@ class MyAccount extends StatelessWidget {
           onPressed: () async {
             const storage = FlutterSecureStorage();
             await storage.deleteAll();
-            Get.offAll(() => const SplashScreen());
+            Get.offAll(() => SplashScreen());
           },
           icon: const Icon(Icons.logout),
         ),
