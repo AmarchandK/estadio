@@ -7,6 +7,7 @@ import '../../model/Home/home_response.dart';
 
 class SearchController extends GetxController {
   RxBool isSearchClicked = false.obs;
+  RxBool isSearched = false.obs;
   final searchController = TextEditingController();
   List<Datum> allSerach = [];
   late List<Datum> foundTurfs = [];

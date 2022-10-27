@@ -11,7 +11,6 @@ import 'controller/Home/location_fetch_controller.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await LocationController.instance.getCurrentPosition();
-
   runApp(const MyApp());
 }
 

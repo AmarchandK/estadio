@@ -17,7 +17,7 @@ class CurrentLocation extends StatelessWidget {
           CupertinoIcons.location_solid,
           size: size,
         ),
-        contentsText(text: place, size: 18),
+        contentsText(text: place, size: 17),
       ],
     );
   }

@@ -121,6 +121,7 @@ class HomeController extends ChangeNotifier {
       nearGrounds.addAll(homeResponse.data!);
     }
     onLoding();
+    notifyListeners();
   }
 //////////////////////////////////////////////////////////
 
@@ -136,10 +137,12 @@ class HomeController extends ChangeNotifier {
       allTurf.addAll(homeResponse.data!);
     }
     onLoding();
+    notifyListeners();
   }
 
   Future<List<Datum>> searchAsign() async {
     await allTurfFetch();
+    notifyListeners();
     return allTurf;
   }
 }

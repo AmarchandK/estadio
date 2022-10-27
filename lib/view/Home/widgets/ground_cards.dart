@@ -94,12 +94,12 @@ class GroundCards extends StatelessWidget {
                     Row(
                       children: [
                         contentsText(
-                            text: turfList.turfType!.turfFives! ? "5s" : "",
-                            size: 16),
+                          text: turfList.turfType!.turfFives! ? "5s" : "",
+                        ),
                         w20,
                         contentsText(
-                            text: turfList.turfType!.turfSevens! ? "7s" : "",
-                            size: 16)
+                          text: turfList.turfType!.turfSevens! ? "7s" : "",
+                        )
                       ],
                     ),
                   ],

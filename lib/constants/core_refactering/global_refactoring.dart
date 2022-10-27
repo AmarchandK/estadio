@@ -41,12 +41,14 @@ Widget subTittle(String text) => Padding(
             color: Colors.lightGreen[300]),
       ),
     );
-contentsText({required String text, double? size, Color? color}) => Text(
-      text,
-      style: GoogleFonts.andika(
-          fontSize: size ?? 15,
-          fontWeight: FontWeight.w600,
-          color: color ?? Colors.grey[100]),
+contentsText({required String text, double? size, Color? color}) => FittedBox(
+      child: Text(
+        text,
+        style: GoogleFonts.andika(
+            fontSize: size ?? 15,
+            fontWeight: FontWeight.w600,
+            color: color ?? Colors.grey[100]),
+      ),
     );
 
 SnackbarController showDialogue(tittle) {
@@ -125,6 +127,7 @@ class UserSecureStorage {
   static Future getrefreshToken() async => await storage.read(key: refreshKey);
   static Future getid() async => await storage.read(key: userId);
 }
+
 String greeting() {
   var hour = DateTime.now().hour;
   if (hour < 12) {

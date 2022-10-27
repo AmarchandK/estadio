@@ -54,7 +54,7 @@ class DescriptionPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                w20,
+                w10,
                 RatingBarIndicator(
                   rating: datum.turfInfo!.turfRating!,
                   itemBuilder: (context, index) => const Icon(
@@ -66,8 +66,8 @@ class DescriptionPage extends StatelessWidget {
                 ),
                 const Spacer(),
                 CurrentLocation(
-                    place: '${datum.turfPlace} , ${datum.turfDistrict}',
-                    size: 20),
+                    place: '${datum.turfPlace}, \n${datum.turfDistrict}',
+                    size: 17),
                 Link(
                   uri: Uri.parse(datum.turfInfo!.turfMap!),
                   builder: (context, followLink) => IconButton(

@@ -6,17 +6,16 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/state_manager.dart';
 
 class LocationController extends GetxController {
+  ///////////Singleton///////////////////////////////
   static final LocationController instance = LocationController._insantce();
-
   factory LocationController() {
     return instance;
   }
-
   LocationController._insantce();
-
+  ///////////////////////////////////////////////////////
   RxString currentAddress = 'Malappuram'.obs;
   dynamic currentPosition = Geolocator.getCurrentPosition().obs;
-
+  /////////////////////////////////////////////
   Future<bool> _handlePermision() async {
     LocationPermission _permission;
     bool _seviceEnabled;

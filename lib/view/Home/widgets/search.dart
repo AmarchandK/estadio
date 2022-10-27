@@ -5,6 +5,7 @@ import 'package:estadio/view/Discription/discriptiom.dart';
 import 'package:estadio/view/Home/widgets/ground_cards.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../constants/colors.dart';
@@ -16,47 +17,53 @@ class AnimatedSearch extends StatelessWidget {
   final SearchController _searchController = Get.put(SearchController());
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => AnimatedContainer(
-        color: _searchController.isSearchClicked.value
-            ? wColor
-            : Colors.transparent,
-        duration: const Duration(seconds: 1),
-        height: _searchController.isSearchClicked.value
-            ? heightSize(context) - 150
-            : 60,
-        child: SingleChildScrollView(
-          child: Column(
+    return Column(
+      children: [
+        SizedBox(
+          height: 60,
+          child: Stack(
             children: [
-              SizedBox(
-                height: 60,
-                child: Stack(
-                  children: [
-                    Align(
-                      child: AnimatedOpacity(
-                        opacity:
-                            _searchController.isSearchClicked.value ? 0 : 1,
-                        duration: const Duration(seconds: 1),
-                        child: Text(
-                          greeting(),
-                          style: GoogleFonts.lato(
-                              fontStyle: FontStyle.italic,
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
+              Align(
+                child: AnimatedOpacity(
+                  opacity: _searchController.isSearchClicked.value ? 0 : 1,
+                  duration: const Duration(seconds: 1),
+                  child: Text(
+                    greeting(),
+                    style: GoogleFonts.lato(
+                      fontStyle: FontStyle.italic,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: wColor,
                     ),
-                    const _TextField(),
-                  ],
+                  ),
                 ),
               ),
-              _searchController.isSearchClicked.value
-                  ? const _IdleWidgets()
-                  : const SizedBox()
+              const _TextField(),
             ],
           ),
         ),
-      ),
+        Obx(
+          () => AnimatedContainer(
+            color: _searchController.isSearchClicked.value
+                ? wColor
+                : Colors.transparent,
+            duration: const Duration(seconds: 1),
+            height: _searchController.isSearchClicked.value
+                ? heightSize(context) - 150
+                : 0,
+            child: SingleChildScrollView(
+              physics: const ScrollPhysics(),
+              child: Column(
+                children: [
+                  _searchController.isSearchClicked.value
+                      ? const _IdleWidgets()
+                      : const SizedBox()
+                ],
+              ),
+            ),
+          ),
+        )
+      ],
     );
   }
 }
@@ -108,8 +115,11 @@ class _TextField extends GetView<SearchController> {
                   : widthSize(context) / 1.23,
               child: IconButton(
                 onPressed: () {
-                  FocusScope.of(context).unfocus();
                   controller.searchController.clear();
+                  controller.runFilter(controller.searchController.text.trim());
+                  controller.isSearched.value = true;
+                  FocusScope.of(context).unfocus();
+
                   controller.isSearchClicked.value =
                       !controller.isSearchClicked.value;
                 },
@@ -139,13 +149,20 @@ class _TextField extends GetView<SearchController> {
                   ),
                   child: TextFormField(
                     style: const TextStyle(color: Colors.black),
-                    onChanged: (value) => controller.debouncer.run(() {
-                      controller.runFilter(value.trim());
-                    }),
+                    onChanged: (value) {
+                      if (value.isEmpty) {
+                        controller.isSearched.value = true;
+                      } else {
+                        controller.isSearched.value = false;
+                      }
+                      controller.debouncer.run(() {
+                        controller.runFilter(value.trim());
+                      });
+                    },
                     controller: controller.searchController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20)),
+                          borderRadius: BorderRadius.circular(10)),
                       hintText: 'Search here',
                     ),
                   ),
@@ -167,39 +184,46 @@ class _IdleWidgets extends GetView<SearchController> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SearchController>(
-      builder: (controller) => controller.foundTurfs.isEmpty
-          ? MasonryGridView.builder(
-              shrinkWrap: true,
-              crossAxisSpacing: 5,
-              mainAxisSpacing: 5,
-              itemCount: controller.allSerach.length,
-              gridDelegate:
-                  const SliverSimpleGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3),
-              itemBuilder: (context, index) {
-                return Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: lightGreen, width: 4)),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.network(controller.allSerach[index].turfLogo!),
-                  ),
-                );
-              },
-            )
-          : ListView.builder(
-              shrinkWrap: true,
-              physics: const AlwaysScrollableScrollPhysics(),
-              itemBuilder: (context, index) => GroundCards(
-                    toFucn: () => Get.to(
-                      () => DescriptionPage(
-                        datum: controller.foundTurfs[index],
+      builder: (controller) => controller.foundTurfs.isNotEmpty
+          ? (controller.isSearched.value
+              ? MasonryGridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  crossAxisSpacing: 5,
+                  mainAxisSpacing: 5,
+                  itemCount: controller.allSerach.length,
+                  gridDelegate:
+                      const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3),
+                  itemBuilder: (context, index) {
+                    return Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: lightGreen, width: 4)),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                            controller.allSerach[index].turfLogo!),
                       ),
-                    ),
-                    turfList: controller.foundTurfs[index],
-                  ),
-              itemCount: controller.foundTurfs.length),
+                    );
+                  },
+                )
+              : ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) => GroundCards(
+                        toFucn: () => Get.to(
+                          () => DescriptionPage(
+                            datum: controller.foundTurfs[index],
+                          ),
+                        ),
+                        turfList: controller.foundTurfs[index],
+                      ),
+                  itemCount: controller.foundTurfs.length))
+          : const Text(
+              'No data',
+              style: TextStyle(color: Colors.black),
+            ),
     );
   }
 }

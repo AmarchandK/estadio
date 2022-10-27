@@ -51,22 +51,25 @@ class HomePage extends StatelessWidget {
                       Align(
                           alignment: Alignment.centerLeft,
                           child: mainHeadingText('Near by Grounds')),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: controller.nearGrounds.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final turfsList = controller.nearGrounds[index];
-                          return GroundCards(
-                            toFucn: () => Get.to(
-                              () => DescriptionPage(
-                                datum: turfsList,
+                      Consumer<HomeController>(
+                          builder: (context, controller, _) {
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: controller.nearGrounds.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final turfsList = controller.nearGrounds[index];
+                            return GroundCards(
+                              toFucn: () => Get.to(
+                                () => DescriptionPage(
+                                  datum: turfsList,
+                                ),
                               ),
-                            ),
-                            turfList: turfsList,
-                          );
-                        },
-                      )
+                              turfList: turfsList,
+                            );
+                          },
+                        );
+                      })
                     ],
                   ),
                 )
