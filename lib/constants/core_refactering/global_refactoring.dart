@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 Widget mainHeadingText(
-  text,
+  text
 ) =>
     Padding(
         padding: const EdgeInsets.only(left: 18, top: 8),
@@ -91,19 +91,19 @@ errorHandler(Object e) {
     if (e.response!.data["status"] == false) {
       showToast(e.response!.data["message"]);
     } else if (e.response?.statusCode == 401) {
-      showDialogue('Server not found !');
+      showDialogue(e.response!.data["message"]);
     } else if (e.type == DioErrorType.connectTimeout) {
-      showDialogue('Connection Timout');
+      showDialogue(e.response!.data["message"]);
     } else if (e.type == DioErrorType.receiveTimeout) {
-      showDialogue('Recieve Timout');
+      showDialogue(e.response!.data["message"]);
     } else if (e.type == DioErrorType.cancel) {
-      showDialogue('Request cancelled');
+      showDialogue(e.response!.data["message"]);
     } else if (e.type == DioErrorType.sendTimeout) {
-      showDialogue('Url  sent timeout');
+      showDialogue(e.response!.data["message"]);
     } else if (e.type == DioErrorType.response) {
-      showDialogue('Incorrect status code, such as 404, 503...');
+      showDialogue(e.response!.data["message"]);
     } else if (e.type == DioErrorType.other) {
-      showDialogue('Some other Error');
+      showDialogue(e.response!.data["message"]);
     }
   } else if (e is SocketException) {
     showDialogue(

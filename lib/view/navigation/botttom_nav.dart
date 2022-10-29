@@ -1,12 +1,11 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:estadio/constants/sizes.dart';
-import 'package:estadio/controller/BottomNav/bottomnav_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-
 import '../../constants/colors.dart';
+import '../../controller/bottomNav/bottomnav_controller.dart';
 
 class BottomNav extends GetView<BottomNavController> {
   const BottomNav({super.key});

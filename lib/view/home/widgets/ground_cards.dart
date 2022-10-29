@@ -1,14 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:estadio/constants/core_refactering/global_refactoring.dart';
 import 'package:estadio/constants/shimmer/shimmer.dart';
-import 'package:estadio/view/Home/widgets/current_location.dart';
+import 'package:estadio/model/home/home_response.dart';
+import 'package:estadio/view/fav_button/fav_button.dart';
+import 'package:estadio/view/home/widgets/current_location.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_cards/flutter_custom_cards.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../constants/colors.dart';
 import '../../../constants/sizes.dart';
-import '../../../model/Home/home_response.dart';
 
 class GroundCards extends StatelessWidget {
   const GroundCards({
@@ -122,13 +123,7 @@ class GroundCards extends StatelessWidget {
                     ),
                   ],
                 ),
-                IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.bookmark_border,
-                      color: lightGreen,
-                      size: 30,
-                    )),
+                FavButton(datum: turfList),
                 w20
               ],
             )

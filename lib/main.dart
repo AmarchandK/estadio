@@ -1,12 +1,12 @@
 import 'package:estadio/constants/controler_initalize/controller_int.dart';
-import 'package:estadio/controller/Home/home_controller.dart';
-import 'package:estadio/view/Splashscreen/splash_screen.dart';
+import 'package:estadio/view/splashscreen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'constants/colors.dart';
-import 'controller/Home/location_fetch_controller.dart';
+import 'controller/home/home_controller.dart';
+import 'controller/home/location_fetch_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

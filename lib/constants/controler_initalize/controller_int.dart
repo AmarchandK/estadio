@@ -1,12 +1,11 @@
 import 'dart:async';
 import 'dart:core';
-import 'package:estadio/controller/Home/search_controller.dart';
-import 'package:estadio/controller/BottomNav/bottomnav_controller.dart';
-import 'package:estadio/controller/Home/location_fetch_controller.dart';
-import 'package:estadio/controller/Splash/splash_controller.dart';
+import 'package:estadio/controller/authentication/login_controller.dart';
+import 'package:estadio/controller/bottomNav/bottomnav_controller.dart';
+import 'package:estadio/controller/home/location_fetch_controller.dart';
+import 'package:estadio/controller/home/search_controller.dart';
+import 'package:estadio/controller/splash/splash_controller.dart';
 import 'package:get/get.dart';
-
-import '../../controller/Authentication/login_controller.dart';
 
 Future controllerInit() async {
   Get.put(SplashController());

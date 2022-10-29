@@ -1,9 +1,9 @@
 import 'package:estadio/constants/colors.dart';
 import 'package:estadio/constants/core_refactering/global_refactoring.dart';
 import 'package:estadio/constants/sizes.dart';
-import 'package:estadio/model/Home/home_response.dart';
-import 'package:estadio/view/Discription/widgets/discription_chip.dart';
-import 'package:estadio/view/Home/widgets/current_location.dart';
+import 'package:estadio/model/home/home_response.dart';
+import 'package:estadio/view/discription/widgets/discription_chip.dart';
+import 'package:estadio/view/home/widgets/current_location.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';

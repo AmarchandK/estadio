@@ -1,16 +1,16 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
-import 'package:estadio/model/Authentication/sign_in/create_response.dart';
-import 'package:estadio/view/Navigation/botttom_nav.dart';
+import 'package:estadio/controller/authentication/login_controller.dart';
+import 'package:estadio/model/authentication/log_in/login_request.dart';
+import 'package:estadio/model/authentication/log_in/login_response.dart';
+import 'package:estadio/model/authentication/otp/otp_request.dart';
+import 'package:estadio/model/authentication/otp/otp_response.dart';
+import 'package:estadio/model/authentication/sign_in/create_request.dart';
+import 'package:estadio/model/authentication/sign_in/create_response.dart';
+import 'package:estadio/view/navigation/botttom_nav.dart';
 import 'package:get/get.dart';
 import '../constants/core_refactering/global_refactoring.dart';
 import '../constants/url/url.dart';
-import '../controller/Authentication/login_controller.dart';
-import '../model/Authentication/log_in/login_request.dart';
-import '../model/Authentication/log_in/login_response.dart';
-import '../model/Authentication/otp/otp_request.dart';
-import '../model/Authentication/otp/otp_response.dart';
-import '../model/Authentication/sign_in/create_request.dart';
 import '../view/authentication/otp_veryfy.dart';
 
 class ApiService {

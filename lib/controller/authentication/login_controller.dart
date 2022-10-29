@@ -1,8 +1,8 @@
-import 'package:estadio/model/Authentication/log_in/login_request.dart';
+import 'package:estadio/model/authentication/log_in/login_request.dart';
+import 'package:estadio/model/authentication/otp/otp_request.dart';
+import 'package:estadio/model/authentication/sign_in/create_request.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../model/Authentication/otp/otp_request.dart';
-import '../../model/Authentication/sign_in/create_request.dart';
 import '../../services/auth_services.dart';
 
 class Authentication extends GetxController {

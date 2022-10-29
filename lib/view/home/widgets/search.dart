@@ -1,11 +1,10 @@
 import 'package:estadio/constants/core_refactering/global_refactoring.dart';
 import 'package:estadio/constants/sizes.dart';
-import 'package:estadio/controller/Home/search_controller.dart';
-import 'package:estadio/view/Discription/discriptiom.dart';
-import 'package:estadio/view/Home/widgets/ground_cards.dart';
+import 'package:estadio/controller/home/search_controller.dart';
+import 'package:estadio/view/discription/discriptiom.dart';
+import 'package:estadio/view/home/widgets/ground_cards.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../constants/colors.dart';
@@ -196,14 +195,22 @@ class _IdleWidgets extends GetView<SearchController> {
                       const SliverSimpleGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3),
                   itemBuilder: (context, index) {
-                    return Container(
-                      decoration: BoxDecoration(
+                    return GestureDetector(
+                      onTap: () => Get.to(
+                        () => DescriptionPage(
+                          datum: controller.allSerach[index],
+                        ),
+                      ),
+                      child: Container(
+                        decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: lightGreen, width: 4)),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.network(
-                            controller.allSerach[index].turfLogo!),
+                          border: Border.all(color: lightGreen, width: 4),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.network(
+                              controller.allSerach[index].turfLogo!),
+                        ),
                       ),
                     );
                   },

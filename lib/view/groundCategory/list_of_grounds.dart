@@ -1,11 +1,11 @@
 import 'package:estadio/constants/colors.dart';
 import 'package:estadio/constants/sizes.dart';
-import 'package:estadio/view/Discription/discriptiom.dart';
-import 'package:estadio/view/Home/widgets/ground_cards.dart';
+import 'package:estadio/model/home/home_response.dart';
+import 'package:estadio/view/discription/discriptiom.dart';
+import 'package:estadio/view/home/widgets/ground_cards.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../model/Home/home_response.dart';
 
 class GroundCategory extends StatelessWidget {
   const GroundCategory(

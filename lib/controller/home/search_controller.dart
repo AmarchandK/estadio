@@ -1,9 +1,9 @@
 import 'dart:developer';
-import 'package:estadio/controller/Home/home_controller.dart';
+import 'package:estadio/controller/home/home_controller.dart';
+import 'package:estadio/model/home/home_response.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import '../../constants/debounce/debounce.dart';
-import '../../model/Home/home_response.dart';
 
 class SearchController extends GetxController {
   RxBool isSearchClicked = false.obs;

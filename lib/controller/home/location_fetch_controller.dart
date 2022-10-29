@@ -1,6 +1,6 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers, invalid_return_type_for_catch_error, avoid_print
 import 'package:estadio/constants/core_refactering/global_refactoring.dart';
-import 'package:estadio/controller/Home/home_controller.dart';
+import 'package:estadio/controller/home/home_controller.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/state_manager.dart';
@@ -46,7 +46,7 @@ class LocationController extends GetxController {
         .then((Position position) {
       currentPosition = position;
       getAddress(currentPosition!);
-    }).catchError((e) => print('exeption   $e'));
+    }).catchError((e) => print('exeption on fetching locatioin  $e'));
     update();
   }
 
@@ -55,9 +55,10 @@ class LocationController extends GetxController {
             currentPosition!.latitude, currentPosition!.longitude)
         .then((List<Placemark> placemarks) {
       Placemark place = placemarks[0];
+      HomeController.turfLocality = place.subAdministrativeArea!.trim();
+
       currentAddress.value =
           '${place.subLocality},${place.subAdministrativeArea}';
-      HomeController.turfLocality = place.subAdministrativeArea!.trim();
     }).catchError((e) {
       print('exeption add  $e');
     });

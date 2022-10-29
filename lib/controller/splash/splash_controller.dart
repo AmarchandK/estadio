@@ -1,6 +1,5 @@
-import 'package:estadio/controller/Home/home_controller.dart';
-import 'package:estadio/view/Navigation/botttom_nav.dart';
 import 'package:estadio/view/authentication/login_page.dart';
+import 'package:estadio/view/navigation/botttom_nav.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
@@ -8,7 +7,7 @@ class SplashController extends GetxController {
   @override
   void onInit() async {
     checkUserLoggedIn();
-    await HomeController.instance().onInit();
+    // await HomeController.instance().onInit();
     super.onInit();
   }
 

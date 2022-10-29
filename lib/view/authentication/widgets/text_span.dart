@@ -1,9 +1,9 @@
+import 'package:estadio/controller/authentication/login_controller.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../constants/colors.dart';
-import '../../../controller/Authentication/login_controller.dart';
 
 class Textspan extends GetView<Authentication> {
   const Textspan(

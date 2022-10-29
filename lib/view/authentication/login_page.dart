@@ -1,10 +1,10 @@
 import 'dart:ui';
 import 'package:estadio/constants/core_refactering/global_refactoring.dart';
+import 'package:estadio/controller/authentication/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../constants/colors.dart';
 import '../../constants/sizes.dart';
-import '../../controller/Authentication/login_controller.dart';
 import 'create_account.dart';
 import 'widgets/button.dart';
 import 'widgets/text_span.dart';

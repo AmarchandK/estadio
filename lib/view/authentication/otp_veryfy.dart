@@ -1,12 +1,12 @@
 import 'dart:ui';
 
+import 'package:estadio/controller/authentication/login_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
 import '../../constants/colors.dart';
 import '../../constants/sizes.dart';
-import '../../controller/Authentication/login_controller.dart';
 
 class OTPscreen extends GetView<Authentication> {
   OTPscreen({Key? key}) : super(key: key);

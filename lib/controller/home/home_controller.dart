@@ -1,8 +1,9 @@
+import 'dart:developer';
 import 'package:estadio/constants/core_refactering/global_refactoring.dart';
-import 'package:estadio/model/Home/home_response.dart';
 import 'package:estadio/services/all_turf_service.dart';
 import 'package:estadio/services/nearby_serevice.dart';
 import 'package:flutter/foundation.dart';
+import '../../model/home/home_response.dart';
 
 class HomeController extends ChangeNotifier {
   static final HomeController _singleton = HomeController.instance();
@@ -12,6 +13,7 @@ class HomeController extends ChangeNotifier {
   HomeController.instance();
 
   onInit() async {
+    log('Called');
     await nearTurfFech();
     await allTurfFetch();
     await listAdd();
@@ -23,7 +25,6 @@ class HomeController extends ChangeNotifier {
   //////// turf lists////////////////
   final List<Datum> nearGrounds = [];
   final List<Datum> allTurf = [];
-  final List<Datum> favTurf = [];
   ///////////////////////////////////
 
 ///////category turfs //////////////////
@@ -128,7 +129,6 @@ class HomeController extends ChangeNotifier {
 ///////////////All turf fetch //////////////////////////////
   Future allTurfFetch() async {
     onLoding();
-
     final String? token = await UserSecureStorage.getToken();
     final AllResponse? homeResponse =
         await AllTurfService.allTurf(token: token!);
