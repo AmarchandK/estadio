@@ -131,22 +131,27 @@ class DescriptionPage extends StatelessWidget {
               ],
             ),
             subTittle('Rates'),
+            h10,
             SizedBox(
-              height: 100,
+              height: 80,
               child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) => timings(
                       amount: price[index],
-                      time: '10 am-12 pm',
-                      timetype: 'Morning'),
+                      timetype: index == 0
+                          ? 'Morning'
+                          : index == 1
+                              ? 'Afternoon'
+                              : 'Evening'),
                   separatorBuilder: (context, index) => w10,
                   itemCount: 3),
             ),
+            const SizedBox(height: 100)
           ]),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Booking(datum: datum),
       ),
     );
