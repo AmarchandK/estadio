@@ -1,11 +1,9 @@
 import 'package:estadio/constants/colors.dart';
 import 'package:estadio/constants/sizes.dart';
 import 'package:estadio/model/home/home_response.dart';
-import 'package:estadio/view/discription/discriptiom.dart';
 import 'package:estadio/view/home/widgets/ground_cards.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class GroundCategory extends StatelessWidget {
   const GroundCategory(
@@ -56,8 +54,6 @@ class GroundCategory extends StatelessWidget {
               },
               itemBuilder: (BuildContext context, int index) => GroundCards(
                 turfList: turfList[index],
-                toFucn: () =>
-                    Get.to(() => DescriptionPage(datum: turfList[index])),
               ),
             ),
           )

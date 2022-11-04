@@ -7,21 +7,20 @@ import 'package:estadio/view/home/widgets/current_location.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_cards/flutter_custom_cards.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../constants/colors.dart';
 import '../../../constants/sizes.dart';
+import '../../discription/discriptiom.dart';
 
 class GroundCards extends StatelessWidget {
   const GroundCards({
     Key? key,
     this.onFav,
-    required this.toFucn,
     required this.turfList,
   }) : super(key: key);
 
   final void Function()? onFav;
-
-  final void Function() toFucn;
 
   final Datum turfList;
 
@@ -31,7 +30,11 @@ class GroundCards extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: CustomCard(
         color: darkGreen,
-        onTap: toFucn,
+        onTap: () => Get.to(
+          () => DescriptionPage(
+            datum: turfList,
+          ),
+        ),
         childPadding: 5,
         borderRadius: 10,
         child: Row(

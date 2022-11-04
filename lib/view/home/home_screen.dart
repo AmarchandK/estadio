@@ -2,7 +2,6 @@ import 'package:estadio/constants/core_refactering/global_refactoring.dart';
 import 'package:estadio/constants/sizes.dart';
 import 'package:estadio/controller/home/home_controller.dart';
 import 'package:estadio/controller/home/location_fetch_controller.dart';
-import 'package:estadio/view/discription/discriptiom.dart';
 import 'package:estadio/view/home/widgets/current_location.dart';
 import 'package:estadio/view/home/widgets/dot_slide.dart';
 import 'package:estadio/view/home/widgets/search.dart';
@@ -58,11 +57,7 @@ class HomePage extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       final turfsList = controller.nearGrounds[index];
                       return GroundCards(
-                        toFucn: () => Get.to(
-                          () => DescriptionPage(
-                            datum: turfsList,
-                          ),
-                        ),
+                      
                         turfList: turfsList,
                       );
                     },

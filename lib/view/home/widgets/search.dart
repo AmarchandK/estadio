@@ -230,11 +230,7 @@ class _IdleWidgets extends GetView<SearchController> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) => GroundCards(
-                        toFucn: () => Get.to(
-                          () => DescriptionPage(
-                            datum: controller.foundTurfs[index],
-                          ),
-                        ),
+                      
                         turfList: controller.foundTurfs[index],
                       ),
                   itemCount: controller.foundTurfs.length))
