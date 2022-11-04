@@ -2,6 +2,7 @@ import 'package:estadio/constants/colors.dart';
 import 'package:estadio/constants/core_refactering/global_refactoring.dart';
 import 'package:estadio/constants/sizes.dart';
 import 'package:estadio/model/home/home_response.dart';
+import 'package:estadio/view/discription/widgets/booking_sheet.dart';
 import 'package:estadio/view/discription/widgets/discription_chip.dart';
 import 'package:estadio/view/home/widgets/current_location.dart';
 import 'package:flutter/cupertino.dart';
@@ -29,7 +30,7 @@ class DescriptionPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Column(children: [
             Align(
               alignment: Alignment.topLeft,
@@ -66,7 +67,7 @@ class DescriptionPage extends StatelessWidget {
                 ),
                 const Spacer(),
                 CurrentLocation(
-                    place: '${datum.turfPlace}, \n${datum.turfDistrict}',
+                    place: '${datum.turfPlace}, ${datum.turfDistrict}',
                     size: 17),
                 Link(
                   uri: Uri.parse(datum.turfInfo!.turfMap!),
@@ -145,6 +146,8 @@ class DescriptionPage extends StatelessWidget {
             ),
           ]),
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: Booking(datum: datum),
       ),
     );
   }

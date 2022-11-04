@@ -27,21 +27,22 @@ class HomePage extends StatelessWidget {
       body: Consumer<HomeController>(
         builder: (context, controller, _) {
           return SingleChildScrollView(
-            physics: const ScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             child: Column(
               children: [
                 h20,
+                Padding(
+                  padding: const EdgeInsets.only(top: 12),
+                  child: AnimatedSearch(),
+                ),
+                h10,
                 Obx(
-                  () => Padding(
-                    padding: const EdgeInsets.only(top: 12, left: 15),
-                    child: CurrentLocation(
-                      place: _locationController.currentAddress.value,
-                      size: 25,
-                    ),
+                  () => CurrentLocation(
+                    place: _locationController.currentAddress.value,
+                    size: 25,
                   ),
                 ),
-                AnimatedSearch(),
-                h10,
+                h20,
                 const ImageSlider(),
                 h10,
                 const DotSlider(),

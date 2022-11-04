@@ -1,8 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:estadio/constants/core_refactering/global_refactoring.dart';
+import 'package:estadio/constants/shimmer/shimmer.dart';
 import 'package:estadio/constants/sizes.dart';
 import 'package:estadio/controller/home/search_controller.dart';
 import 'package:estadio/view/discription/discriptiom.dart';
 import 'package:estadio/view/home/widgets/ground_cards.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
@@ -206,10 +209,18 @@ class _IdleWidgets extends GetView<SearchController> {
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(color: lightGreen, width: 4),
                         ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.network(
-                              controller.allSerach[index].turfLogo!),
+                        child: CachedNetworkImage(
+                          imageUrl: controller.allSerach[index].turfLogo!,
+                          imageBuilder: (context, imageProvider) => ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.network(
+                                controller.allSerach[index].turfLogo!),
+                          ),
+                          placeholder: (context, url) =>
+                              const ShimmerWidget.borderRectangle(
+                                  width: 100, height: 100),
+                          errorWidget: (context, url, error) =>
+                              const CupertinoActivityIndicator(),
                         ),
                       ),
                     );

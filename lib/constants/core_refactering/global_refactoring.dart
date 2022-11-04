@@ -8,29 +8,26 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-Widget mainHeadingText(
-  text
-) =>
-    Padding(
-        padding: const EdgeInsets.only(left: 18, top: 8),
-        child: Row(
-          children: [
-            Text(
-              text,
-              style: GoogleFonts.baumans(
-                  color: lightGreen, fontSize: 30, fontWeight: FontWeight.bold),
-            ),
-            const Expanded(
-                child: Padding(
-              padding: EdgeInsets.only(top: 6),
-              child: Divider(
-                color: wColor,
-                thickness: 2,
-                indent: 10,
-              ),
-            ))
-          ],
-        ));
+Widget mainHeadingText(text) => Padding(
+    padding: const EdgeInsets.only(left: 18, top: 8),
+    child: Row(
+      children: [
+        Text(
+          text,
+          style: GoogleFonts.baumans(
+              color: lightGreen, fontSize: 30, fontWeight: FontWeight.bold),
+        ),
+        const Expanded(
+            child: Padding(
+          padding: EdgeInsets.only(top: 6),
+          child: Divider(
+            color: wColor,
+            thickness: 2,
+            indent: 10,
+          ),
+        ))
+      ],
+    ));
 Widget subTittle(String text) => Padding(
       padding: const EdgeInsets.all(7),
       child: Text(
@@ -41,14 +38,12 @@ Widget subTittle(String text) => Padding(
             color: Colors.lightGreen[300]),
       ),
     );
-contentsText({required String text, double? size, Color? color}) => FittedBox(
-      child: Text(
-        text,
-        style: GoogleFonts.andika(
-            fontSize: size ?? 15,
-            fontWeight: FontWeight.w600,
-            color: color ?? Colors.grey[100]),
-      ),
+contentsText({required String text, double? size, Color? color}) => Text(
+      text,
+      style: GoogleFonts.andika(
+          fontSize: size ?? 15,
+          fontWeight: FontWeight.w600,
+          color: color ?? Colors.grey[100]),
     );
 
 SnackbarController showDialogue(tittle) {

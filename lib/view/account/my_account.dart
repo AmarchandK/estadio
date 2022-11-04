@@ -1,4 +1,5 @@
-import 'package:estadio/view/splashscreen/splash_screen.dart';
+import 'package:estadio/controller/authentication/login_controller.dart';
+import 'package:estadio/view/authentication/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,7 @@ class MyAccount extends StatelessWidget {
           onPressed: () async {
             const storage = FlutterSecureStorage();
             await storage.deleteAll();
-            Get.offAll(() => SplashScreen());
+            Get.offAll(() => const LoginPage());
           },
           icon: const Icon(Icons.logout),
         ),

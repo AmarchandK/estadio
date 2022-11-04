@@ -53,8 +53,7 @@ class GroundCards extends StatelessWidget {
                       ),
                     ),
                 placeholder: (context, url) =>
-                    const ShimmerWidget.borderRectangle(
-                        width: 100, height: 100),
+                    const ShimmerWidget.borderRectangle(width: 83, height: 83),
                 errorWidget: (context, url, error) => const SizedBox(
                       width: 100,
                       height: 100,
