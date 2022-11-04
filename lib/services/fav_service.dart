@@ -10,12 +10,10 @@ class FavService {
 
   ///////////////////// Add to Fav ////////////////////////////////////
   static Future addToFav(AllResponse favResponse) async {
-    log('1');
     try {
       log(favResponse.toJson().toString());
       final Response response =
           await dio.post(Config.addWishList, data: favResponse.toJson());
-      log('2');
       log(response.statusMessage!.toString());
       return AllResponse.fromJson(response.data);
     } catch (e) {
@@ -35,7 +33,6 @@ class FavService {
       log(response.data);
       return AllResponse.fromJson(response.data);
     } catch (e) {
-      log('exeption during fav fetch $e');
       errorHandler(e);
     }
     return null;

@@ -9,9 +9,7 @@ class AllTurfService {
     try {
       final Response response = await dio.get(
         Config.allTurf,
-        options: Options(
-          headers: {"Authorization": "Bearer $token"},
-        ),
+        options: Options(headers: {"Authorization": "Bearer $token"}),
       );
       return AllResponse.fromJson(response.data);
     } catch (e) {

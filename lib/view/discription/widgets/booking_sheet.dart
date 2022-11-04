@@ -1,14 +1,16 @@
+import 'dart:developer';
 import 'package:estadio/constants/core_refactering/global_refactoring.dart';
 import 'package:estadio/constants/sizes.dart';
+import 'package:estadio/controller/discription/description_controller.dart';
+import 'package:estadio/view/discription/widgets/booking_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:horizontal_calendar/horizontal_calendar.dart';
 import 'package:slider_button/slider_button.dart';
-
 import '../../../constants/colors.dart';
 import '../../../model/home/home_response.dart';
 
-class Booking extends StatelessWidget {
+class Booking extends GetView<DescriptionController> {
   const Booking({
     Key? key,
     required this.datum,
@@ -19,56 +21,62 @@ class Booking extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.bottomSheet(
-          Container(
-            color: darkGreen,
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Column(
-                children: [
-                  HorizontalCalendar(
-                    date: DateTime.now(),
-                    textColor: Colors.white,
-                    backgroundColor: Colors.transparent,
-                    selectedColor: lightGreen,
-                    onDateSelected: (date) => print(
-                      date.toString(),
+      onTap: () {
+        controller.timeConversion(datum.turfTime!);
+        controller.timesListAdd();
+        Get.bottomSheet(
+            Container(
+              color: darkGreen,
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  children: [
+                    HorizontalCalendar(
+                      date: DateTime.now(),
+                      textColor: Colors.white,
+                      backgroundColor: Colors.transparent,
+                      selectedColor: lightGreen,
+                      onDateSelected: (date) => log(
+                        date.toString(),
+                      ),
                     ),
-                  ),
-                  _GetBottom(
-                    data: datum,
-                    heading: 'Morning',
-                    headingIcon: Icons.nights_stay_outlined,
-                    iconColor: lightGreen,
-                  ),
-                  _GetBottom(
-                    data: datum,
-                    heading: 'Afternoon',
-                    headingIcon: Icons.nights_stay_outlined,
-                    iconColor: lightGreen,
-                  ),
-                  _GetBottom(
-                    data: datum,
-                    heading: 'Night',
-                    headingIcon: Icons.nights_stay_outlined,
-                    iconColor: lightGreen,
-                  ),
-                  SliderButton(
-                      action: () => Get.defaultDialog(),
-                      label: const Text('Book Now'),
-                      alignLabel: Alignment.center,
-                      vibrationFlag: true,
-                      buttonSize: 50,
-                      backgroundColor: greyColor,
-                      highlightedColor: darkGreen,
-                      buttonColor: lightGreen,
-                      height: 60,
-                      width: widthSize(context) - 30)
-                ],
+                    BookingChip(
+                      data: datum,
+                      heading: 'Morning',
+                      headingIcon: Icons.sunny_snowing,
+                      price: controller.morning,
+                    ),
+                    BookingChip(
+                      data: datum,
+                      heading: 'Afternoon',
+                      headingIcon: Icons.sunny,
+                      price: controller.afternoon,
+                    ),
+                    BookingChip(
+                      data: datum,
+                      heading: 'Evening',
+                      headingIcon: Icons.nights_stay_outlined,
+                      price: controller.evenging,
+                    ),
+                    h20,
+                    SliderButton(
+                        action: () => Get.defaultDialog(),
+                        label: const Text('Book Now',
+                            style: TextStyle(fontSize: 25)),
+                        alignLabel: Alignment.center,
+                        vibrationFlag: true,
+                        buttonSize: 50,
+                        backgroundColor: lightGreen,
+                        buttonColor: darkGreen,
+                        height: 60,
+                        width: widthSize(context) - 30),
+                    h20,
+                  ],
+                ),
               ),
             ),
-          ),
-          enterBottomSheetDuration: const Duration(seconds: 1)),
+            enterBottomSheetDuration: const Duration(seconds: 1));
+      },
       child: Container(
         height: 60,
         width: widthSize(context) - 50,
@@ -81,73 +89,6 @@ class Booking extends StatelessWidget {
           'Book',
         ),
       ),
-    );
-  }
-}
-
-class _GetBottom extends StatelessWidget {
-  const _GetBottom({
-    Key? key,
-    required this.data,
-    required this.heading,
-    required this.headingIcon,
-    required this.iconColor,
-  }) : super(key: key);
-  final Datum data;
-  final String heading;
-  final IconData headingIcon;
-  final Color iconColor;
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ListTile(
-          leading: Icon(
-            headingIcon,
-            color: iconColor,
-          ),
-          title: Text(
-            heading,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          trailing: Text(
-            heading == 'Morning'
-                ? '₹${data.turfPrice!.morningPrice!}'
-                : (heading == 'Afternoon'
-                    ? '₹${data.turfPrice!.afternoonPrice!}'
-                    : '₹${data.turfPrice!.eveningPrice!}'),
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
-        Wrap(
-          children: List.generate(
-            5,
-            (index) => Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.green),
-                  color: Colors.green.withOpacity(0.4),
-                ),
-                height: 30,
-                width: 100,
-                child: const Center(
-                  child: Text(
-                    '1:30 pm',
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
