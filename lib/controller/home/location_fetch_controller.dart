@@ -55,7 +55,7 @@ class LocationController extends GetxController {
             currentPosition!.latitude, currentPosition!.longitude)
         .then((List<Placemark> placemarks) {
       Placemark place = placemarks[0];
-      HomeController.turfLocality = place.subAdministrativeArea!.trim();
+      HomeController.turfLocality = place.subAdministrativeArea!.obs;
 
       currentAddress.value =
           '${place.subLocality},${place.subAdministrativeArea}';

@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
                 h10,
                 Obx(
                   () => CurrentLocation(
-                    place: _locationController.currentAddress.value,
+                    place: _locationController.currentAddress.value.obs,
                     size: 25,
                   ),
                 ),

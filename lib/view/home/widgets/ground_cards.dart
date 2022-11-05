@@ -78,7 +78,7 @@ class GroundCards extends StatelessWidget {
                       ),
                     ),
                     CurrentLocation(
-                      place: turfList.turfPlace!,
+                      place: turfList.turfPlace!.obs,
                       size: 15,
                     ),
                     turfList.turfInfo!.turfIsAvailable!

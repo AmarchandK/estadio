@@ -67,7 +67,7 @@ class DescriptionPage extends StatelessWidget {
                 ),
                 const Spacer(),
                 CurrentLocation(
-                    place: '${datum.turfPlace}, ${datum.turfDistrict}',
+                    place: '${datum.turfPlace}, ${datum.turfDistrict}'.obs,
                     size: 17),
                 Link(
                   uri: Uri.parse(datum.turfInfo!.turfMap!),

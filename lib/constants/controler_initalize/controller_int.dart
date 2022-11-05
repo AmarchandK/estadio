@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:core';
 import 'package:estadio/controller/authentication/login_controller.dart';
+import 'package:estadio/controller/booking/booking_controller.dart';
 import 'package:estadio/controller/bottomNav/bottomnav_controller.dart';
 import 'package:estadio/controller/discription/description_controller.dart';
 import 'package:estadio/controller/home/location_fetch_controller.dart';
@@ -15,4 +16,5 @@ Future controllerInit() async {
   Get.put(LocationController());
   Get.put(SearchController());
   Get.put(DescriptionController());
+  Get.put(BookingController());
 }

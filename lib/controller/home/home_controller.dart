@@ -3,6 +3,7 @@ import 'package:estadio/constants/core_refactering/global_refactoring.dart';
 import 'package:estadio/services/all_turf_service.dart';
 import 'package:estadio/services/nearby_serevice.dart';
 import 'package:flutter/foundation.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import '../../model/home/home_response.dart';
 
 class HomeController extends ChangeNotifier {
@@ -20,7 +21,7 @@ class HomeController extends ChangeNotifier {
     await categoryAllAdd();
   }
 
-  static late String turfLocality;
+  static late RxString turfLocality;
 
   //////// turf lists////////////////
   final List<Datum> nearGrounds = [];
@@ -115,8 +116,8 @@ class HomeController extends ChangeNotifier {
     onLoding();
     final String? token = await UserSecureStorage.getToken();
 
-    final AllResponse? homeResponse =
-        await NearByService.nearByTurf(place: turfLocality, token: token!);
+    final AllResponse? homeResponse = await NearByService.nearByTurf(
+        place: turfLocality.value, token: token!);
     if (homeResponse != null && homeResponse.status == true) {
       nearGrounds.clear();
       nearGrounds.addAll(homeResponse.data!);

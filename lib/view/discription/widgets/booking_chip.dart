@@ -1,8 +1,9 @@
+import 'package:estadio/controller/booking/booking_controller.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/state_manager.dart';
 import '../../../model/home/home_response.dart';
 
-class BookingChip extends StatelessWidget {
+class BookingChip extends GetView<BookingController> {
   const BookingChip({
     Key? key,
     required this.data,
@@ -46,14 +47,16 @@ class BookingChip extends StatelessWidget {
         Wrap(
           children: List.generate(
             price.length,
-            (index) => Padding(
-              padding: const EdgeInsets.all(8.0),
+            (index) => GestureDetector(
+              onTap: () {},
               child: Container(
+                margin: const EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.green),
-                  color: Colors.green.withOpacity(0.4),
-                ),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.white),
+                    color: Colors.green.withOpacity(0.4)
+                    // : Colors.red.withOpacity(0.4),
+                    ),
                 height: 50,
                 width: 100,
                 child: Center(

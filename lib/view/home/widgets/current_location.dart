@@ -1,5 +1,6 @@
 import 'package:estadio/constants/core_refactering/global_refactoring.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:get/state_manager.dart';
 
 class CurrentLocation extends StatelessWidget {
   const CurrentLocation({
@@ -7,7 +8,7 @@ class CurrentLocation extends StatelessWidget {
     Key? key,
     required this.size,
   }) : super(key: key);
-  final String place;
+  final RxString place;
   final double size;
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,9 @@ class CurrentLocation extends StatelessWidget {
           CupertinoIcons.location_solid,
           size: size,
         ),
-        contentsText(text: place, size: 17),
+        Obx(
+          () => contentsText(text: place.value, size: 17),
+        )
       ],
     );
   }
