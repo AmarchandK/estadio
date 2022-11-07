@@ -84,7 +84,7 @@ class LoginPage extends GetView<Authentication> {
                         onTap: () => controller.onLoginBtnTap(),
                         text: 'Validate'),
                     h20,
-                    Textspan(() {
+                    TextspanAuth(() {
                       controller.confirmController.clear();
                       controller.passwordController.clear();
                       controller.emailController.clear();

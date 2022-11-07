@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../constants/colors.dart';
 
-class Textspan extends GetView<Authentication> {
-  const Textspan(
+class TextspanAuth extends GetView<Authentication> {
+  const TextspanAuth(
     this.onTap, {
     Key? key,
     required this.firstText,

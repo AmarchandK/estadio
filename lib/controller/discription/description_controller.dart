@@ -1,25 +1,23 @@
-import 'dart:developer';
-
 import 'package:estadio/model/home/home_response.dart';
 import 'package:get/state_manager.dart';
 
 class DescriptionController extends GetxController {
   List<int> timings = [];
-  List morning = [];
-  List afternoon = [];
-  List evenging = [];
+  List<String> morningList = [];
+  List<String> afternoonList = [];
+  List<String> evengingList = [];
   timesListAdd() {
-    _timesListAddCore(timings[0], timings[1], morning);
-    _timesListAddCore(timings[2], timings[3], afternoon);
-    _timesListAddCore(timings[4], timings[5], evenging);
+    _timesListAddCore(timings[0], timings[1], morningList, '');
+    _timesListAddCore(timings[2], timings[3], afternoonList, ' ');
+    _timesListAddCore(timings[4], timings[5], evengingList, '  ');
+    
   }
 
-  _timesListAddCore(int from, int to, List addList) {
+  _timesListAddCore(int from, int to, List addList, String space) {
     addList.clear();
     for (int i = from; i < to; i++) {
-      addList.add("$i:00 - ${i + 1}:00");
+      addList.add("$space$i:00 - ${i + 1}:00");
     }
-    log(addList.toString());
   }
 
   timeConversion(TurfTime turfTime) {

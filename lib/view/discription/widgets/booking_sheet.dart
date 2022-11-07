@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:estadio/constants/core_refactering/global_refactoring.dart';
 import 'package:estadio/constants/sizes.dart';
+import 'package:estadio/controller/booking/booking_controller.dart';
 import 'package:estadio/controller/discription/description_controller.dart';
 import 'package:estadio/view/discription/widgets/booking_chip.dart';
 import 'package:flutter/material.dart';
@@ -11,12 +12,13 @@ import '../../../constants/colors.dart';
 import '../../../model/home/home_response.dart';
 
 class Booking extends GetView<DescriptionController> {
-  const Booking({
+  Booking({
     Key? key,
     required this.datum,
   }) : super(key: key);
 
   final Datum datum;
+  final BookingController _bookingController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,8 @@ class Booking extends GetView<DescriptionController> {
       onTap: () {
         controller.timeConversion(datum.turfTime!);
         controller.timesListAdd();
+        _bookingController.bookedList.clear();
+        _bookingController.totalFair.value = 0;
         Get.bottomSheet(
             Container(
               color: darkGreen,
@@ -31,6 +35,34 @@ class Booking extends GetView<DescriptionController> {
                 physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
+                    Container(
+                      height: 50,
+                      margin: const EdgeInsets.symmetric(vertical: 10),
+                      alignment: Alignment.center,
+                      width: widthSize(context) - 100,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: wColor, width: 2),
+                      ),
+                      child: Obx(
+                        () => RichText(
+                          text: TextSpan(
+                            children: [
+                              const TextSpan(
+                                text: 'Total :',
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              TextSpan(
+                                text: _bookingController.totalFair.value
+                                    .toString(),
+                                style: const TextStyle(
+                                    color: lightGreen, fontSize: 25),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                     HorizontalCalendar(
                       date: DateTime.now(),
                       textColor: Colors.white,
@@ -41,28 +73,35 @@ class Booking extends GetView<DescriptionController> {
                       ),
                     ),
                     BookingChip(
+                      datum.turfPrice!.morningPrice!,
                       data: datum,
                       heading: 'Morning',
                       headingIcon: Icons.sunny_snowing,
-                      price: controller.morning,
+                      timesList: controller.morningList,
                     ),
                     BookingChip(
+                      datum.turfPrice!.afternoonPrice!,
                       data: datum,
                       heading: 'Afternoon',
                       headingIcon: Icons.sunny,
-                      price: controller.afternoon,
+                      timesList: controller.afternoonList,
                     ),
                     BookingChip(
+                      datum.turfPrice!.eveningPrice!,
                       data: datum,
                       heading: 'Evening',
                       headingIcon: Icons.nights_stay_outlined,
-                      price: controller.evenging,
+                      timesList: controller.evengingList,
                     ),
                     h20,
                     SliderButton(
-                        action: () => Get.defaultDialog(),
-                        label: const Text('Book Now',
-                            style: TextStyle(fontSize: 25)),
+                        action: () => Get.defaultDialog(
+                            title: _bookingController.bookedList.toString(),
+                            backgroundColor: greyColor),
+                        label: const Text(
+                          'Book Now',
+                          style: TextStyle(fontSize: 25),
+                        ),
                         alignLabel: Alignment.center,
                         vibrationFlag: true,
                         buttonSize: 50,

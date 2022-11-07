@@ -94,7 +94,7 @@ class CreateAccount extends GetView<Authentication> {
                         },
                         text: 'Validate'),
                     h10,
-                    Textspan(() {
+                    TextspanAuth(() {
                       controller.confirmController.clear();
                       controller.passwordController.clear();
                       controller.emailController.clear();
