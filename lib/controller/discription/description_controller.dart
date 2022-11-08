@@ -6,11 +6,11 @@ class DescriptionController extends GetxController {
   List<String> morningList = [];
   List<String> afternoonList = [];
   List<String> evengingList = [];
+
   timesListAdd() {
     _timesListAddCore(timings[0], timings[1], morningList, '');
     _timesListAddCore(timings[2], timings[3], afternoonList, ' ');
     _timesListAddCore(timings[4], timings[5], evengingList, '  ');
-    
   }
 
   _timesListAddCore(int from, int to, List addList, String space) {

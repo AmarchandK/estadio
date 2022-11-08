@@ -58,6 +58,7 @@ dependencies:
   slider_button: ^2.0.0
   dependencies:  
   horizontal_calendar: ^1.0.1
+  intl: ^0.17.0
 
   
 dev_dependencies:

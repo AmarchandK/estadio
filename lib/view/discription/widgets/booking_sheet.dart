@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:estadio/constants/core_refactering/global_refactoring.dart';
 import 'package:estadio/constants/sizes.dart';
 import 'package:estadio/controller/booking/booking_controller.dart';
@@ -11,6 +10,7 @@ import 'package:slider_button/slider_button.dart';
 import '../../../constants/colors.dart';
 import '../../../model/home/home_response.dart';
 
+// ignore: must_be_immutable
 class Booking extends GetView<DescriptionController> {
   Booking({
     Key? key,
@@ -18,6 +18,7 @@ class Booking extends GetView<DescriptionController> {
   }) : super(key: key);
 
   final Datum datum;
+  int dateTime = DateTime.now().day;
   final BookingController _bookingController = Get.find();
 
   @override
@@ -49,7 +50,7 @@ class Booking extends GetView<DescriptionController> {
                           text: TextSpan(
                             children: [
                               const TextSpan(
-                                text: 'Total :',
+                                text: 'Total : ₹ ',
                                 style: TextStyle(fontSize: 20),
                               ),
                               TextSpan(
@@ -68,26 +69,29 @@ class Booking extends GetView<DescriptionController> {
                       textColor: Colors.white,
                       backgroundColor: Colors.transparent,
                       selectedColor: lightGreen,
-                      onDateSelected: (date) => log(
-                        date.toString(),
-                      ),
+                      onDateSelected: (date) {
+                        _bookingController.onDateChaneFunction(date);
+                      },
                     ),
                     BookingChip(
-                      datum.turfPrice!.morningPrice!,
+                      dateTime: dateTime,
+                      amount: datum.turfPrice!.morningPrice!,
                       data: datum,
                       heading: 'Morning',
                       headingIcon: Icons.sunny_snowing,
                       timesList: controller.morningList,
                     ),
                     BookingChip(
-                      datum.turfPrice!.afternoonPrice!,
+                      dateTime: dateTime,
+                      amount: datum.turfPrice!.afternoonPrice!,
                       data: datum,
                       heading: 'Afternoon',
                       headingIcon: Icons.sunny,
                       timesList: controller.afternoonList,
                     ),
                     BookingChip(
-                      datum.turfPrice!.eveningPrice!,
+                      dateTime: dateTime,
+                      amount: datum.turfPrice!.eveningPrice!,
                       data: datum,
                       heading: 'Evening',
                       headingIcon: Icons.nights_stay_outlined,
@@ -95,9 +99,25 @@ class Booking extends GetView<DescriptionController> {
                     ),
                     h20,
                     SliderButton(
-                        action: () => Get.defaultDialog(
-                            title: _bookingController.bookedList.toString(),
-                            backgroundColor: greyColor),
+                        action: () {
+                          return Get.defaultDialog(
+                              onCancel: () => Get.back(),
+                              onConfirm: () => Get.back(),
+                              content: Wrap(
+                                children: List.generate(
+                                  _bookingController.bookedList.length,
+                                  (index) => Padding(
+                                    padding: const EdgeInsets.all(5),
+                                    child: Text(
+                                      _bookingController.bookedList[index],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              title:
+                                  'Total : ₹ ${_bookingController.totalFair.value}',
+                              backgroundColor: greyColor);
+                        },
                         label: const Text(
                           'Book Now',
                           style: TextStyle(fontSize: 25),
