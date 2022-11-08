@@ -7,7 +7,7 @@ class DescriptionController extends GetxController {
   List<String> afternoonList = [];
   List<String> evengingList = [];
 
-  timesListAdd() {
+  _timesListAdd() {
     _timesListAddCore(timings[0], timings[1], morningList, '');
     _timesListAddCore(timings[2], timings[3], afternoonList, ' ');
     _timesListAddCore(timings[4], timings[5], evengingList, '  ');
@@ -35,5 +35,6 @@ class DescriptionController extends GetxController {
         timings[i] = timings[i] - 12;
       }
     }
+    _timesListAdd();
   }
 }

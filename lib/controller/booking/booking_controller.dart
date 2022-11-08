@@ -6,6 +6,12 @@ class BookingController extends GetxController {
   List<String> bookedList = [];
   int selectedDate = DateTime.now().day;
   RxInt totalFair = 0.obs;
+  onTap() {
+    selectedDate = DateTime.now().day;
+    bookedList.clear();
+    totalFair.value = 0;
+  }
+
   chipClicked(String value, int amount, String heading) {
     final color = colorSelection(
       value: value,

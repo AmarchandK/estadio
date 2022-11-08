@@ -6,7 +6,6 @@ import '../../../model/home/home_response.dart';
 class BookingChip extends GetView<BookingController> {
   const BookingChip({
     super.key,
-    required this.dateTime,
     required this.data,
     required this.amount,
     required this.heading,
@@ -18,7 +17,6 @@ class BookingChip extends GetView<BookingController> {
   final IconData headingIcon;
   final List<String> timesList;
   final int amount;
-  final int dateTime;
 
   @override
   Widget build(BuildContext context) {

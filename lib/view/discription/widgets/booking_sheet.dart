@@ -10,7 +10,6 @@ import 'package:slider_button/slider_button.dart';
 import '../../../constants/colors.dart';
 import '../../../model/home/home_response.dart';
 
-// ignore: must_be_immutable
 class Booking extends GetView<DescriptionController> {
   Booking({
     Key? key,
@@ -18,17 +17,15 @@ class Booking extends GetView<DescriptionController> {
   }) : super(key: key);
 
   final Datum datum;
-  int dateTime = DateTime.now().day;
+
   final BookingController _bookingController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        _bookingController.onTap();
         controller.timeConversion(datum.turfTime!);
-        controller.timesListAdd();
-        _bookingController.bookedList.clear();
-        _bookingController.totalFair.value = 0;
         Get.bottomSheet(
             Container(
               color: darkGreen,
@@ -74,7 +71,7 @@ class Booking extends GetView<DescriptionController> {
                       },
                     ),
                     BookingChip(
-                      dateTime: dateTime,
+                 
                       amount: datum.turfPrice!.morningPrice!,
                       data: datum,
                       heading: 'Morning',
@@ -82,7 +79,7 @@ class Booking extends GetView<DescriptionController> {
                       timesList: controller.morningList,
                     ),
                     BookingChip(
-                      dateTime: dateTime,
+             
                       amount: datum.turfPrice!.afternoonPrice!,
                       data: datum,
                       heading: 'Afternoon',
@@ -90,7 +87,7 @@ class Booking extends GetView<DescriptionController> {
                       timesList: controller.afternoonList,
                     ),
                     BookingChip(
-                      dateTime: dateTime,
+             
                       amount: datum.turfPrice!.eveningPrice!,
                       data: datum,
                       heading: 'Evening',
