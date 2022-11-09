@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:estadio/constants/core_refactering/global_refactoring.dart';
 import 'package:estadio/services/all_turf_service.dart';
 import 'package:estadio/services/nearby_serevice.dart';
@@ -14,7 +13,6 @@ class HomeController extends ChangeNotifier {
   HomeController.instance();
 
   onInit() async {
-    log('Called');
     await nearTurfFech();
     await allTurfFetch();
     await listAdd();

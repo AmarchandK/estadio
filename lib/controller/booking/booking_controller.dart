@@ -11,14 +11,14 @@ class BookingController extends GetxController {
   late int selectedDate;
   RxInt totalFair = 0.obs;
   RxBool isLoading = false.obs;
-  ////////////////Book now Button OnTap //////////////////////////////////
+  Map<String, List<int>> dateBookedMap = {};
+  //////////////// Book now Button OnTap //////////////////////////////////
   onTap(String id) async {
     selectedDate = DateTime.now().day;
     bookedList.clear();
     totalFair.value = 0;
     log(id);
     isLoading.value = true;
-
     await bookedTurfFetch(id);
     isLoading.value = false;
   }
@@ -69,16 +69,15 @@ class BookingController extends GetxController {
   }
   //////////////////////////////////////////
 
-  //////////////////// Services ////////////////////////////////////////
+  //////////////////// Service Connect //////////////////////////////////////
   Future bookedTurfFetch(String id) async {
     final BookedResponse? bookedResponse =
         await GetBookedTurfService.getBookedTurfs(id: id);
     if (bookedResponse != null) {
-      alreadyBookedList.clear();
+      dateBookedMap.clear();
       for (var element in bookedResponse.data) {
-        alreadyBookedList.addAll(element.timeSlot);
+        dateBookedMap[element.bookingDate] = element.timeSlot;
       }
-      log(alreadyBookedList.toString());
     }
   }
 }

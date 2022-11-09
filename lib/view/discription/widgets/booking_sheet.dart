@@ -3,7 +3,6 @@ import 'package:estadio/constants/sizes.dart';
 import 'package:estadio/controller/booking/booking_controller.dart';
 import 'package:estadio/controller/discription/description_controller.dart';
 import 'package:estadio/view/discription/widgets/booking_chip.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:horizontal_calendar/horizontal_calendar.dart';

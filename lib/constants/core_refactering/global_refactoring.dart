@@ -98,7 +98,7 @@ errorHandler(Object e) {
     } else if (e.type == DioErrorType.response) {
       showDialogue(e.response!.data["message"]);
     } else if (e.type == DioErrorType.other) {
-      showDialogue(e.response!.data["message"]);
+      showDialogue('Something went Wrong');
     }
   } else if (e is SocketException) {
     showDialogue(
