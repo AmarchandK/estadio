@@ -96,7 +96,8 @@ class Booking extends GetView<DescriptionController> {
                         action: () {
                           return Get.defaultDialog(
                               onCancel: () => Get.back(),
-                              onConfirm: () => Get.back(),
+                              onConfirm: () => _bookingController.newTurfBook(
+                                  turfId: datum.id!),
                               content: Wrap(
                                 children: List.generate(
                                   _bookingController.newBookedList.length,

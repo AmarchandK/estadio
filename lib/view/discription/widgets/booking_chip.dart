@@ -1,3 +1,4 @@
+import 'package:estadio/constants/colors.dart';
 import 'package:estadio/controller/booking/booking_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,12 @@ class BookingChip extends GetView<BookingController> {
         ),
         Obx(
           () => controller.isLoading.value
-              ? const SizedBox(height: 130, child: CupertinoActivityIndicator())
+              ? const SizedBox(
+                  height: 130,
+                  child: CupertinoActivityIndicator(
+                    color: wColor,
+                    radius: 20,
+                  ))
               : Wrap(
                   children: List.generate(
                     timesList.length,

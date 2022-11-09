@@ -1,5 +1,5 @@
-class BookedResponse {
-  BookedResponse({
+class AlreadyBookedResponse {
+  AlreadyBookedResponse({
     required this.status,
     required this.data,
   });
@@ -7,7 +7,8 @@ class BookedResponse {
   bool status;
   List<Datas> data;
 
-  factory BookedResponse.fromJson(Map<String, dynamic> json) => BookedResponse(
+  factory AlreadyBookedResponse.fromJson(Map<String, dynamic> json) =>
+      AlreadyBookedResponse(
         status: json["status"],
         data: List<Datas>.from(json["data"].map((x) => Datas.fromJson(x))),
       );

@@ -1,9 +1,13 @@
+import 'dart:developer';
+
 import 'package:estadio/constants/colors.dart';
+import 'package:estadio/constants/core_refactering/global_refactoring.dart';
 import 'package:estadio/services/booking_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:intl/intl.dart';
-import '../../model/booking/booked_turf_response.dart';
+import '../../model/booking/allready_booked_turf_response.dart';
+import '../../model/booking/booking.dart';
 
 class BookingController extends GetxController {
   final List<int> newBookedList = [];
@@ -88,13 +92,27 @@ class BookingController extends GetxController {
 
   //////////////////// Service Connect //////////////////////////////////////
   Future<void> bookedTurfFetch(String id) async {
-    final BookedResponse? bookedResponse =
-        await GetBookedTurfService.getBookedTurfs(id: id);
+    final AlreadyBookedResponse? bookedResponse =
+        await BookTurfService.getBookedTurfs(id: id);
     if (bookedResponse != null) {
       alredyBookedTurfMap.clear();
       for (var element in bookedResponse.data) {
         alredyBookedTurfMap[element.bookingDate] = element.timeSlot;
       }
+    }
+  }
+
+  Future<void> newTurfBook({required String turfId}) async {
+    log(turfId);
+    log(selectedDate);
+    log(newBookedList.toString());
+
+    BookedRequest model = BookedRequest(
+        bookingDate: selectedDate, turfId: turfId, timeSlot: newBookedList);
+    BookedResponse? bookedResponse =
+        await BookTurfService.bookTurf(model: model);
+    if (bookedResponse != null) {
+      showToast(bookedResponse.message);
     }
   }
   ////////////////////////////////////////////

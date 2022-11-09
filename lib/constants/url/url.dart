@@ -10,6 +10,7 @@ class Config {
       "/user/get-wishlist/"; /*add User id in last */
   static const String getBookedTurf =
       "/account/get-booking/"; /*add Turf id in last */
+  static const String bookTurf = "/account/add-booking";
   // static const String phoneLogin = "/account/loginwith-number";
   // static const String verifyOtp = "/account/verify-number-otp";
 

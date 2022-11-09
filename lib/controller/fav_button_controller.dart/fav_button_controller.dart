@@ -9,20 +9,19 @@ class FavButtonController extends GetxController {
     return favTurfs.contains(datum).obs;
   }
 
- Future<void> getFav() async {
+  Future<void> getFav() async {
     String userId = await UserSecureStorage.getid();
     AllResponse? favResponse = await FavService.getFav(userId);
 
-if(favResponse!=null){
-   favTurfs.clear();
-    favTurfs.addAll(favResponse.data!);
-}
- 
+    if (favResponse != null) {
+      favTurfs.clear();
+      favTurfs.addAll(favResponse.data!);
+    }
   }
 
   addFavToDb(Datum datum) async {
     String userId = await UserSecureStorage.getid();
-    AllResponse favResponse = AllResponse(
+    AllResponse favModel = AllResponse(
       userId: userId,
       data: [
         Datum(
@@ -73,6 +72,6 @@ if(favResponse!=null){
         )
       ],
     );
-    await FavService.addToFav(favResponse);
+    await FavService.addToFav(favModel);
   }
 }

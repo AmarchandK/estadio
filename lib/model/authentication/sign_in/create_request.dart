@@ -1,6 +1,4 @@
-import 'dart:convert';
 
-String createRequestToJson(CreateRequest data) => json.encode(data.toJson());
 
 class CreateRequest {
     CreateRequest({
