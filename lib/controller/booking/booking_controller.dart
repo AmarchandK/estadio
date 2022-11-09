@@ -1,83 +1,101 @@
-import 'dart:developer';
 import 'package:estadio/constants/colors.dart';
 import 'package:estadio/services/booking_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
+import 'package:intl/intl.dart';
 import '../../model/booking/booked_turf_response.dart';
 
 class BookingController extends GetxController {
-  List<String> bookedList = [];
+  final List<int> newBookedList = [];
   final List alreadyBookedList = [];
-  late int selectedDate;
+  late String selectedDate;
+  final Map<String, List<int>> alredyBookedTurfMap = {};
   RxInt totalFair = 0.obs;
   RxBool isLoading = false.obs;
-  Map<String, List<int>> dateBookedMap = {};
+
   //////////////// Book now Button OnTap //////////////////////////////////
-  onTap(String id) async {
-    selectedDate = DateTime.now().day;
-    bookedList.clear();
+  void bookNowOnTap(String id) async {
+    selectedDate = DateFormat.yMd().format(DateTime.now());
+    newBookedList.clear();
     totalFair.value = 0;
-    log(id);
     isLoading.value = true;
     await bookedTurfFetch(id);
+    bookListChecking(selectedDate);
     isLoading.value = false;
   }
   /////////////////////////////////////////
 
-  ///////////////// On date changes////////////////////////////////////
+  ///////////////// On date changes///////////////////////////////////////
   void onDateChangeTap(date) {
-    selectedDate = int.parse(date.toString().split("-").last);
-    bookedList.clear();
+    final parseDate = DateTime.parse(date.toString());
+    selectedDate = DateFormat.yMd().format(parseDate);
+    newBookedList.clear();
     totalFair.value = 0;
+    bookListChecking(selectedDate);
     update();
   }
   /////////////////////////////////////////
 
-  ////////////////////////// Selectable Chip functions////////////////
-  chipClicked(String value, int amount, String heading) {
-    final color = chipColorSelection(
-      value: value,
-      heading: heading,
-    );
-    if (color == greyColor) {
-      null;
-    } else if (color == Colors.green.withOpacity(0.4)) {
-      bookedList.add(value);
-      totalFair.value += amount;
+  ////////////////////////// Selectable Chip functions///////////////////
+  int toDBtimeConversion(String value, String heading) {
+    final int time;
+    if (heading == "Morning") {
+      time = int.parse(value.trim().split(":").first);
+      return time;
     } else {
-      bookedList.remove(value);
+      time = int.parse(value.trim().split(":").first) + 12;
+      return time;
+    }
+  }
+
+  void chipClicked(
+      {required String value, required int amount, required String heading}) {
+    final color = chipColor(timeValue: value, heading: heading);
+    final time = toDBtimeConversion(value, heading);
+    if (color == Colors.green.withOpacity(0.4)) {
+      newBookedList.add(time);
+      totalFair.value += amount;
+    } else if (color == Colors.amber[300]!) {
+      newBookedList.remove(time);
       totalFair.value -= amount;
     }
     update();
   }
 
-  Color chipColorSelection({required String value, required String heading}) {
-    final int time;
-    if (heading == "Morning") {
-      time = int.parse(value.trim().split(":").first);
-    } else {
-      time = int.parse(value.trim().split(":").first) + 12;
-    }
-
-    if (time <= DateTime.now().hour && selectedDate == DateTime.now().day) {
+  Color chipColor({required String timeValue, required String heading}) {
+    final time = toDBtimeConversion(timeValue, heading);
+    if (time <= DateTime.now().hour &&
+        selectedDate == DateFormat.yMd().format(DateTime.now())) {
       return greyColor;
-    } else if (bookedList.contains(value)) {
-      return Colors.red.withOpacity(0.4);
+    } else if (alreadyBookedList.contains(time)) {
+      return Colors.redAccent[100]!;
+    } else if (newBookedList.contains(time)) {
+      return Colors.amber[300]!;
     } else {
       return Colors.green.withOpacity(0.4);
     }
   }
   //////////////////////////////////////////
 
+//////////// Already booked Checking //////////////////////////////////////
+  void bookListChecking(String selectedDate) {
+    alreadyBookedList.clear();
+    if (alredyBookedTurfMap.containsKey(selectedDate)) {
+      alreadyBookedList.addAll(alredyBookedTurfMap[selectedDate]!);
+    }
+  }
+  ////////////////////////////////////////////
+
   //////////////////// Service Connect //////////////////////////////////////
-  Future bookedTurfFetch(String id) async {
+  Future<void> bookedTurfFetch(String id) async {
     final BookedResponse? bookedResponse =
         await GetBookedTurfService.getBookedTurfs(id: id);
     if (bookedResponse != null) {
-      dateBookedMap.clear();
+      alredyBookedTurfMap.clear();
       for (var element in bookedResponse.data) {
-        dateBookedMap[element.bookingDate] = element.timeSlot;
+        alredyBookedTurfMap[element.bookingDate] = element.timeSlot;
       }
     }
   }
+  ////////////////////////////////////////////
 }

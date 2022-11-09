@@ -90,7 +90,7 @@ class CreateAccount extends GetView<Authentication> {
                           controller.passwordController.text !=
                                   controller.confirmController.text
                               ? showDialogue('Password Missmatch')
-                              : await controller.onCreatebtnTap();
+                              :  controller.onCreatebtnTap();
                         },
                         text: 'Validate'),
                     h10,

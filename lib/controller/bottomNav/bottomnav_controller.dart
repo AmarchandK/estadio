@@ -5,7 +5,7 @@ import 'package:estadio/view/orders/orders.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/state_manager.dart';
 class BottomNavController extends GetxController {
-  RxInt pageIndex = 0.obs;
+final  RxInt pageIndex = 0.obs;
   final RxList<Widget> screens =
       [HomePage(), const Favourites(), const MyOrders(), const MyAccount()].obs;
 }

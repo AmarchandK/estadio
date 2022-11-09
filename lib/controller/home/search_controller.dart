@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 import 'package:estadio/controller/home/home_controller.dart';
 import 'package:estadio/model/home/home_response.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,7 +26,7 @@ class SearchController extends GetxController {
 
   void runFilter(String serachItem) {
     late List<Datum> searchResults = [];
-    log('Item $serachItem');
+  
     if (serachItem.isEmpty) {
       searchResults = allSerach;
     } else {
@@ -39,7 +39,6 @@ class SearchController extends GetxController {
           .toList();
     }
     foundTurfs = searchResults;
-    log(searchResults.toString());
     update();
   }
 

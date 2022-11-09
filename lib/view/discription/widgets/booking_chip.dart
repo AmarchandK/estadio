@@ -57,8 +57,8 @@ class BookingChip extends GetView<BookingController> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(color: Colors.white),
-                            color: controller.chipColorSelection(
-                              value: timesList[index],
+                            color: controller.chipColor(
+                              timeValue: timesList[index],
                               heading: heading,
                             ),
                           ),
@@ -72,7 +72,9 @@ class BookingChip extends GetView<BookingController> {
                         ),
                         onTap: () {
                           controller.chipClicked(
-                              timesList[index], amount, heading);
+                              value: timesList[index],
+                              amount: amount,
+                              heading: heading);
                         },
                       );
                     }),

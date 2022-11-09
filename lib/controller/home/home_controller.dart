@@ -15,8 +15,8 @@ class HomeController extends ChangeNotifier {
   onInit() async {
     await nearTurfFech();
     await allTurfFetch();
-    await listAdd();
-    await categoryAllAdd();
+     listAdd();
+     categoryAllAdd();
   }
 
   static late RxString turfLocality;
@@ -51,7 +51,7 @@ class HomeController extends ChangeNotifier {
   //////////////////////////
 
   bool homeIsLoading = true;
-  onLoding() {
+ void onLoding() {
     homeIsLoading = !homeIsLoading;
     notifyListeners();
   }
@@ -65,7 +65,7 @@ class HomeController extends ChangeNotifier {
 /////////////////////////////////////////////////////
 
 /////////////////// turf cateogory add ///////////////
-  listAdd() {
+ void listAdd() {
     cricketList.clear();
     footballList.clear();
     badmintonList.clear();
@@ -87,7 +87,7 @@ class HomeController extends ChangeNotifier {
     }
   }
 
-  categoryAllAdd() {
+ void categoryAllAdd() {
     categoryAllList.clear();
     List<Datum> categories(int i) {
       switch (i) {
@@ -110,7 +110,7 @@ class HomeController extends ChangeNotifier {
   ////////////////////////////////////////////////////////
 
 /////////////// Near bu turf fetch //////////////////////////
-  Future nearTurfFech() async {
+  Future<void> nearTurfFech() async {
     onLoding();
     final String? token = await UserSecureStorage.getToken();
 
@@ -126,7 +126,7 @@ class HomeController extends ChangeNotifier {
 //////////////////////////////////////////////////////////
 
 ///////////////All turf fetch //////////////////////////////
-  Future allTurfFetch() async {
+  Future<void> allTurfFetch() async {
     onLoding();
     final String? token = await UserSecureStorage.getToken();
     final AllResponse? homeResponse =

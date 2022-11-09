@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:estadio/controller/authentication/login_controller.dart';
 import 'package:estadio/model/authentication/log_in/login_request.dart';
@@ -15,7 +15,6 @@ import '../view/authentication/otp_veryfy.dart';
 
 class ApiService {
   static final Dio dio = Dio(BaseOptions(baseUrl: Config.baseUrl));
-
   /*-------------------Create User------------------------*/
   static Future createUser(CreateRequest model) async {
     try {
@@ -44,7 +43,6 @@ class ApiService {
       );
       showToast(otoResponse.message);
       if (response.statusCode! >= 200 && response.statusCode! <= 299) {
-        log("OTP SuccessFull${response.data}");
         Get.to(() => const BottomNav());
       }
     } catch (e) {
@@ -56,13 +54,13 @@ class ApiService {
   static Future loginUser(LoginRequest model) async {
     try {
       final response = await dio.post(Config.loginEmail, data: model.toJson());
-      log('message');
+
       final LoginResponse loginResponse = LoginResponse.fromJson(response.data);
       await UserSecureStorage.setTokens(
           loginResponse.token, loginResponse.refreshToken, loginResponse.id);
       showToast(loginResponse.message);
       if (response.statusCode! >= 200 && response.statusCode! <= 299) {
-        log("Login Success${response.data}");
+
         Get.offAll(() => const BottomNav());
       }
     } catch (e) {

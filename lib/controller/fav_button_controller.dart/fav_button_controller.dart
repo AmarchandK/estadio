@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:estadio/constants/core_refactering/global_refactoring.dart';
 import 'package:estadio/model/home/home_response.dart';
 import 'package:estadio/services/fav_service.dart';
@@ -10,10 +9,10 @@ class FavButtonController extends GetxController {
     return favTurfs.contains(datum).obs;
   }
 
-  getFav() async {
+ Future<void> getFav() async {
     String userId = await UserSecureStorage.getid();
     AllResponse? favResponse = await FavService.getFav(userId);
-    log('fetch completed');
+
 if(favResponse!=null){
    favTurfs.clear();
     favTurfs.addAll(favResponse.data!);
@@ -23,7 +22,6 @@ if(favResponse!=null){
 
   addFavToDb(Datum datum) async {
     String userId = await UserSecureStorage.getid();
-    log("userId is :$userId");
     AllResponse favResponse = AllResponse(
       userId: userId,
       data: [

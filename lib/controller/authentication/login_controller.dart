@@ -21,7 +21,7 @@ class Authentication extends GetxController {
   static late String registerId;
 
   /////////////////////////ON TAP////////////////////////////
-  onLoginBtnTap() async {
+void onLoginBtnTap() async {
     if (logKey.currentState!.validate()) {
       onTapLoading.value = false;
 
@@ -33,7 +33,7 @@ class Authentication extends GetxController {
     }
   }
 
-  onCreatebtnTap() async {
+ void onCreatebtnTap() async {
     if (createKey.currentState!.validate()) {
       onTapLoading.value = false;
       final model = CreateRequest(
@@ -44,7 +44,7 @@ class Authentication extends GetxController {
     }
   }
 
-  onOtpEnter(pin) async {
+ void onOtpEnter(pin) async {
     onTapLoading.value = false;
     final model = OtpRequest(userOtp: pin, id: registerId);
     await ApiService.otpVerify(model);

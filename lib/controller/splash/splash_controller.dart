@@ -7,11 +7,10 @@ class SplashController extends GetxController {
   @override
   void onInit() async {
     checkUserLoggedIn();
-    // await HomeController.instance().onInit();
     super.onInit();
   }
 
-  checkUserLoggedIn() async {
+ void checkUserLoggedIn() async {
     const FlutterSecureStorage storage = FlutterSecureStorage();
     final token = await storage.read(key: 'tokenKey');
     await Future.delayed(

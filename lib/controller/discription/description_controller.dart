@@ -7,20 +7,20 @@ class DescriptionController extends GetxController {
   List<String> afternoonList = [];
   List<String> evengingList = [];
 
-  _timesListAdd() {
+ void _timesListAdd() {
     _timesListAddCore(timings[0], timings[1], morningList, '');
     _timesListAddCore(timings[2], timings[3], afternoonList, ' ');
     _timesListAddCore(timings[4], timings[5], evengingList, '  ');
   }
 
-  _timesListAddCore(int from, int to, List addList, String space) {
+ void _timesListAddCore(int from, int to, List addList, String space) {
     addList.clear();
     for (int i = from; i < to; i++) {
       addList.add("$space$i:00 - ${i + 1}:00");
     }
   }
 
-  timeConversion(TurfTime turfTime) {
+ void timeConversion(TurfTime turfTime) {
     timings.clear();
     timings.addAll([
       turfTime.timeMorningStart!,
