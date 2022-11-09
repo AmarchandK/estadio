@@ -1,4 +1,5 @@
 import 'package:estadio/controller/booking/booking_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import '../../../model/home/home_response.dart';
@@ -42,37 +43,42 @@ class BookingChip extends GetView<BookingController> {
             ),
           ),
         ),
-        Wrap(
-          children: List.generate(
-            timesList.length,
-            (index) => GetBuilder<BookingController>(builder: (_) {
-              return GestureDetector(
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  margin: const EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.white),
-                    color: controller.colorSelection(
-                      value: timesList[index],
-                      heading: heading,
-                    ),
-                  ),
-                  height: 50,
-                  width: 100,
-                  child: Center(
-                    child: Text(
-                      timesList[index].trim(),
-                    ),
+        Obx(
+          () => controller.isLoading.value
+              ? const SizedBox(height: 130, child: CupertinoActivityIndicator())
+              : Wrap(
+                  children: List.generate(
+                    timesList.length,
+                    (index) => GetBuilder<BookingController>(builder: (_) {
+                      return GestureDetector(
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          margin: const EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: Colors.white),
+                            color: controller.chipColorSelection(
+                              value: timesList[index],
+                              heading: heading,
+                            ),
+                          ),
+                          height: 50,
+                          width: 100,
+                          child: Center(
+                            child: Text(
+                              timesList[index].trim(),
+                            ),
+                          ),
+                        ),
+                        onTap: () {
+                          controller.chipClicked(
+                              timesList[index], amount, heading);
+                        },
+                      );
+                    }),
                   ),
                 ),
-                onTap: () {
-                  controller.chipClicked(timesList[index], amount, heading);
-                },
-              );
-            }),
-          ),
-        ),
+        )
       ],
     );
   }

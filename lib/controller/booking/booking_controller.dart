@@ -1,19 +1,41 @@
+import 'dart:developer';
 import 'package:estadio/constants/colors.dart';
+import 'package:estadio/services/booking_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
+import '../../model/booking/booked_turf_response.dart';
 
 class BookingController extends GetxController {
   List<String> bookedList = [];
-  int selectedDate = DateTime.now().day;
+  final List alreadyBookedList = [];
+  late int selectedDate;
   RxInt totalFair = 0.obs;
-  onTap() {
+  RxBool isLoading = false.obs;
+  ////////////////Book now Button OnTap //////////////////////////////////
+  onTap(String id) async {
     selectedDate = DateTime.now().day;
     bookedList.clear();
     totalFair.value = 0;
-  }
+    log(id);
+    isLoading.value = true;
 
+    await bookedTurfFetch(id);
+    isLoading.value = false;
+  }
+  /////////////////////////////////////////
+
+  ///////////////// On date changes////////////////////////////////////
+  void onDateChangeTap(date) {
+    selectedDate = int.parse(date.toString().split("-").last);
+    bookedList.clear();
+    totalFair.value = 0;
+    update();
+  }
+  /////////////////////////////////////////
+
+  ////////////////////////// Selectable Chip functions////////////////
   chipClicked(String value, int amount, String heading) {
-    final color = colorSelection(
+    final color = chipColorSelection(
       value: value,
       heading: heading,
     );
@@ -29,7 +51,7 @@ class BookingController extends GetxController {
     update();
   }
 
-  Color colorSelection({required String value, required String heading}) {
+  Color chipColorSelection({required String value, required String heading}) {
     final int time;
     if (heading == "Morning") {
       time = int.parse(value.trim().split(":").first);
@@ -45,11 +67,18 @@ class BookingController extends GetxController {
       return Colors.green.withOpacity(0.4);
     }
   }
+  //////////////////////////////////////////
 
-  void onDateChaneFunction(date) {
-    selectedDate = int.parse(date.toString().split("-").last);
-    bookedList.clear();
-    totalFair.value = 0;
-    update();
+  //////////////////// Services ////////////////////////////////////////
+  Future bookedTurfFetch(String id) async {
+    final BookedResponse? bookedResponse =
+        await GetBookedTurfService.getBookedTurfs(id: id);
+    if (bookedResponse != null) {
+      alreadyBookedList.clear();
+      for (var element in bookedResponse.data) {
+        alreadyBookedList.addAll(element.timeSlot);
+      }
+      log(alreadyBookedList.toString());
+    }
   }
 }
