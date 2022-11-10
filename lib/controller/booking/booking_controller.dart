@@ -1,6 +1,9 @@
+import 'dart:developer';
 import 'package:estadio/constants/colors.dart';
 import 'package:estadio/constants/core_refactering/global_refactoring.dart';
+import 'package:estadio/controller/bottomNav/bottomnav_controller.dart';
 import 'package:estadio/services/booking_service.dart';
+import 'package:estadio/view/navigation/botttom_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -14,6 +17,7 @@ class BookingController extends GetxController {
   final Map<String, List<int>> alredyBookedTurfMap = {};
   RxInt totalFair = 0.obs;
   RxBool isLoading = false.obs;
+  final BottomNavController _bottomController = Get.put(BottomNavController());
 
   //////////////// Book now Button OnTap //////////////////////////////////
   void bookNowOnTap(String id) async {
@@ -103,12 +107,20 @@ class BookingController extends GetxController {
   Future<void> newTurfBook({required String turfId}) async {
     BookedRequest model = BookedRequest(
         bookingDate: selectedDate, turfId: turfId, timeSlot: newBookedList);
-    Get.back();
+    log('after payment');
     BookedResponse? bookedResponse =
         await BookTurfService.bookTurf(model: model);
+    log(bookedResponse.toString());
+
     if (bookedResponse != null) {
+      _bottomController.pageIndex.value = 0;
+      Get.offAll(() => const BottomNav());
       showToast(bookedResponse.message);
+      log(bookedResponse.message);
+      log('Turf booked SuccessFully');
     }
+    Get.back();
+    Get.back();
   }
   ////////////////////////////////////////////
 }

@@ -38,7 +38,7 @@ Widget subTittle(String text) => Padding(
             color: Colors.lightGreen[300]),
       ),
     );
-contentsText({required String text, double? size, Color? color}) => Text(
+Text contentsText({required String text, double? size, Color? color}) => Text(
       text,
       style: GoogleFonts.andika(
           fontSize: size ?? 15,
@@ -70,18 +70,18 @@ SnackbarController showDialogue(tittle) {
   );
 }
 
-showToast(message) {
+void showToast(message) {
   Fluttertoast.showToast(
       msg: message,
       fontSize: 20,
       textColor: lightGreen,
       toastLength: Toast.LENGTH_LONG,
       timeInSecForIosWeb: 3,
-      gravity: ToastGravity.TOP,
-      backgroundColor: bColor);
+      gravity: ToastGravity.BOTTOM,
+      backgroundColor: wColor);
 }
 
-errorHandler(Object e) {
+void errorHandler(Object e) {
   if (e is DioError) {
     if (e.response!.data["status"] == false) {
       showToast(e.response!.data["message"]);

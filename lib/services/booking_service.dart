@@ -27,10 +27,10 @@ class BookTurfService {
       final Response response =
           await dio.post(Config.bookTurf, data: model.toJson());
       if (response.statusCode == 200) {
-        BookedResponse.fromJson(response.data);
+        return BookedResponse.fromJson(response.data);
       }
     } catch (e) {
-      errorHandler(e);
+       errorHandler(e);
     }
     return null;
   }

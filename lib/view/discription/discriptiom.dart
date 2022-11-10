@@ -9,7 +9,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/link.dart';
 import 'widgets/amout_category.dart';
 import 'widgets/turf_pic.dart';
 
@@ -69,14 +68,6 @@ class DescriptionPage extends StatelessWidget {
                 CurrentLocation(
                     place: '${datum.turfPlace}, ${datum.turfDistrict}'.obs,
                     size: 17),
-                Link(
-                  uri: Uri.parse(datum.turfInfo!.turfMap!),
-                  builder: (context, followLink) => IconButton(
-                    color: darkGreen,
-                    onPressed: () => followLink,
-                    icon: const Icon(Icons.map_rounded),
-                  ),
-                )
               ],
             ),
             subTittle('Facilities'),

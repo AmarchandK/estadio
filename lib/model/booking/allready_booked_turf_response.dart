@@ -17,17 +17,15 @@ class AlreadyBookedResponse {
 class Datas {
   Datas({
     required this.bookingDate,
-    required this.turfId,
     required this.timeSlot,
   });
 
   String bookingDate;
-  String turfId;
+
   List<int> timeSlot;
 
   factory Datas.fromJson(Map<String, dynamic> json) => Datas(
         bookingDate: json["booking_date"],
-        turfId: json["turf_id"],
         timeSlot: List<int>.from(json["time_slot"].map((x) => x)),
       );
 }

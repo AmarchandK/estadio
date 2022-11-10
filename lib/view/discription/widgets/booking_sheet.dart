@@ -1,6 +1,7 @@
 import 'package:estadio/constants/core_refactering/global_refactoring.dart';
 import 'package:estadio/constants/sizes.dart';
 import 'package:estadio/controller/booking/booking_controller.dart';
+import 'package:estadio/controller/booking/payment_controller.dart';
 import 'package:estadio/controller/discription/description_controller.dart';
 import 'package:estadio/view/discription/widgets/booking_chip.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class Booking extends GetView<DescriptionController> {
   }) : super(key: key);
   final Datum datum;
   final BookingController _bookingController = Get.find();
-
+  final PaymentController _paymentController = Get.put(PaymentController());
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -133,24 +134,13 @@ class Booking extends GetView<DescriptionController> {
                         _bookingController.newBookedList.isNotEmpty
                             ? Get.defaultDialog(
                                 onCancel: () => Get.back(),
-                                onConfirm: () async {
-                                  await _bookingController.newTurfBook(
-                                      turfId: datum.id!);
+                                onConfirm: () {
+                                  _paymentController.pay(
+                                      _bookingController.totalFair.value,
+                                      datum.id!);
                                 },
                                 textConfirm: 'Pay',
-                                // content: Wrap(
-                                //   children: List.generate(
-                                //     _bookingController.newBookedList.length,
-                                //     (index) => Padding(
-                                //       padding: const EdgeInsets.all(5),
-                                //       child: Text(
-                                //         _bookingController.newBookedList[index]
-                                //             .toString(),
-                                //       ),
-                                //     ),
-                                //   ),
-                                // ),
-                                titleStyle: const TextStyle(color:darkGreen),
+                                titleStyle: const TextStyle(color: darkGreen),
                                 title:
                                     'Total : ₹ ${_bookingController.totalFair.value}',
                                 backgroundColor: wColor)

@@ -57,7 +57,6 @@ class HomePage extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       final turfsList = controller.nearGrounds[index];
                       return GroundCards(
-                      
                         turfList: turfsList,
                       );
                     },

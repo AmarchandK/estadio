@@ -12,16 +12,19 @@ class CurrentLocation extends StatelessWidget {
   final double size;
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Icon(
-          CupertinoIcons.location_solid,
-          size: size,
-        ),
-        Obx(
-          () => contentsText(text: place.value, size: 17),
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(left: 10, right: 5),
+      child: Row(
+        children: [
+          Icon(
+            CupertinoIcons.location_solid,
+            size: size,
+          ),
+          Obx(
+            () => FittedBox(child: contentsText(text: place.value, size: 17)),
+          )
+        ],
+      ),
     );
   }
 }
