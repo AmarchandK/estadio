@@ -21,10 +21,9 @@ class Authentication extends GetxController {
   static late String registerId;
 
   /////////////////////////ON TAP////////////////////////////
-void onLoginBtnTap() async {
+Future<void> onLoginBtnTap() async {
     if (logKey.currentState!.validate()) {
       onTapLoading.value = false;
-
       final model = LoginRequest(
           userMail: emailController.text.trim(),
           userPassword: passwordController.text.trim());

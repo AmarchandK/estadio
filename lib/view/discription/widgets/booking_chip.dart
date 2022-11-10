@@ -78,7 +78,7 @@ class BookingChip extends GetView<BookingController> {
                         ),
                         onTap: () {
                           controller.chipClicked(
-                              value: timesList[index],
+                              times: timesList[index],
                               amount: amount,
                               heading: heading);
                         },

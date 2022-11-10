@@ -81,7 +81,7 @@ class LoginPage extends GetView<Authentication> {
                     ),
                     h20,
                     OnTapButton(
-                        onTap: () => controller.onLoginBtnTap(),
+                        onTap: () async => await controller.onLoginBtnTap(),
                         text: 'Validate'),
                     h20,
                     TextspanAuth(() {

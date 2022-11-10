@@ -1,10 +1,8 @@
-import 'dart:developer';
-
 import 'package:estadio/constants/colors.dart';
 import 'package:estadio/constants/core_refactering/global_refactoring.dart';
 import 'package:estadio/services/booking_service.dart';
 import 'package:flutter/material.dart';
-import 'package:get/state_manager.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../model/booking/allready_booked_turf_response.dart';
 import '../../model/booking/booking.dart';
@@ -53,9 +51,9 @@ class BookingController extends GetxController {
   }
 
   void chipClicked(
-      {required String value, required int amount, required String heading}) {
-    final color = chipColor(timeValue: value, heading: heading);
-    final time = toDBtimeConversion(value, heading);
+      {required String times, required int amount, required String heading}) {
+    final color = chipColor(timeValue: times, heading: heading);
+    final time = toDBtimeConversion(times, heading);
     if (color == Colors.green.withOpacity(0.4)) {
       newBookedList.add(time);
       totalFair.value += amount;
@@ -68,11 +66,11 @@ class BookingController extends GetxController {
 
   Color chipColor({required String timeValue, required String heading}) {
     final time = toDBtimeConversion(timeValue, heading);
-    if (time <= DateTime.now().hour &&
+    if (alreadyBookedList.contains(time)) {
+      return Colors.redAccent[100]!;
+    } else if (time <= DateTime.now().hour &&
         selectedDate == DateFormat.yMd().format(DateTime.now())) {
       return greyColor;
-    } else if (alreadyBookedList.contains(time)) {
-      return Colors.redAccent[100]!;
     } else if (newBookedList.contains(time)) {
       return Colors.amber[300]!;
     } else {
@@ -103,12 +101,9 @@ class BookingController extends GetxController {
   }
 
   Future<void> newTurfBook({required String turfId}) async {
-    log(turfId);
-    log(selectedDate);
-    log(newBookedList.toString());
-
     BookedRequest model = BookedRequest(
         bookingDate: selectedDate, turfId: turfId, timeSlot: newBookedList);
+    Get.back();
     BookedResponse? bookedResponse =
         await BookTurfService.bookTurf(model: model);
     if (bookedResponse != null) {

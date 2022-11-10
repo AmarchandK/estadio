@@ -15,14 +15,24 @@ class Booking extends GetView<DescriptionController> {
     Key? key,
     required this.datum,
   }) : super(key: key);
-
   final Datum datum;
-
   final BookingController _bookingController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      child: Container(
+        height: 60,
+        width: widthSize(context) - 50,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: darkGreen,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: subTittle(
+          'Book',
+        ),
+      ),
       onTap: () {
         _bookingController.bookNowOnTap(datum.id!);
         controller.timeConversion(datum.turfTime!);
@@ -61,6 +71,19 @@ class Booking extends GetView<DescriptionController> {
                         ),
                       ),
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        _IconText(
+                            iconColor: Colors.green.withOpacity(0.4),
+                            text: 'Available'),
+                        const _IconText(iconColor: greyColor, text: 'Expired'),
+                        _IconText(
+                            iconColor: Colors.redAccent[100]!, text: 'Booked'),
+                        _IconText(
+                            iconColor: Colors.amber[300]!, text: 'Selected'),
+                      ],
+                    ),
                     HorizontalCalendar(
                       date: DateTime.now(),
                       textColor: Colors.white,
@@ -93,38 +116,47 @@ class Booking extends GetView<DescriptionController> {
                     ),
                     h20,
                     SliderButton(
-                        action: () {
-                          return Get.defaultDialog(
-                              onCancel: () => Get.back(),
-                              onConfirm: () => _bookingController.newTurfBook(
-                                  turfId: datum.id!),
-                              content: Wrap(
-                                children: List.generate(
-                                  _bookingController.newBookedList.length,
-                                  (index) => Padding(
-                                    padding: const EdgeInsets.all(5),
-                                    child: Text(
-                                      _bookingController.newBookedList[index]
-                                          .toString(),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              title:
-                                  'Total : ₹ ${_bookingController.totalFair.value}',
-                              backgroundColor: greyColor);
-                        },
-                        label: const Text(
-                          'Book Now',
-                          style: TextStyle(fontSize: 25),
-                        ),
-                        alignLabel: Alignment.center,
-                        vibrationFlag: true,
-                        buttonSize: 50,
-                        backgroundColor: lightGreen,
-                        buttonColor: darkGreen,
-                        height: 60,
-                        width: widthSize(context) - 30),
+                      // dismissible: false,
+                      label: const Text(
+                        'BOOK NOW',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w900),
+                      ),
+                      alignLabel: Alignment.center,
+                      vibrationFlag: true,
+                      buttonSize: 50,
+                      backgroundColor: lightGreen,
+                      buttonColor: darkGreen,
+                      height: 60,
+                      width: widthSize(context) - 30,
+                      action: () {
+                        _bookingController.newBookedList.isNotEmpty
+                            ? Get.defaultDialog(
+                                onCancel: () => Get.back(),
+                                onConfirm: () async {
+                                  await _bookingController.newTurfBook(
+                                      turfId: datum.id!);
+                                },
+                                textConfirm: 'Pay',
+                                // content: Wrap(
+                                //   children: List.generate(
+                                //     _bookingController.newBookedList.length,
+                                //     (index) => Padding(
+                                //       padding: const EdgeInsets.all(5),
+                                //       child: Text(
+                                //         _bookingController.newBookedList[index]
+                                //             .toString(),
+                                //       ),
+                                //     ),
+                                //   ),
+                                // ),
+                                titleStyle: const TextStyle(color:darkGreen),
+                                title:
+                                    'Total : ₹ ${_bookingController.totalFair.value}',
+                                backgroundColor: wColor)
+                            : showDialogue('Please select atleast one');
+                      },
+                    ),
                     h20,
                   ],
                 ),
@@ -132,17 +164,28 @@ class Booking extends GetView<DescriptionController> {
             ),
             enterBottomSheetDuration: const Duration(seconds: 1));
       },
-      child: Container(
-        height: 60,
-        width: widthSize(context) - 50,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: darkGreen,
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: subTittle(
-          'Book',
-        ),
+    );
+  }
+}
+
+class _IconText extends StatelessWidget {
+  const _IconText({Key? key, required this.iconColor, required this.text})
+      : super(key: key);
+  final Color iconColor;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton.icon(
+      onPressed: null,
+      icon: Icon(
+        Icons.circle,
+        size: 20.0,
+        color: iconColor,
+      ),
+      label: Text(
+        text,
+        style: const TextStyle(color: wColor, fontSize: 10),
       ),
     );
   }

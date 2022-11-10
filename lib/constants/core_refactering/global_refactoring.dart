@@ -112,6 +112,7 @@ class UserSecureStorage {
   static const String tokenKey = 'tokenKey';
   static const String refreshKey = 'refreshKey';
   static const String userId = 'userId';
+
   static Future setTokens(String token, String refreshToken, String id) async {
     await storage.write(key: tokenKey, value: token);
     await storage.write(key: refreshKey, value: refreshToken);
