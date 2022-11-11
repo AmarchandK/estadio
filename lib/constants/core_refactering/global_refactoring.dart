@@ -51,7 +51,7 @@ SnackbarController showDialogue(tittle) {
     GetSnackBar(
       messageText: Text(
         tittle,
-        style: const TextStyle(color: redColor),
+        style: const TextStyle(color: redColor, fontWeight: FontWeight.bold),
       ),
       icon: const Icon(CupertinoIcons.exclamationmark_shield),
       duration: const Duration(seconds: 5),

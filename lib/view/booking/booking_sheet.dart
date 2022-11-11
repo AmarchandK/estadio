@@ -3,13 +3,13 @@ import 'package:estadio/constants/sizes.dart';
 import 'package:estadio/controller/booking/booking_controller.dart';
 import 'package:estadio/controller/booking/payment_controller.dart';
 import 'package:estadio/controller/discription/description_controller.dart';
-import 'package:estadio/view/discription/widgets/booking_chip.dart';
+import 'package:estadio/view/booking/booking_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:horizontal_calendar/horizontal_calendar.dart';
 import 'package:slider_button/slider_button.dart';
-import '../../../constants/colors.dart';
-import '../../../model/home/home_response.dart';
+import '../../constants/colors.dart';
+import '../../model/home/home_response.dart';
 
 class Booking extends GetView<DescriptionController> {
   Booking({

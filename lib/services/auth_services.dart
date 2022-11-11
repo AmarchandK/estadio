@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:estadio/controller/authentication/login_controller.dart';
 import 'package:estadio/model/authentication/log_in/login_request.dart';
@@ -7,11 +6,11 @@ import 'package:estadio/model/authentication/otp/otp_request.dart';
 import 'package:estadio/model/authentication/otp/otp_response.dart';
 import 'package:estadio/model/authentication/sign_in/create_request.dart';
 import 'package:estadio/model/authentication/sign_in/create_response.dart';
-import 'package:estadio/view/navigation/botttom_nav.dart';
 import 'package:get/get.dart';
 import '../constants/core_refactering/global_refactoring.dart';
 import '../constants/url/url.dart';
 import '../view/authentication/otp_veryfy.dart';
+import '../view/bottom_nav/botttom_nav.dart';
 
 class ApiService {
   static final Dio dio = Dio(BaseOptions(baseUrl: Config.baseUrl));

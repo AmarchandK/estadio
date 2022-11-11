@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:estadio/constants/core_refactering/global_refactoring.dart';
 import 'package:estadio/constants/shimmer/shimmer.dart';
 import 'package:estadio/model/home/home_response.dart';
-import 'package:estadio/view/fav_button/fav_button.dart';
+import 'package:estadio/view/favorites/widgets/fav_button.dart';
 import 'package:estadio/view/home/widgets/current_location.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

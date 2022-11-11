@@ -2,7 +2,7 @@ import 'package:estadio/constants/colors.dart';
 import 'package:estadio/constants/core_refactering/global_refactoring.dart';
 import 'package:estadio/constants/sizes.dart';
 import 'package:estadio/model/home/home_response.dart';
-import 'package:estadio/view/discription/widgets/booking_sheet.dart';
+import 'package:estadio/view/booking/booking_sheet.dart';
 import 'package:estadio/view/discription/widgets/discription_chip.dart';
 import 'package:estadio/view/home/widgets/current_location.dart';
 import 'package:flutter/cupertino.dart';

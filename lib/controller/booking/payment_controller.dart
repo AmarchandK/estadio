@@ -1,6 +1,6 @@
-import 'dart:developer';
-
+import 'package:estadio/constants/core_refactering/global_refactoring.dart';
 import 'package:estadio/controller/booking/booking_controller.dart';
+import 'package:estadio/view/payment_status/payment_status.dart';
 import 'package:get/get.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
@@ -17,19 +17,19 @@ class PaymentController extends GetxController {
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) async {
-    log(response.paymentId.toString());
-    log(' Payment Successfull');
-    log(turfId);
+    _bookingController.isPaymentLoading.value = true;
+    Get.offAll(() => PaymentStatus());
     await _bookingController.newTurfBook(turfId: turfId);
+    _bookingController.isPaymentLoading.value = false;
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
-    log('_handlePaymentError');
+    showDialogue(response.message.toString());
     // Do something when payment fails
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
-    log('_handleExternalWallet');
+    showDialogue(response.walletName);
   }
 
   Future<void> pay(amount, id) async {
@@ -37,13 +37,17 @@ class PaymentController extends GetxController {
     Map<String, dynamic> options = {
       'key': 'rzp_test_0rVXPTdOuP9c4q',
       'amount': amount * 100, //in the smallest currency sub-unit.
-      'name': 'Acme Corp.',
+      'name': 'Estadio',
       // 'order_id': 'order_EMBFqjDHEEn80l', // Generate order_id using Orders API
-      'description': 'Fine T-Shirt',
+      'description': 'For Demo',
       'timeout': 60, // in seconds
-      'prefill': {'contact': '9645686644', 'email': 'gaurav.kumar@example.com'}
+      'prefill': {'contact': '9645686644', 'email': 'unofficial00345@gmail.com'}
     };
-    _razorpay.open(options);
+    try {
+      _razorpay.open(options);
+    } catch (e) {
+      showDialogue(e);
+    }
     Get.back();
     Get.back();
   }
@@ -51,7 +55,6 @@ class PaymentController extends GetxController {
   @override
   void dispose() {
     _razorpay.clear(); // Removes all listeners
-    log('Payment controller disposed');
     super.dispose();
   }
 }
