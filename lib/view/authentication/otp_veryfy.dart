@@ -22,13 +22,15 @@ class OTPscreen extends GetView<Authentication> {
           },
           icon: const Icon(
             Icons.arrow_back_ios_rounded,
-            color: Colors.black,
+            color: wColor,
           ),
         ),
         elevation: 0,
       ),
       body: Container(
         margin: const EdgeInsets.only(left: 25, right: 25),
+        decoration: const BoxDecoration(
+            image: DecorationImage(image: AssetImage('assets/baground.jpg'))),
         alignment: Alignment.center,
         child: SingleChildScrollView(
           child: ClipRRect(
@@ -66,9 +68,6 @@ class OTPscreen extends GetView<Authentication> {
                                 animationCurve: Curves.elasticInOut,
                                 animationDuration: const Duration(seconds: 1),
                                 focusNode: FocusNode(),
-                                // validator: (value) {
-                                //   return '';
-                                // },
                                 errorPinTheme: _defaultPinTheme.copyBorderWith(
                                   border: Border.all(color: Colors.redAccent),
                                 ),
@@ -97,7 +96,7 @@ class OTPscreen extends GetView<Authentication> {
                         },
                         child: const Text(
                           "Resend",
-                          style: TextStyle(color: Colors.black),
+                          style: TextStyle(color: wColor),
                         ),
                       ),
                     )
@@ -116,11 +115,11 @@ class OTPscreen extends GetView<Authentication> {
     height: 56,
     textStyle: const TextStyle(
       fontSize: 22,
-      color: bColor,
+      color: wColor,
     ),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(7),
-      border: Border.all(color: bColor),
+      border: Border.all(color: wColor),
     ),
   );
   final PinTheme _focusedPinTheme = PinTheme(
@@ -139,7 +138,7 @@ class OTPscreen extends GetView<Authentication> {
     height: 56,
     textStyle: const TextStyle(
       fontSize: 22,
-      color: bColor,
+      color: wColor,
     ),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(7),

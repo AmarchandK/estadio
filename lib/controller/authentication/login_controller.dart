@@ -1,3 +1,4 @@
+import 'package:estadio/controller/bottomNav/bottomnav_controller.dart';
 import 'package:estadio/model/authentication/log_in/login_request.dart';
 import 'package:estadio/model/authentication/otp/otp_request.dart';
 import 'package:estadio/model/authentication/sign_in/create_request.dart';
@@ -10,6 +11,8 @@ class Authentication extends GetxController {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  final BottomNavController _bottomNavController =
+      Get.put(BottomNavController());
   ///////////////////////////RXBOOL ///////////////////////
   static RxBool onTapLoading = true.obs;
   final RxBool isObscure = true.obs;
@@ -21,18 +24,19 @@ class Authentication extends GetxController {
   static late String registerId;
 
   /////////////////////////ON TAP////////////////////////////
-Future<void> onLoginBtnTap() async {
+  Future<void> onLoginBtnTap() async {
     if (logKey.currentState!.validate()) {
       onTapLoading.value = false;
       final model = LoginRequest(
           userMail: emailController.text.trim(),
           userPassword: passwordController.text.trim());
       await ApiService.loginUser(model);
+      _bottomNavController.pageIndex.value = 0;
       onTapLoading.value = true;
     }
   }
 
- void onCreatebtnTap() async {
+  void onCreatebtnTap() async {
     if (createKey.currentState!.validate()) {
       onTapLoading.value = false;
       final model = CreateRequest(
@@ -43,7 +47,7 @@ Future<void> onLoginBtnTap() async {
     }
   }
 
- void onOtpEnter(pin) async {
+  void onOtpEnter(pin) async {
     onTapLoading.value = false;
     final model = OtpRequest(userOtp: pin, id: registerId);
     await ApiService.otpVerify(model);

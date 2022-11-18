@@ -59,7 +59,6 @@ class ApiService {
           loginResponse.token, loginResponse.refreshToken, loginResponse.id);
       showToast(loginResponse.message);
       if (response.statusCode! >= 200 && response.statusCode! <= 299) {
-
         Get.offAll(() => const BottomNav());
       }
     } catch (e) {
