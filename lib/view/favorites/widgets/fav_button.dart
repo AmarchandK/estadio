@@ -12,15 +12,18 @@ class FavButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      onPressed: () async {
-        await _favButtonController.addFavToDb(datum);
-      },
-      icon: Obx(() => Icon(
-        _favButtonController.isFav(datum.id!).value
-            ? Icons.bookmark_outlined
-            : Icons.bookmark_border_outlined,
-        color: lightGreen,
-      )),
-    );
+        onPressed: () async {
+          _favButtonController.isFav(datum.turfName!)
+              ? await _favButtonController.deleteFav(datum.turfName!)
+              : await _favButtonController.addFavToDb(datum);
+        },
+        icon: GetBuilder<FavButtonController>(
+          builder: (controller) => Icon(
+            _favButtonController.isFav(datum.turfName!)
+                ? Icons.bookmark_outlined
+                : Icons.bookmark_border_outlined,
+            color: lightGreen,
+          ),
+        ));
   }
 }

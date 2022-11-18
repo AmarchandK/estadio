@@ -13,31 +13,45 @@ class FavButtonController extends GetxController {
     super.onInit();
   }
 
-  RxBool isFav(String id) {
-    for (Datum data in favTurfs) {
-      log("${data.id} && $id");
-      return (data.id! == id).obs;
+  String? idReturn(String turfName) {
+    for (var item in favTurfs) {
+      if (item.turfName == turfName) {
+        return item.id!;
+      }
     }
-    return false.obs;
+    return null;
+  }
+
+  bool isFav(String turfName) {
+    List temp = [];
+    for (var item in favTurfs) {
+      temp.add(item.turfName!.trim());
+    }
+    final bool value = temp.contains(turfName.trim());
+    return value;
   }
 
   Future<void> getFav() async {
-    String userId = await UserSecureStorage.getid();
-    AllResponse? favResponse = await FavService.getFav(userId);
-
+    final String userId = await UserSecureStorage.getid();
+    final AllResponse? favResponse = await FavService.getFav(userId);
     if (favResponse != null) {
       favTurfs.clear();
       favTurfs.addAll(favResponse.data!);
-      for (var element in favTurfs) {
-        log(element.turfName.toString());
-      }
     }
     update();
   }
 
+  Future<void> deleteFav(String turfName) async {
+    String? id = idReturn(turfName);
+    if (id != null) {
+      await FavService.deleteFav(id.trim());
+      await getFav();
+    }
+  }
+
   Future<void> addFavToDb(Datum datum) async {
-    String userId = await UserSecureStorage.getid();
-    AllResponse favModel = AllResponse(
+    final String userId = await UserSecureStorage.getid();
+    final AllResponse favModel = AllResponse(
       userId: userId,
       data: [
         Datum(
@@ -85,11 +99,11 @@ class FavButtonController extends GetxController {
               timeEveningStart: datum.turfTime!.timeEveningStart,
               timeMorningEnd: datum.turfTime!.timeMorningEnd,
               timeMorningStart: datum.turfTime!.timeMorningStart),
-        )
+        ),
       ],
     );
+
     await FavService.addToFav(favModel);
     await getFav();
-    update();
   }
 }

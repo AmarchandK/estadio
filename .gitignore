@@ -10,6 +10,8 @@
 .svn/
 migrate_working_dir/
 assets/
+lib/constants/controler_initalize
+lib/constants/url
 
 # IntelliJ related
 *.iml

@@ -11,6 +11,7 @@ import 'package:estadio/controller/splash/splash_controller.dart';
 import 'package:get/get.dart';
 
 Future<void> controllerInit() async {
+  Get.put(BottomNavController());
   Get.put(SplashController());
   Get.put(Authentication());
   Get.put(BottomNavController());
@@ -18,6 +19,5 @@ Future<void> controllerInit() async {
   Get.put(SearchController());
   Get.put(DescriptionController());
   Get.put(BookingController());
-  Get.put(BottomNavController());
-  Get.lazyPut(() => FavButtonController());
+  Get.put(FavButtonController());
 }

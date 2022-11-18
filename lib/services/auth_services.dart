@@ -14,6 +14,8 @@ import '../view/bottom_nav/botttom_nav.dart';
 
 class ApiService {
   static final Dio dio = Dio(BaseOptions(baseUrl: Config.baseUrl));
+
+  
   /*-------------------Create User------------------------*/
   static Future createUser(CreateRequest model) async {
     try {

@@ -21,15 +21,14 @@ class MyAccount extends StatelessWidget {
             BigUserCard(
               cardColor: lightGreen,
               userName: 'Amar',
-              userProfilePic: const AssetImage(''),
+              userProfilePic: const AssetImage('assets/yoga.jpg'),
               cardActionWidget: SettingsItem(
                 icons: Icons.edit,
                 iconStyle: IconStyle(
-                  withBackground: true,
                   borderRadius: 50,
                   backgroundColor: Colors.yellow[600],
                 ),
-                title: "Modify",
+                title: "Update",
                 titleStyle: const TextStyle(color: bColor),
                 subtitle: "Tap to change your data",
                 onTap: () {

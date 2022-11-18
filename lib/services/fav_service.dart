@@ -9,25 +9,42 @@ class FavService {
   static final Dio dio = Dio(BaseOptions(baseUrl: Config.baseUrl));
 
   ///////////////////// Add to Fav ////////////////////////////////////
-  static Future<AllResponse?> addToFav(AllResponse favResponse) async {
+  static Future<String?> addToFav(AllResponse favResponse) async {
     try {
       final Response response =
           await dio.post(Config.addWishList, data: favResponse.toJson());
-
-      return AllResponse.fromJson(response.data);
+      if (response.statusCode == 200) {
+        final String message = response.data['message'];
+        return message;
+      }
     } catch (e) {
       errorHandler(e);
-      return null;
     }
+    return null;
   }
 
   ////////////////////// Get  Fav /////////////////////////////
   static Future<AllResponse?> getFav(String id) async {
     try {
       final Response response = await dio.get(Config.getWhishlist + id);
-      log(' Fav Response ${response.data}');
+      if (response.statusCode == 200) {
+        return AllResponse.fromJson(response.data);
+      }
+    } catch (e) {
+      errorHandler(e);
+    }
+    return null;
+  }
+  /////////////////////////////////////
 
-      return AllResponse.fromJson(response.data);
+  /////////////////////// Delete Fav ////////////////////////
+  static Future<bool?> deleteFav(String id) async {
+    try {
+      final Response response = await dio.delete(Config.deleteFav + id);
+      log(response.data.toString());
+      if (response.statusCode == 200) {
+        return true;
+      }
     } catch (e) {
       errorHandler(e);
     }
