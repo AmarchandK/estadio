@@ -21,7 +21,7 @@ class ImageSlider extends StatelessWidget {
         autoPlayInterval: const Duration(seconds: 5),
         height: 180,
         enableInfiniteScroll: false,
-        autoPlay: false,
+        autoPlay: true,
         enlargeCenterPage: true,
         onPageChanged: (index, reason) => controller.carousleChange(index),
       ),

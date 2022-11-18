@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:estadio/constants/colors.dart';
 import 'package:estadio/controller/fav_button_controller.dart/fav_button_controller.dart';
 import 'package:estadio/model/home/home_response.dart';
@@ -12,21 +11,16 @@ class FavButton extends StatelessWidget {
   final Datum datum;
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<FavButtonController>(
-      builder: (controller) => IconButton(
-        onPressed: () async {
-          log(datum.turfName.toString());
-
-          await _favButtonController.addFavToDb(datum);
-          log(datum.turfName.toString());
-        },
-        icon: Icon(
-          _favButtonController.isFav(datum).value
-              ? Icons.bookmark_outlined
-              : Icons.bookmark_border_outlined,
-          color: lightGreen,
-        ),
-      ),
+    return IconButton(
+      onPressed: () async {
+        await _favButtonController.addFavToDb(datum);
+      },
+      icon: Obx(() => Icon(
+        _favButtonController.isFav(datum.id!).value
+            ? Icons.bookmark_outlined
+            : Icons.bookmark_border_outlined,
+        color: lightGreen,
+      )),
     );
   }
 }

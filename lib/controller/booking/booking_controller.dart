@@ -17,7 +17,6 @@ class BookingController extends GetxController {
   RxInt totalFair = 0.obs;
   RxBool isLoading = false.obs;
   RxBool isPaymentLoading = false.obs;
-
   RxBool isSuccess = false.obs;
   final ConfettiController confettiController = ConfettiController();
   //////////////// Book now Button OnTap //////////////////////////////////
@@ -27,7 +26,7 @@ class BookingController extends GetxController {
     totalFair.value = 0;
     isLoading.value = true;
     await bookedTurfFetch(id);
-    bookListChecking(selectedDate);
+    _bookListChecking(selectedDate);
     isLoading.value = false;
   }
   /////////////////////////////////////////
@@ -38,7 +37,7 @@ class BookingController extends GetxController {
     selectedDate = DateFormat.yMd().format(parseDate);
     newBookedList.clear();
     totalFair.value = 0;
-    bookListChecking(selectedDate);
+    _bookListChecking(selectedDate);
     update();
   }
   /////////////////////////////////////////
@@ -85,7 +84,7 @@ class BookingController extends GetxController {
   //////////////////////////////////////////
 
 //////////// Already booked Checking //////////////////////////////////////
-  void bookListChecking(String selectedDate) {
+  void _bookListChecking(String selectedDate) {
     alreadyBookedList.clear();
     if (alredyBookedTurfMap.containsKey(selectedDate)) {
       alreadyBookedList.addAll(alredyBookedTurfMap[selectedDate]!);
@@ -106,11 +105,12 @@ class BookingController extends GetxController {
   }
 
   Future<void> newTurfBook({required String turfId}) async {
+    isSuccess.value = false;
     BookedRequest model = BookedRequest(
         bookingDate: selectedDate, turfId: turfId, timeSlot: newBookedList);
     BookedResponse? bookedResponse =
         await BookTurfService.bookTurf(model: model);
-    if (bookedResponse != null) {
+    if (bookedResponse != null && bookedResponse.status) {
       isSuccess.value = true;
       showToast(bookedResponse.message);
     }
@@ -125,7 +125,7 @@ class BookingController extends GetxController {
   void afterPayment() async {
     confettiController.play();
     update();
-    await Future.delayed(const Duration(seconds: 5));
+    await Future.delayed(const Duration(seconds: 3));
     confettiController.stop();
     Get.offAll(() => const BottomNav());
   }

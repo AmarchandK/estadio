@@ -9,7 +9,6 @@ import '../../constants/sizes.dart';
 class PaymentStatus extends StatelessWidget {
   PaymentStatus({super.key});
   final BookingController _bookingController = Get.find();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +35,7 @@ class PaymentStatus extends StatelessWidget {
                   ),
                 )
               : ColoredBox(
-                  color: bColor,
+                  color: darkGreen,
                   child: Stack(
                     children: [
                       ConfettiWidget(

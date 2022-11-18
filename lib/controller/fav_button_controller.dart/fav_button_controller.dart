@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:estadio/constants/core_refactering/global_refactoring.dart';
 import 'package:estadio/model/home/home_response.dart';
 import 'package:estadio/services/fav_service.dart';
@@ -5,8 +7,18 @@ import 'package:get/state_manager.dart';
 
 class FavButtonController extends GetxController {
   List<Datum> favTurfs = [];
-  RxBool isFav(Datum datum) {
-    return favTurfs.contains(datum).obs;
+  @override
+  void onInit() {
+    getFav();
+    super.onInit();
+  }
+
+  RxBool isFav(String id) {
+    for (Datum data in favTurfs) {
+      log("${data.id} && $id");
+      return (data.id! == id).obs;
+    }
+    return false.obs;
   }
 
   Future<void> getFav() async {
@@ -16,10 +28,14 @@ class FavButtonController extends GetxController {
     if (favResponse != null) {
       favTurfs.clear();
       favTurfs.addAll(favResponse.data!);
+      for (var element in favTurfs) {
+        log(element.turfName.toString());
+      }
     }
+    update();
   }
 
-  addFavToDb(Datum datum) async {
+  Future<void> addFavToDb(Datum datum) async {
     String userId = await UserSecureStorage.getid();
     AllResponse favModel = AllResponse(
       userId: userId,
@@ -73,5 +89,7 @@ class FavButtonController extends GetxController {
       ],
     );
     await FavService.addToFav(favModel);
+    await getFav();
+    update();
   }
 }

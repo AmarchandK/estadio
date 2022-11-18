@@ -10,11 +10,11 @@ class SplashController extends GetxController {
     super.onInit();
   }
 
- void checkUserLoggedIn() async {
+  void checkUserLoggedIn() async {
     const FlutterSecureStorage storage = FlutterSecureStorage();
     final token = await storage.read(key: 'tokenKey');
     await Future.delayed(
-      const Duration(seconds: 1),
+      const Duration(seconds: 3),
     );
     if (token == null || token.isEmpty) {
       Get.off(() => const LoginPage());
