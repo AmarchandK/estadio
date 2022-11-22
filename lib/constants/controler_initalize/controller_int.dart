@@ -20,4 +20,5 @@ Future<void> controllerInit() async {
   Get.put(DescriptionController());
   Get.put(BookingController());
   Get.put(FavButtonController());
+
 }

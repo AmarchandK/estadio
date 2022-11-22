@@ -41,10 +41,7 @@ class BottomNav extends GetView<BottomNavController> {
               tabs: const [
                 GButton(icon: CupertinoIcons.home, text: ' Home'),
                 GButton(icon: CupertinoIcons.bookmark_fill, text: ' Saved'),
-                GButton(
-                    icon: CupertinoIcons.list_bullet_indent, text: ' Orders'),
-                GButton(
-                    icon: CupertinoIcons.person_alt_circle, text: ' Account'),
+                GButton(icon: CupertinoIcons.settings, text: ' Account'),
               ]),
         ),
       ),

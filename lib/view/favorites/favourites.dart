@@ -3,6 +3,7 @@ import 'package:estadio/controller/fav_button_controller.dart/fav_button_control
 import 'package:estadio/view/home/widgets/ground_cards.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 class Favourites extends GetView<FavButtonController> {
   const Favourites({super.key});
@@ -15,10 +16,14 @@ class Favourites extends GetView<FavButtonController> {
         title: mainHeadingText('Favourites'),
         backgroundColor: Colors.transparent,
       ),
-      body: ListView.builder(
-          itemCount: controller.favTurfs.length,
-          itemBuilder: (context, index) =>
-              GroundCards(turfList: controller.favTurfs[index])),
+      body: GetBuilder<FavButtonController>(builder: (_) {
+        return controller.favTurfs.isEmpty
+            ? Center(child: Lottie.asset('assets/favLoding.json'))
+            : ListView.builder(
+                itemCount: controller.favTurfs.length,
+                itemBuilder: (context, index) =>
+                    GroundCards(turfList: controller.favTurfs[index]));
+      }),
     );
   }
 }

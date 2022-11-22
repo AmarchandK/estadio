@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:estadio/constants/core_refactering/global_refactoring.dart';
 import 'package:estadio/constants/url/url.dart';
@@ -22,6 +20,7 @@ class FavService {
     }
     return null;
   }
+  ////////////////////////////////////////////////
 
   ////////////////////// Get  Fav /////////////////////////////
   static Future<AllResponse?> getFav(String id) async {
@@ -41,7 +40,6 @@ class FavService {
   static Future<bool?> deleteFav(String id) async {
     try {
       final Response response = await dio.delete(Config.deleteFav + id);
-      log(response.data.toString());
       if (response.statusCode == 200) {
         return true;
       }
@@ -50,4 +48,5 @@ class FavService {
     }
     return null;
   }
+  ////////////////////////////////////
 }

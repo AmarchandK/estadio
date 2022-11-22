@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:estadio/constants/core_refactering/global_refactoring.dart';
 import 'package:estadio/model/home/home_response.dart';
 import 'package:estadio/services/fav_service.dart';
@@ -47,6 +45,11 @@ class FavButtonController extends GetxController {
       await FavService.deleteFav(id.trim());
       await getFav();
     }
+  }
+
+  late Stream<List> list;
+    Future<void> f(String turfName) async {
+
   }
 
   Future<void> addFavToDb(Datum datum) async {
